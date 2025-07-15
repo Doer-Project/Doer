@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="controller.RegisterController"
+            prefWidth="700" prefHeight="650"
+            style="-fx-background-color: linear-gradient(to bottom right, #1B4242, #4FBDBA, #CDEED6);">
+
+    <!-- App Title -->
+    <Label text="DOER"
+           layoutX="40" layoutY="40"
+           style="-fx-font-size: 42px; -fx-text-fill: white; -fx-font-family: 'Verdana'; -fx-font-weight: bold;"/>
+
+    <!-- Left Description -->
+    <VBox layoutX="30" layoutY="120" spacing="10" prefWidth="220">
+        <Label text="Join Us!"
+               style="-fx-font-size: 18px; -fx-text-fill: white; -fx-font-weight: bold;" />
+        <Label text="Create your account to find or request help for home tasks."
+               wrapText="true"
+               style="-fx-font-size: 14px; -fx-text-fill: white;"/>
+    </VBox>
+
+    <!-- Register Form -->
+    <VBox fx:id="registerForm" alignment="CENTER" spacing="12" layoutX="310" layoutY="60" prefWidth="340">
+
+        <Label text="Register"
+               style="-fx-font-size: 24px; -fx-text-fill: white; -fx-font-weight: bold;"/>
+
+        <TextField fx:id="nameField" promptText="Full Name" maxWidth="300"
+                   style="-fx-background-radius: 10; -fx-padding: 10;"/>
+        <TextField fx:id="ageField" promptText="Age" maxWidth="300"
+                   style="-fx-background-radius: 10; -fx-padding: 10;"/>
+        <ComboBox fx:id="genderCombo" promptText="Select Gender" maxWidth="300"
+                  style="-fx-background-color: #ffffff; -fx-background-radius: 10; -fx-padding: 10; -fx-border-color: #1B4242; -fx-border-radius: 10; -fx-pref-height: 40;">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="Male"/>
+                    <String fx:value="Female"/>
+                    <String fx:value="Other"/>
+                </FXCollections>
+            </items>
+        </ComboBox>
+        <TextField fx:id="emailField" promptText="Email Address" maxWidth="300"
+                   style="-fx-background-radius: 10; -fx-padding: 10;"/>
+
+        <TextField fx:id="otpField" promptText="Enter OTP" visible="false" managed="false" maxWidth="300"
+                   style="-fx-background-radius: 10; -fx-padding: 10;" />
+
+        <HBox spacing="15" alignment="CENTER">
+            <RadioButton fx:id="householdRadio" text="Household"/>
+            <RadioButton fx:id="workerRadio" text="Worker"/>
+        </HBox>
+
+        <VBox fx:id="dynamicFields" spacing="10" alignment="CENTER"/>
+
+        <!-- Moved here -->
+        <Button fx:id="otpButton" text="Send OTP" onAction="#handleOtp"
+                style="-fx-background-color: #4FBDBA; -fx-text-fill: white; -fx-background-radius: 10; -fx-padding: 10;"/>
+
+        <Hyperlink fx:id="goToLoginLink" text="Already have an account? Login"
+                   style="-fx-text-fill: white; -fx-underline: false;"/>
+
+    </VBox>
+</AnchorPane>
