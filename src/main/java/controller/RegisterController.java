@@ -77,7 +77,7 @@ public class RegisterController {
             return;
 
         }
-        User user = new User(name, userName, age, gender);
+//        User user = new User(name, userName, age, gender);
 
         ///  for 2 section of the dahsbord
         if (role.equals("Household")) {
