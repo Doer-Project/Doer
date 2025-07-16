@@ -10,7 +10,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-import main.java.util.MessageBox;
+import util.MessageBox;
 
 public class LoginController {
     @FXML private TextField emailField;
