@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="controller.LoginController"
+            prefWidth="600" prefHeight="500"
+            style="-fx-background-color: linear-gradient(to bottom right, #1B4242, #4FBDBA, #CDEED6);">
+
+    <!-- App Title -->
+    <Label text="DOER"
+           layoutX="40" layoutY="40"
+           style="-fx-font-size: 42px; -fx-text-fill: white; -fx-font-family: 'Verdana'; -fx-font-weight: bold;"/>
+
+    <!-- Left-side text -->
+    <VBox layoutX="30" layoutY="120" spacing="10" prefWidth="220">
+        <Label text="Welcome Back!"
+               style="-fx-font-size: 18px; -fx-text-fill: white; -fx-font-weight: bold;" />
+        <Label text="Log in to manage your tasks and workers."
+               wrapText="true"
+               style="-fx-font-size: 14px; -fx-text-fill: white;"/>
+    </VBox>
+
+    <!-- Login Form -->
+    <VBox alignment="CENTER" spacing="15" layoutX="300" layoutY="100" prefWidth="250">
+
+        <Label text="Login"
+               style="-fx-font-size: 24px; -fx-text-fill: white; -fx-font-weight: bold;"/>
+
+        <TextField fx:id="emailField" promptText="Email or Username" maxWidth="220"
+                   style="-fx-background-radius: 10; -fx-padding: 10;"/>
+
+        <PasswordField fx:id="passwordField" promptText="Password" maxWidth="220"
+                       style="-fx-background-radius: 10; -fx-padding: 10;"/>
+
+        <TextField fx:id="otpField" promptText="Enter OTP" visible="false" managed="false" maxWidth="220"
+                   style="-fx-background-radius: 10; -fx-padding: 10;"/>
+
+        <Button fx:id="sendOtpBtn" text="Send OTP" onAction="#handleOtpOrLogin"
+                style="-fx-background-color: #4FBDBA; -fx-text-fill: white; -fx-background-radius: 10; -fx-padding: 10 20;"/>
+
+        <Hyperlink fx:id="goToRegisterLink" text="Don't have an account? Register"
+                   style="-fx-text-fill: white; -fx-underline: false;"/>
+
+    </VBox>
+</AnchorPane>
