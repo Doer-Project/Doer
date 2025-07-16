@@ -28,7 +28,7 @@ public class LoginController {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/RegisterPage.fxml"));
                 Parent registerRoot = loader.load();
                 Stage stage = (javafx.stage.Stage) goToRegisterLink.getScene().getWindow();
-                stage.setScene(new javafx.scene.Scene(registerRoot, 750, 650));
+                stage.setScene(new javafx.scene.Scene(registerRoot, 700, 650));
             } catch (Exception e) {
                 e.printStackTrace();
             }
