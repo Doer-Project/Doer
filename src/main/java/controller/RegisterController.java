@@ -1,5 +1,6 @@
 package controller;
 
+import app.UserServices;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -63,6 +64,11 @@ public class RegisterController {
         workerRadio.setOnAction(e -> loadWorkerFields());
     }
 
+    public boolean handleRegister() {
+        return UserServices.registerUser(nameField.getText(),"Patel", userNameField.getText(), emailField.getText(), ageField.getText(), genderCombo.getValue(), address.getText(), city.getText());
+    }
+
+
     /// loading household specific fields when household radio button is selected
     private void loadHouseholdFields() {
         dynamicFields.getChildren().clear();
@@ -116,9 +122,12 @@ public class RegisterController {
             // Logic to verify OTP and register user
             if (!otpField.getText().trim().isEmpty()) {
                 System.out.println("Verifying OTP: " + otpField.getText());
-                System.out.println("Registration successful!");
-                // Redirect to login page or main application page
+                // Here you would typically verify the OTP with your backend service
                 // You can add your logic here
+                if (handleRegister()) {
+                    System.out.println("Registration successful!");
+                }
+                // Redirect to login page or main application page
             } else {
                 System.out.println("Registration failed. Please check your details.");
                 MessageBox.showAlert("Missing OTP", "Please enter the OTP.");
@@ -150,13 +159,16 @@ public class RegisterController {
         }
 
         if (householdRadio.isSelected()) {
-            MessageBox.showAlert("Household Registration", "Please fill in household details.");
-            return !(address.getText().trim().isEmpty() && city.getText().trim().isEmpty());
+            if (address.getText().trim().isEmpty() || city.getText().trim().isEmpty()){
+                MessageBox.showAlert("Household Registration", "Please fill in household details.");
+                return false;
+            }
         } else if (workerRadio.isSelected()) {
-            MessageBox.showAlert("Worker Registration", "Please fill in worker details.");
-            return !(category.getValue() == null && experience.getText().trim().isEmpty());
-
+            if (category.getValue() == null || experience.getText().trim().isEmpty()) {
+                MessageBox.showAlert("Worker Registration", "Please fill in worker details.");
+                return false;
+            }
         }
-        return false;
+        return true;
     }
 }
