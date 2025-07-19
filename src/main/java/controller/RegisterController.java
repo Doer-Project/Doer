@@ -14,7 +14,8 @@ import util.MessageBox;
 public class RegisterController {
 
     /// Basic fields
-    @FXML private TextField nameField;
+    @FXML private TextField firstNameField;
+    @FXML private TextField lastNameField;
     @FXML private TextField userNameField;
     @FXML private PasswordField passwordField;
     @FXML private PasswordField confirmPasswordField;
@@ -29,11 +30,13 @@ public class RegisterController {
 
     /// household specific fields
     @FXML private TextField address;
+    @FXML private TextField pinCode;
     @FXML private TextField city;
 
     /// worker specific fields
     @FXML private ComboBox<String> category;
     @FXML private TextField experience;
+    @FXML private TextField preferredLocation;
 
     @FXML private VBox dynamicFields;
 
@@ -65,7 +68,11 @@ public class RegisterController {
     }
 
     public boolean handleRegister() {
-        return UserServices.registerUser(nameField.getText(),"Patel", userNameField.getText(), emailField.getText(), ageField.getText(), genderCombo.getValue(), address.getText(), city.getText());
+        if (householdRadio.isSelected()) {
+            return UserServices.registerHousehold(firstNameField.getText(), lastNameField.getText(), userNameField.getText(), emailField.getText(), ageField.getText(), genderCombo.getValue(), address.getText(), city.getText(), pinCode.getText(),passwordField.getText());
+        } else {
+            return UserServices.registerWorker(firstNameField.getText(), lastNameField.getText(), userNameField.getText(), emailField.getText(), ageField.getText(), genderCombo.getValue(), category.getValue(), experience.getText(), passwordField.getText(), preferredLocation.getText());
+        }
     }
 
 
@@ -77,11 +84,15 @@ public class RegisterController {
         address.setPromptText("Address");
         address.setStyle("-fx-background-color: #F5F5F5; -fx-background-radius: 10; -fx-padding: 10;");
 
+        pinCode = new TextField();
+        pinCode.setPromptText("PinCode");
+        pinCode.setStyle("-fx-background-color: #F5F5F5; -fx-background-radius: 10; -fx-padding: 10;");
+
         city = new TextField();
         city.setPromptText("City");
         city.setStyle("-fx-background-color: #F5F5F5; -fx-background-radius: 10; -fx-padding: 10;");
 
-        dynamicFields.getChildren().addAll(address, city);
+        dynamicFields.getChildren().addAll(address, pinCode, city);
     }
 
     /// loading worker specific fields when worker radio button is selected
@@ -100,12 +111,17 @@ public class RegisterController {
                 "-fx-font-size: 14px; " +
                 "-fx-padding: 5 10;");
 
+        preferredLocation = new TextField();
+        preferredLocation.setPromptText("Preferred Location to work");
+        preferredLocation.setMaxWidth(300);
+        preferredLocation.setStyle("-fx-background-color: #F5F5F5; -fx-background-radius: 10; -fx-padding: 10;");
+
         experience = new TextField();
         experience.setPromptText("Years of Experience");
         experience.setMaxWidth(300);
         experience.setStyle("-fx-background-color: #F5F5F5; -fx-background-radius: 10; -fx-padding: 10;");
 
-        dynamicFields.getChildren().addAll(category, experience);
+        dynamicFields.getChildren().addAll(category, preferredLocation, experience);
     }
 
     /// Handle OTP button click
@@ -123,11 +139,12 @@ public class RegisterController {
             if (!otpField.getText().trim().isEmpty()) {
                 System.out.println("Verifying OTP: " + otpField.getText());
                 // Here you would typically verify the OTP with your backend service
-                // You can add your logic here
                 if (handleRegister()) {
                     System.out.println("Registration successful!");
+                    // Redirect to login page or main application page
+                } else {
+                    System.out.println("something unexpected happened, please try again.");
                 }
-                // Redirect to login page or main application page
             } else {
                 System.out.println("Registration failed. Please check your details.");
                 MessageBox.showAlert("Missing OTP", "Please enter the OTP.");
@@ -137,7 +154,8 @@ public class RegisterController {
 
     /// Validate all fields before sending OTP or registering (except OTP)
     private boolean validateFields() {
-        if (nameField.getText().trim().isEmpty() ||
+        if (firstNameField.getText().trim().isEmpty() ||
+            lastNameField.getText().trim().isEmpty() ||
             userNameField.getText().trim().isEmpty() ||
             ageField.getText().trim().isEmpty() ||
             passwordField.getText().trim().isEmpty() ||

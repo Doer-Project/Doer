@@ -1,17 +1,21 @@
 package model;
 
 public class Household extends User {
-    private String city;
     private String address;
+    private String pin_code;
+    private String city;
+    private String passwordHash;
 
     public Household() {
         super();
     }
 
-    public Household(String firstName, String lastName, String userName, String email, int age, String gender, String address, String city) {
+    public Household(String firstName, String lastName, String userName, String email, int age, String gender, String address, String city, String pin_code, String passwordHash) {
         super(firstName, lastName, userName, email, age, gender);
         this.address = address;
+        this.pin_code = pin_code;
         this.city = city;
+        this.passwordHash = passwordHash;
     }
 
     @Override
@@ -50,6 +54,14 @@ public class Household extends User {
 
     public String getAddress() {
         return address;
+    }
+
+    public String getPasswordHash() {
+        return passwordHash;
+    }
+
+    public String getPin_code() {
+        return pin_code;
     }
 
     @Override

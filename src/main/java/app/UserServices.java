@@ -2,11 +2,10 @@ package app;
 
 import database.UserDAO;
 import model.Household;
-import model.User;
 import util.MessageBox;
 
 public class UserServices {
-    public static boolean registerUser(String firstName, String lastName, String userName, String email, String age, String gender, String address, String city) {
+    public static boolean registerHousehold(String firstName, String lastName, String userName, String email, String age, String gender, String address, String city, String pin_code, String passwordHash) {
         if (firstName.isEmpty() || lastName.isEmpty()) {
             MessageBox.showAlert("Invalid Input", "First name and last name cannot be empty.");
             return false;
@@ -42,7 +41,7 @@ public class UserServices {
             return false;
         }
 
-        Household user = new Household(firstName, lastName, userName, email, Integer.parseInt(age), gender, address, city);
+        Household user = new Household(firstName, lastName, userName, email, Integer.parseInt(age), gender, address, city, pin_code, passwordHash);
 
         try {
             UserDAO userDAO = new UserDAO();
@@ -57,5 +56,9 @@ public class UserServices {
             MessageBox.showError("Database Error", "An error occurred while connecting to the database: " + e.getMessage());
             return false;
         }
+    }
+
+    public static boolean registerWorker(String firstName, String lastName, String userName, String email, String age, String gender, String category, String experience, String passwordHash, String preferredLocation) {
+        return true;
     }
 }

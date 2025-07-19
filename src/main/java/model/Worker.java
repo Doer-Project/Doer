@@ -4,17 +4,17 @@ public class Worker extends User {
 
     private String category;
     private int experience;
-    private String role;
+    private String preferredLocation;
     private String passwordHash;
 
     public Worker() {}
 
-    public Worker(String firstName, String lastName, String userName, String email, int age, String gender, String category, int experience, String role, String passwordHash) {
+    public Worker(String firstName, String lastName, String userName, String email, int age, String gender, String category, int experience, String passwordHash, String preferredLocation) {
         super(firstName, lastName, userName, email, age, gender);
         this.category = category;
         this.experience = experience;
-        this.role = role;
         this.passwordHash = passwordHash;
+        this.preferredLocation = preferredLocation;
     }
 
     @Override
@@ -55,12 +55,12 @@ public class Worker extends User {
         return experience;
     }
 
-    public String getRole() {
-        return role;
-    }
-
     public String getPasswordHash() {
         return passwordHash;
+    }
+
+    public String getPreferredLocation() {
+        return preferredLocation;
     }
 
     @Override
@@ -68,7 +68,6 @@ public class Worker extends User {
         return "Worker{" + super.toString() +
                 ", category='" + category + '\'' +
                 ", experience=" + experience +
-                ", role='" + role + '\'' +
                 ", passwordHash='" + passwordHash + '\'' +
                 '}';
     }
