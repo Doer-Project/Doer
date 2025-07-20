@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="controller.RegisterController"
+            prefWidth="700" prefHeight="500"
+            style="-fx-background-color: linear-gradient(to bottom right, #1B4242, #4FBDBA, #CDEED6);">
+
+    <!-- App Logo-like Title -->
+    <Label text="DOER"
+           layoutX="40" layoutY="40"
+           style="-fx-font-size: 42px; -fx-text-fill: white; -fx-font-family: 'Verdana'; -fx-font-weight: bold;"/>
+
+    <!-- Side Text -->
+    <VBox layoutX="40" layoutY="120" spacing="5">
+        <Label text="Create an Account"
+               style="-fx-font-size: 20px; -fx-text-fill: white; -fx-font-weight: bold;" />
+        <Label text="Register to find or offer services."
+               wrapText="true"
+               style="-fx-font-size: 14px; -fx-text-fill: white;"/>
+    </VBox>
+
+    <!-- Form Section -->
+    <VBox layoutX="310" layoutY="40" spacing="10" prefWidth="340" alignment="CENTER">
+
+        <!-- Form Title -->
+        <Label text="Register" alignment="CENTER" style="-fx-font-size: 24px; -fx-text-fill: white; -fx-font-weight: bold; -fx-alignment: center;" />
+
+        <TextField fx:id="firstNameField" promptText="Full Name" maxWidth="300"
+                   style="-fx-background-radius: 10; -fx-padding: 10; -fx-pref-height: 40;" />
+
+        <TextField fx:id="lastNameField" promptText="Full Name" maxWidth="300"
+                   style="-fx-background-radius: 10; -fx-padding: 10; -fx-pref-height: 40;" />
+
+        <TextField fx:id="userNameField" promptText="Set a username" maxWidth="300"
+                   style="-fx-background-radius: 10; -fx-padding: 10; -fx-pref-height: 40;" />
+
+        <PasswordField fx:id="passwordField" promptText="Create a strong password" maxWidth="300"
+                   style="-fx-background-radius: 10; -fx-padding: 10; -fx-pref-height: 40;" />
+
+        <PasswordField fx:id="confirmPasswordField" promptText="Confirm password" maxWidth="300"
+                   style="-fx-background-radius: 10; -fx-padding: 10; -fx-pref-height: 40;" />
+
+        <TextField fx:id="ageField" promptText="Age" maxWidth="300"
+                   style="-fx-background-radius: 10; -fx-padding: 10; -fx-pref-height: 40;" />
+
+        <ComboBox fx:id="genderCombo" promptText="Select Gender" maxWidth="300" prefHeight="40"
+                  style="-fx-background-color: #F5F5F5;
+                         -fx-background-radius: 10;
+                         -fx-border-radius: 10;
+                         -fx-border-color: #1B4242;
+                         -fx-border-width: 1;
+                         -fx-font-size: 14px;
+                         -fx-padding: 5 10;">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="Male" />
+                    <String fx:value="Female" />
+                    <String fx:value="Other" />
+                </FXCollections>
+            </items>
+        </ComboBox>
+
+        <TextField fx:id="emailField" promptText="Email" maxWidth="300"
+                   style="-fx-background-radius: 10; -fx-padding: 10; -fx-pref-height: 40;" />
+
+        <HBox spacing="10">
+            <RadioButton fx:id="householdRadio" text="Household"
+                         style="-fx-text-fill: white;" />
+            <RadioButton fx:id="workerRadio" text="Worker (Doer)"
+                         style="-fx-text-fill: white;" />
+        </HBox>
+
+        <VBox fx:id="dynamicFields" spacing="10" maxWidth="300">
+            <!-- Dynamically loaded fields will be inserted here and will follow height rule -->
+        </VBox>
+
+        <TextField fx:id="otpField" promptText="Enter OTP" visible="false" managed="false" maxWidth="300"
+                   style="-fx-background-radius: 10; -fx-padding: 10; -fx-pref-height: 40;" />
+
+        <Button fx:id="otpButton" text="Send OTP" onAction="#handleOtp"
+                style="-fx-background-color: #4FBDBA; -fx-text-fill: white; -fx-background-radius: 10; -fx-padding: 8 20; -fx-pref-height: 40;" />
+
+        <Hyperlink fx:id="goToLoginLink" text="Already have an account? Login"
+                   style="-fx-text-fill: white; -fx-underline: false;" />
+
+    </VBox>
+</AnchorPane>
