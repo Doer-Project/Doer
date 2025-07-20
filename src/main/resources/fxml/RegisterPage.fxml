@@ -30,10 +30,10 @@
         <!-- Form Title -->
         <Label text="Register" alignment="CENTER" style="-fx-font-size: 24px; -fx-text-fill: white; -fx-font-weight: bold; -fx-alignment: center;" />
 
-        <TextField fx:id="firstNameField" promptText="Full Name" maxWidth="300"
+        <TextField fx:id="firstNameField" promptText="First Name" maxWidth="300"
                    style="-fx-background-radius: 10; -fx-padding: 10; -fx-pref-height: 40;" />
 
-        <TextField fx:id="lastNameField" promptText="Full Name" maxWidth="300"
+        <TextField fx:id="lastNameField" promptText="Last Name" maxWidth="300"
                    style="-fx-background-radius: 10; -fx-padding: 10; -fx-pref-height: 40;" />
 
         <TextField fx:id="userNameField" promptText="Set a username" maxWidth="300"
