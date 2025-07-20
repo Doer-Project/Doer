@@ -8,7 +8,7 @@ public class ValidationUtil {
      * - no space or special characters allowed
      * - 3 to 20 length
      *
-     * @param username
+     * @param username;
      * @return true if username is valid, otherwise false
      */
     public static boolean isValidUsername(String username) {
@@ -23,7 +23,7 @@ public class ValidationUtil {
      * - At least one digit (0-9)
      * - At least one special character [!@#$%^&*_]
      *
-     * @param password
+     * @param password :- user's account password
      * @return ture if password is strong & valid, otherwise false
      */
     public static boolean isStrongPassword(String password) {
@@ -36,7 +36,7 @@ public class ValidationUtil {
      *  Validate email:
      *  - [xyz@.domain]
      *
-     * @param email
+     * @param email :- user's email
      * @return true if email is valid, otherwise false
      */
     public static boolean isValidEmail(String email) {
@@ -48,7 +48,7 @@ public class ValidationUtil {
      * - e.g :- city, firstName, lastName
      * - Alphabets only (a-z) & (A-Z)
      *
-     * @param input
+     * @param input :- firstName, lastName, city , etc...
      * @return true if alphabets only input, otherwise false
      */
     public static boolean isAlphabetOnly(String input) {
