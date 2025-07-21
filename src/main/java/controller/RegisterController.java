@@ -36,7 +36,7 @@ public class RegisterController {
     /// worker specific fields
     @FXML private ComboBox<String> category;
     @FXML private TextField experience;
-    @FXML private TextField preferredLocation;
+    @FXML private TextField preferredCity;
 
     @FXML private VBox dynamicFields;
 
@@ -60,6 +60,7 @@ public class RegisterController {
                 stage.setScene(new javafx.scene.Scene(loginRoot, 600, 500));
             } catch (Exception e) {
                 e.printStackTrace();
+                MessageBox.showError("Error", "Failed to load login page.");
             }
         });
 
@@ -69,9 +70,9 @@ public class RegisterController {
 
     public boolean handleRegister() {
         if (householdRadio.isSelected()) {
-            return UserServices.registerHousehold(firstNameField.getText(), lastNameField.getText(), userNameField.getText(), emailField.getText(), ageField.getText(), genderCombo.getValue(), address.getText(), city.getText(), pinCode.getText(),passwordField.getText());
+            return UserServices.registerHousehold(firstNameField.getText(), lastNameField.getText(), "h_"+userNameField.getText(), emailField.getText(), ageField.getText(), genderCombo.getValue(), address.getText(), city.getText(), pinCode.getText(),passwordField.getText());
         } else {
-            return UserServices.registerWorker(firstNameField.getText(), lastNameField.getText(), userNameField.getText(), emailField.getText(), ageField.getText(), genderCombo.getValue(), category.getValue(), experience.getText(), passwordField.getText(), preferredLocation.getText());
+            return UserServices.registerWorker(firstNameField.getText(), lastNameField.getText(), "w_"+userNameField.getText(), emailField.getText(), ageField.getText(), genderCombo.getValue(), category.getValue(), experience.getText(), passwordField.getText(), preferredCity.getText());
         }
     }
 
@@ -111,17 +112,17 @@ public class RegisterController {
                 "-fx-font-size: 14px; " +
                 "-fx-padding: 5 10;");
 
-        preferredLocation = new TextField();
-        preferredLocation.setPromptText("Preferred Location to work");
-        preferredLocation.setMaxWidth(300);
-        preferredLocation.setStyle("-fx-background-color: #F5F5F5; -fx-background-radius: 10; -fx-padding: 10;");
+        preferredCity = new TextField();
+        preferredCity.setPromptText("Preferred Location to work");
+        preferredCity.setMaxWidth(300);
+        preferredCity.setStyle("-fx-background-color: #F5F5F5; -fx-background-radius: 10; -fx-padding: 10;");
 
         experience = new TextField();
         experience.setPromptText("Years of Experience");
         experience.setMaxWidth(300);
         experience.setStyle("-fx-background-color: #F5F5F5; -fx-background-radius: 10; -fx-padding: 10;");
 
-        dynamicFields.getChildren().addAll(category, preferredLocation, experience);
+        dynamicFields.getChildren().addAll(category, preferredCity, experience);
     }
 
     /// Handle OTP button click
