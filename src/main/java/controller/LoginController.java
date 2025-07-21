@@ -1,5 +1,7 @@
 package controller;
 
+import app.UserServices;
+import database.UserDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,6 +13,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import util.MessageBox;
+import util.Validations;
 
 public class LoginController {
     @FXML private TextField emailField;
@@ -35,6 +38,21 @@ public class LoginController {
         });
     }
 
+    public boolean handleLogin() {
+        if (Validations.isValidEmail(emailField.getText())) {
+            emailField.setText(UserServices.getUserEmail(emailField.getText()));
+        }
+        else {
+            if (emailField.getText().startsWith("w_")) {
+
+            }
+            else {
+
+            }
+        }
+        return true;
+    }
+
     public void handleOtpOrLogin(ActionEvent actionEvent) {
         if (!validateLoginFields()) return;
         if (!otpSent) {
@@ -46,6 +64,7 @@ public class LoginController {
             otpSent = true;
         } else {
             // Login logic
+            handleLogin();
             System.out.println("Verifying OTP: " + otpField.getText());
             // validate login credentials here
         }

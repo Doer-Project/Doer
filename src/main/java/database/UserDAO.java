@@ -2,6 +2,8 @@ package database;
 
 import model.Household;
 import model.Worker;
+import util.MessageBox;
+import util.Validations;
 
 import java.sql.*;
 
@@ -16,6 +18,14 @@ public class UserDAO {
         } else {
             System.out.println("Failed to establish database connection.");
         }
+    }
+
+    public String getUserNameByEmail(String email) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement("SELECT username FROM users WHERE email = ?");
+        statement.setString(1, email);
+        resultSet = statement.executeQuery();
+
+        return resultSet.getString("username");
     }
 
     public boolean registerHousehold(Household user) throws SQLException {
@@ -48,6 +58,46 @@ public class UserDAO {
     }
 
     public boolean registerWorker(Worker user) throws SQLException {
+        String firstName = user.getFirstName(), lastName = user.getLastName(), userName = user.getUserName(), email = user.getEmail(), passwordHash = user.getPasswordHash(), preferredLocation = user.getPreferredLocation(), gender = user.getGender(), category = user.getCategory();
+        int age = user.getAge(), experience = user.getExperience();
+
+        PreparedStatement userStatement = connection.prepareStatement("INSERT INTO users (username, firstname, lastname, age, gender, email) VALUES (?, ?, ?, ?, ?, ?)");
+
+        userStatement.setString(1, userName);
+        userStatement.setString(2, firstName);
+        userStatement.setString(3, lastName);
+        userStatement.setInt(4, age);
+        userStatement.setString(5, gender);
+        userStatement.setString(6, email);
+
+        userStatement.executeUpdate();
+
+        PreparedStatement typeStatement = connection.prepareStatement("INSERT INTO worker (username, category, experience, preferred_city, password) VALUES (?, ?, ?, ?, ?)");
+
+        typeStatement.setString(1, userName);
+        typeStatement.setString(2, category);
+        typeStatement.setInt(3, experience);
+        typeStatement.setString(4, preferredLocation);
+        typeStatement.setString(5, passwordHash);
+
+        typeStatement.executeUpdate();
+
+        System.out.println("Worker registered: " + firstName + " " + lastName);
         return true;
+    }
+
+    public boolean  loginUser (String userName, String passwordHash, boolean isWorker) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement("SELECT * FROM users WHERE username = ?");
+        statement.setString(1, userName);
+
+        resultSet = statement.executeQuery();
+
+        if (resultSet.next()) {
+            System.out.println("Login successful for user: " + userName);
+            return true;
+        } else {
+            System.out.println("Login failed for user: " + userName);
+            return false;
+        }
     }
 }
