@@ -13,21 +13,25 @@
            layoutX="40.0" layoutY="30.0"
            style="-fx-font-size: 30px; -fx-text-fill: #1B4242; -fx-font-family: 'Verdana'; -fx-font-weight: bold;" />
 
-    <!-- Table Section -->
-    <VBox layoutX="40.0" layoutY="90.0" prefWidth="920.0" spacing="20.0">
-        <TableView fx:id="futureWorkTable" prefHeight="650.0" prefWidth="920.0"
-                   style="-fx-background-radius: 12;">
-            <columns>
-                <TableColumn fx:id="colCategory" text="Category" prefWidth="150.0"/>
-                <TableColumn fx:id="colDate" text="Scheduled Date" prefWidth="150.0"/>
-                <TableColumn fx:id="colTime" text="Time" prefWidth="120.0"/>
-                <TableColumn fx:id="colDescription" text="Description" prefWidth="350.0"/>
-                <TableColumn fx:id="colStatus" text="Status" prefWidth="120.0"/>
-            </columns>
-        </TableView>
+    <!-- Make the VBox section scrollable -->
+    <ScrollPane layoutX="40.0" layoutY="90.0" prefWidth="920.0" prefHeight="700.0"
+                fitToWidth="true" fitToHeight="true"
+                style="-fx-background-color: transparent;">
+        <VBox spacing="20.0">
+            <TableView fx:id="futureWorkTable" prefHeight="650.0" prefWidth="920.0"
+                       style="-fx-background-radius: 12;">
+                <columns>
+                    <TableColumn fx:id="colCategory" text="Category" prefWidth="150.0"/>
+                    <TableColumn fx:id="colDate" text="Scheduled Date" prefWidth="150.0"/>
+                    <TableColumn fx:id="colTime" text="Time" prefWidth="120.0"/>
+                    <TableColumn fx:id="colDescription" text="Description" prefWidth="350.0"/>
+                    <TableColumn fx:id="colStatus" text="Status" prefWidth="120.0"/>
+                </columns>
+            </TableView>
 
-        <Label text="(This table is populated dynamically from your database...)"
-               style="-fx-text-fill: #888888; -fx-font-size: 14px;" />
-    </VBox>
+            <Label text="(This table is populated dynamically from your database...)"
+                   style="-fx-text-fill: #888888; -fx-font-size: 14px;" />
+        </VBox>
+    </ScrollPane>
 
 </AnchorPane>
