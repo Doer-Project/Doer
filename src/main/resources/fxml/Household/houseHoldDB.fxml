@@ -6,7 +6,7 @@
 <?import javafx.scene.text.*?>
 
 <BorderPane xmlns:fx="http://javafx.com/fxml"
-            fx:controller="controller.HouseholdDashboardController"
+            fx:controller="controller.household.HouseholdDashboardController"
             prefWidth="1200.0" prefHeight="700.0"
             style="-fx-background-color: linear-gradient(to bottom right, #E8F5E9, #C8E6C9);">
 
