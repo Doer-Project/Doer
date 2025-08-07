@@ -5,8 +5,8 @@
 
 <AnchorPane xmlns:fx="http://javafx.com/fxml"
             fx:id="mainContentArea"
-            fx:controller="controller.Household.CreateReqController"
-            prefWidth="1050.0" prefHeight="700.0"
+            fx:controller="controller.household.CreateReqController"
+            prefWidth="1000" prefHeight="800"
             style="-fx-background-color: linear-gradient(to bottom right, #1B4242, #4FBDBA, #CDEED6);">
 
     <!-- Title -->

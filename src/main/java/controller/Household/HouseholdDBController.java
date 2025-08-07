@@ -1,4 +1,4 @@
-package controller.Household;
+package controller.household;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,35 +21,35 @@ public class HouseholdDBController {
     @FXML
     public void createNewRequest() {
         resetButtonStyles();
-        btnNewRequest.setStyle("-fx-background-color: #007bff; -fx-text-fill: white;");
+        btnNewRequest.setStyle("-fx-background-color: #007bff;-fx-background-radius: 12; -fx-text-fill: white;");
         loadUI("createRequest.fxml");
     }
 
     @FXML
     public void onGoingWork() {
         resetButtonStyles();
-        btnOngoing.setStyle("-fx-background-color: #007bff; -fx-text-fill: white;");
+        btnOngoing.setStyle("-fx-background-color: #007bff;-fx-background-radius: 12; -fx-text-fill: white;");
         loadUI("onGoing.fxml");
     }
 
     @FXML
     public void futureWork() {
         resetButtonStyles();
-        btnFuture.setStyle("-fx-background-color: #007bff; -fx-text-fill: white;");
+        btnFuture.setStyle("-fx-background-color: #007bff;-fx-background-radius: 12; -fx-text-fill: white;");
         loadUI("futureWork.fxml");
     }
 
     @FXML
     public void completedWork() {
         resetButtonStyles();
-        btnCompleted.setStyle("-fx-background-color: #007bff; -fx-text-fill: white;");
+        btnCompleted.setStyle("-fx-background-color: #007bff;-fx-background-radius: 12; -fx-text-fill: white;");
         loadUI("completed.fxml");
     }
 
     @FXML
     public void viewProfile() {
         resetButtonStyles();
-        btnProfile.setStyle("-fx-background-color: #007bff; -fx-text-fill: white;");
+        btnProfile.setStyle("-fx-background-color: #007bff;-fx-background-radius: 12; -fx-text-fill: white;");
         loadUI("profile.fxml");
     }
 
@@ -64,10 +64,11 @@ public class HouseholdDBController {
     }
 
     public void resetButtonStyles() {
-        btnNewRequest.setStyle("");
-        btnOngoing.setStyle("");
-        btnFuture.setStyle("");
-        btnCompleted.setStyle("");
-        btnProfile.setStyle("");
+        String defaultStyle = "-fx-background-color: #FFFFFF; -fx-background-radius: 12; -fx-text-fill: #1B4242;";
+        btnNewRequest.setStyle(defaultStyle);
+        btnOngoing.setStyle(defaultStyle);
+        btnFuture.setStyle(defaultStyle);
+        btnCompleted.setStyle(defaultStyle);
+        btnProfile.setStyle(defaultStyle);
     }
 }

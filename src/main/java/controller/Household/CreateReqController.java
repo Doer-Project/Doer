@@ -1,4 +1,4 @@
-package controller.Household;
+package controller.household;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
