@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml"
+            prefWidth="1000.0" prefHeight="800.0"
+            style="-fx-background-color: #E3F2FD;">
+
+    <!-- Page Title -->
+    <Label text="Jobs You Completed"
+           layoutX="40.0" layoutY="30.0"
+           style="-fx-font-size: 30px; -fx-text-fill: #0D47A1; -fx-font-family: 'Verdana'; -fx-font-weight: bold;" />
+
+    <!-- Scrollable Table Section -->
+    <ScrollPane layoutX="40.0" layoutY="90.0" prefWidth="920.0" prefHeight="700.0"
+                fitToWidth="true" fitToHeight="true"
+                style="-fx-background-color: transparent;">
+        <VBox spacing="20.0">
+            <TableView fx:id="completedTable" prefHeight="650.0" prefWidth="920.0"
+                       style="-fx-background-radius: 12;">
+
+                <columns>
+                    <TableColumn fx:id="colWorkId" text="Work ID" prefWidth="100.0"/>
+                    <TableColumn fx:id="colService" text="Service" prefWidth="150.0"/>
+                    <TableColumn fx:id="colCustomer" text="Customer" prefWidth="150.0"/>
+                    <TableColumn fx:id="colDate" text="Date Completed" prefWidth="150.0"/>
+                    <TableColumn fx:id="colRating" text="Rating" prefWidth="100.0"/>
+                    <TableColumn fx:id="colReview" text="Review" prefWidth="150.0"/>
+                    <TableColumn fx:id="colAmount" text="Earnings" prefWidth="100.0"/>
+                </columns>
+            </TableView>
+
+            <Label text="(This table shows all jobs you have completed for customers...)"
+                   style="-fx-text-fill: #555555; -fx-font-size: 14px;" />
+        </VBox>
+    </ScrollPane>
+
+</AnchorPane>

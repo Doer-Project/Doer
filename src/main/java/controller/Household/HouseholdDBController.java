@@ -21,35 +21,35 @@ public class HouseholdDBController {
     @FXML
     public void createNewRequest() {
         resetButtonStyles();
-        btnNewRequest.setStyle("-fx-background-color: #007bff;-fx-background-radius: 12; -fx-text-fill: white;");
+        btnNewRequest.setStyle(activeStyle());
         loadUI("createRequest.fxml");
     }
 
     @FXML
     public void onGoingWork() {
         resetButtonStyles();
-        btnOngoing.setStyle("-fx-background-color: #007bff;-fx-background-radius: 12; -fx-text-fill: white;");
+        btnOngoing.setStyle(activeStyle());
         loadUI("onGoing.fxml");
     }
 
     @FXML
     public void futureWork() {
         resetButtonStyles();
-        btnFuture.setStyle("-fx-background-color: #007bff;-fx-background-radius: 12; -fx-text-fill: white;");
-        loadUI("futureWork.fxml");
+        btnFuture.setStyle(activeStyle());
+        loadUI("FutureWork.fxml");
     }
 
     @FXML
     public void completedWork() {
         resetButtonStyles();
-        btnCompleted.setStyle("-fx-background-color: #007bff;-fx-background-radius: 12; -fx-text-fill: white;");
-        loadUI("completed.fxml");
+        btnCompleted.setStyle(activeStyle());
+        loadUI("Completed.fxml");
     }
 
     @FXML
     public void viewProfile() {
         resetButtonStyles();
-        btnProfile.setStyle("-fx-background-color: #007bff;-fx-background-radius: 12; -fx-text-fill: white;");
+        btnProfile.setStyle(activeStyle());
         loadUI("profile.fxml");
     }
 
@@ -70,5 +70,9 @@ public class HouseholdDBController {
         btnFuture.setStyle(defaultStyle);
         btnCompleted.setStyle(defaultStyle);
         btnProfile.setStyle(defaultStyle);
+    }
+
+    private String activeStyle() {
+        return "-fx-background-color: #007bff;-fx-background-radius: 12; -fx-text-fill: white;";
     }
 }
