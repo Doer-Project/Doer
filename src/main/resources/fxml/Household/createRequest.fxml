@@ -2,10 +2,10 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.geometry.*?>
 
 <AnchorPane xmlns:fx="http://javafx.com/fxml"
             fx:id="mainContentArea"
+            fx:controller="controller.Household.CreateReqController"
             prefWidth="1050.0" prefHeight="700.0"
             style="-fx-background-color: linear-gradient(to bottom right, #1B4242, #4FBDBA, #CDEED6);">
 
@@ -16,7 +16,7 @@
 
     <!-- Scrollable area for form -->
     <ScrollPane layoutX="100" layoutY="100" prefWidth="850" prefHeight="570"
-                fitToWidth="true" fitToHeight="false"
+                fitToWidth="true"
                 style="-fx-background-color: transparent;">
         <VBox spacing="30"
               style="-fx-background-color: white; -fx-background-radius: 20; -fx-padding: 30;"
