@@ -34,6 +34,7 @@ public class HouseholdDashboardController {
     }
 
     @FXML
+    // remaining
     public void viewProfile(ActionEvent event) {
         loadUI("profile.fxml");
     }
