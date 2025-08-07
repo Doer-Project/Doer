@@ -60,7 +60,7 @@ public class WorkerDBController {
 
     private void loadUI(String fxmlFile) {
         try {
-            Node node = FXMLLoader.load(getClass().getResource("fxml/worker/"+fxmlFile));
+            Node node = FXMLLoader.load(getClass().getResource("/fxml/worker/"+fxmlFile));
             contentPane.getChildren().setAll(node);
         } catch (IOException e) {
             System.out.println("Error loading UI: " + fxmlFile);
