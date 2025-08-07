@@ -20,13 +20,13 @@
             <children>
                 <Label text="🏠 Household Menu"
                        style="-fx-text-fill: #1B4242; -fx-font-size: 20px; -fx-font-weight: bold;" />
-                <Button fx:id="btnNewRequest" text="🆕 New Work Request" prefWidth="190.0"
+                <Button fx:id="btnNewRequest" text="🆕 New Work Request" prefWidth="190.0" onAction="#createNewRequest"
                         style="-fx-background-color: #FFFFFF; -fx-background-radius: 12; -fx-text-fill: #1B4242;" />
-                <Button fx:id="btnOngoing" text="🔄 Ongoing Work" prefWidth="190.0"
+                <Button fx:id="btnOngoing" text="🔄 Ongoing Work" prefWidth="190.0" onAction="#onGoingWork"
                         style="-fx-background-color: #FFFFFF; -fx-background-radius: 12; -fx-text-fill: #1B4242;" />
-                <Button fx:id="btnFuture" text="📅 Future Scheduled Work" prefWidth="190.0"
+                <Button fx:id="btnFuture" text="📅 Future Scheduled Work" prefWidth="190.0" onAction="#futureWork"
                         style="-fx-background-color: #FFFFFF; -fx-background-radius: 12; -fx-text-fill: #1B4242;" />
-                <Button fx:id="btnCompleted" text="✅ Past Completed Work" prefWidth="190.0"
+                <Button fx:id="btnCompleted" text="✅ Past Completed Work" prefWidth="190.0" onAction="#completedWork"
                         style="-fx-background-color: #FFFFFF; -fx-background-radius: 12; -fx-text-fill: #1B4242;" />
                 <Button fx:id="btnProfile" text="👤 Profile" prefWidth="190.0"
                         style="-fx-background-color: #FFFFFF; -fx-background-radius: 12; -fx-text-fill: #1B4242;" />
