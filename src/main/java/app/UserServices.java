@@ -126,27 +126,6 @@ public class UserServices {
         }
     }
 
-    public static boolean loginUser(String userName, String password, boolean isWorker) {
-        if (Validations.isValidUsername(userName)) {
-            MessageBox.showAlert("Invalid Input", "Username must be between 3 to 20 characters and can only contain letters, numbers, and underscores.");
-            return false;
-        }
-
-        try {
-            UserDAO userDAO = new UserDAO();
-            if (userDAO.loginUser(userName, password, isWorker)) {
-                MessageBox.showInfo("Login Successful", "Welcome back, " + userName + "!");
-                return true;
-            } else {
-                MessageBox.showError("Login Failed", "Invalid username or password.");
-                return false;
-            }
-        } catch (Exception e) {
-            MessageBox.showError("Database Error", "An error occurred while connecting to the database: " + e.getMessage());
-            return false;
-        }
-    }
-
     public static String getUserEmail(String email) {
         try {
             UserDAO userDAO = new UserDAO();
@@ -160,6 +139,22 @@ public class UserServices {
         } catch (Exception e) {
             MessageBox.showError("Database Error", "An error occurred while connecting to the database: " + e.getMessage());
             return null;
+        }
+    }
+
+    public static boolean verifyUser(String username, String password) {
+        try {
+            UserDAO userDAO = new UserDAO();
+            if (userDAO.verifyUser(username, password)) {
+                MessageBox.showInfo("Verification Successful", "User verified successfully.");
+                return true;
+            } else {
+                MessageBox.showError("Verification Failed", "Invalid email or password.");
+                return false;
+            }
+        } catch (Exception e) {
+            MessageBox.showError("Database Error", "An error occurred while connecting to the database: " + e.getMessage());
+            return false;
         }
     }
 }

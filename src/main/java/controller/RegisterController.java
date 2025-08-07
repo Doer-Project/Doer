@@ -70,9 +70,9 @@ public class RegisterController {
 
     public boolean handleRegister() {
         if (householdRadio.isSelected()) {
-            return UserServices.registerHousehold(firstNameField.getText(), lastNameField.getText(), "h_"+userNameField.getText(), emailField.getText(), ageField.getText(), genderCombo.getValue(), address.getText(), city.getText(), pinCode.getText(),passwordField.getText());
+            return UserServices.registerHousehold(firstNameField.getText(), lastNameField.getText(), userNameField.getText(), emailField.getText(), ageField.getText(), genderCombo.getValue(), address.getText(), city.getText(), pinCode.getText(),passwordField.getText());
         } else {
-            return UserServices.registerWorker(firstNameField.getText(), lastNameField.getText(), "w_"+userNameField.getText(), emailField.getText(), ageField.getText(), genderCombo.getValue(), category.getValue(), experience.getText(), passwordField.getText(), preferredCity.getText());
+            return UserServices.registerWorker(firstNameField.getText(), lastNameField.getText(), userNameField.getText(), emailField.getText(), ageField.getText(), genderCombo.getValue(), category.getValue(), experience.getText(), passwordField.getText(), preferredCity.getText());
         }
     }
 
@@ -101,7 +101,7 @@ public class RegisterController {
         dynamicFields.getChildren().clear();
 
         category = new ComboBox<>();
-        category.getItems().addAll("Plumber", "Electrician", "Cleaner", "Cook", "Gardener");
+        category.getItems().addAll("Plumber", "Electrician", "Cleaner", "Painter", "Cook", "Gardener");
         category.setPromptText("Select Category");
         category.setMaxWidth(300);
         category.setStyle("-fx-background-color: #F5F5F5; " +
