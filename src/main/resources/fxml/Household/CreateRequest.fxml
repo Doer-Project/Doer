@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml"
+            fx:id="mainContentArea"
+            fx:controller="controller.Household.CreateReqController"
+            prefWidth="1050.0" prefHeight="700.0"
+            style="-fx-background-color: linear-gradient(to bottom right, #1B4242, #4FBDBA, #CDEED6);">
+
+    <!-- Title -->
+    <Label text="Create New Request"
+           layoutX="40" layoutY="30"
+           style="-fx-font-size: 32px; -fx-text-fill: white; -fx-font-family: 'Verdana'; -fx-font-weight: bold;" />
+
+    <!-- Scrollable area for form -->
+    <ScrollPane layoutX="100" layoutY="100" prefWidth="850" prefHeight="570"
+                fitToWidth="true"
+                style="-fx-background-color: transparent;">
+        <VBox spacing="30"
+              style="-fx-background-color: white; -fx-background-radius: 20; -fx-padding: 30;"
+              prefWidth="830">
+
+            <!-- Section 1: Work Details -->
+            <VBox spacing="15">
+                <Label text="1. Basic Work Details"
+                       style="-fx-font-size: 18px; -fx-text-fill: #1B4242; -fx-font-weight: bold;" />
+
+                <ComboBox fx:id="categoryComboBox" promptText="Select Work Category"
+                          prefWidth="790"
+                          style="-fx-background-radius: 8;" />
+
+                <TextArea fx:id="descriptionTextArea" promptText="Describe the issue or requirement clearly."
+                          wrapText="true" prefRowCount="4" prefWidth="790"
+                          style="-fx-background-radius: 8;" />
+            </VBox>
+
+            <!-- Section 2: Scheduling -->
+            <VBox spacing="15">
+                <Label text="2. Scheduling Preferences"
+                       style="-fx-font-size: 18px; -fx-text-fill: #1B4242; -fx-font-weight: bold;" />
+
+                <DatePicker fx:id="preferredDatePicker" promptText="Select Preferred Date"
+                            prefWidth="790"
+                            style="-fx-background-radius: 8;" />
+            </VBox>
+
+            <!-- Section 3: Location -->
+            <VBox spacing="15">
+                <Label text="3. Location Details"
+                       style="-fx-font-size: 18px; -fx-text-fill: #1B4242; -fx-font-weight: bold;" />
+
+                <TextField fx:id="addressTextField" promptText="Address"
+                           prefWidth="790"
+                           style="-fx-background-radius: 8;" />
+
+                <TextField fx:id="cityTextField" promptText="City"
+                           prefWidth="790"
+                           style="-fx-background-radius: 8;" />
+
+                <TextField fx:id="pinCodeTextField" promptText="Pin Code"
+                           prefWidth="790"
+                           style="-fx-background-radius: 8;" />
+            </VBox>
+
+            <!-- Buttons -->
+            <HBox spacing="20" alignment="CENTER_RIGHT" prefWidth="790">
+                <Button fx:id="resetButton" text="Reset"
+                        style="-fx-background-color: transparent; -fx-text-fill: #1B4242; -fx-border-color: #1B4242; -fx-border-radius: 10; -fx-padding: 8 24;" />
+
+                <Button fx:id="submitButton" text="Submit Request"
+                        style="-fx-background-color: #4FBDBA; -fx-text-fill: white; -fx-background-radius: 10; -fx-padding: 8 24;" />
+            </HBox>
+
+        </VBox>
+    </ScrollPane>
+
+</AnchorPane>
