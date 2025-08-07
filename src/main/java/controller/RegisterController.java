@@ -10,6 +10,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import util.MessageBox;
+import util.OTP;
 
 public class RegisterController {
 
@@ -43,6 +44,7 @@ public class RegisterController {
     @FXML private Hyperlink goToLoginLink;
 
     private boolean otpSent = false;
+    private String otp = "";
     private ToggleGroup accountTypeGroup;
 
     @FXML
@@ -126,11 +128,15 @@ public class RegisterController {
     }
 
     /// Handle OTP button click
-    public void handleOtp(ActionEvent actionEvent) {
+    public void handleOtp() {
         if (!validateFields()) return;
         if (!otpSent) {
             // Logic to send OTP
             System.out.println("Sending OTP to: " + emailField.getText());
+
+            otp = OTP.sendOtp(emailField.getText());
+            System.out.println("OTP sent: " + otp);
+
             otpField.setVisible(true);
             otpField.setManaged(true);
             otpButton.setText("Register");
@@ -139,7 +145,15 @@ public class RegisterController {
             // Logic to verify OTP and register user
             if (!otpField.getText().trim().isEmpty()) {
                 System.out.println("Verifying OTP: " + otpField.getText());
-                // Here you would typically verify the OTP with your backend service
+
+                if (otpField.getText().equals(otp)) {
+                    System.out.println("OTP verified successfully.");
+                } else {
+                    System.out.println("Invalid OTP. Please try again.");
+                    MessageBox.showAlert("Invalid OTP", "The OTP you entered is incorrect. Please try again.");
+                    return;
+                }
+
                 if (handleRegister()) {
                     System.out.println("Registration successful!");
                     // Redirect to login page or main application page

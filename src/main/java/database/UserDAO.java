@@ -12,7 +12,7 @@ public class UserDAO {
     ResultSet resultSet;
     public UserDAO() throws ClassNotFoundException, SQLException {
         Class.forName("com.mysql.cj.jdbc.Driver");
-        connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/d1", "root", "");
+        connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/doer_testing", "root", "");
         if (connection != null) {
             System.out.println("Database connection established successfully.");
         } else {
