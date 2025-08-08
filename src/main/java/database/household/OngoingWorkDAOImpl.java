@@ -1,6 +1,5 @@
-package database;
+package database.household;
 
-import database.OngoingWorkDAO;
 import model.OngoingWork;
 
 import java.sql.*;

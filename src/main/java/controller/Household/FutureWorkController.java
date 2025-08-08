@@ -1,6 +1,6 @@
 package controller.household;
 
-import app.FutureWorkService;
+import app.household.FutureWorkService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;

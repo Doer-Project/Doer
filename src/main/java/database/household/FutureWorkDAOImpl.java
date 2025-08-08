@@ -1,4 +1,4 @@
-package database;
+package database.household;
 
 import model.FutureWork;
 
@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FutureWorkDAOImpl implements FutureWorkDAO{
+public class FutureWorkDAOImpl implements FutureWorkDAO {
     private Connection conn;
     public FutureWorkDAOImpl(Connection conn) {
         this.conn = conn;

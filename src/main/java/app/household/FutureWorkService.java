@@ -1,7 +1,7 @@
-package app;
+package app.household;
 
-import database.FutureWorkDAO;
-import database.FutureWorkDAOImpl;
+import database.household.FutureWorkDAO;
+import database.household.FutureWorkDAOImpl;
 import model.FutureWork;
 import util.DatabaseConnection;
 

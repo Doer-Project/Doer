@@ -1,4 +1,4 @@
-package database;
+package database.household;
 
 import model.OngoingWork;
 import java.util.List;

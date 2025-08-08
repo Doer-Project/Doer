@@ -1,6 +1,6 @@
-package app;
+package app.household;
 
-import database.OngoingWorkDAOImpl;
+import database.household.OngoingWorkDAOImpl;
 import model.OngoingWork;
 import util.DatabaseConnection;
 

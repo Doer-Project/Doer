@@ -1,6 +1,6 @@
 package controller.household;
 
-import app.OngoingWorkService;
+import app.household.OngoingWorkService;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
