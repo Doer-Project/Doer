@@ -13,6 +13,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import model.SessionManager;
 import util.MessageBox;
 import util.Validations;
 
@@ -53,6 +54,8 @@ public class LoginController {
     private boolean verifyCredentials(String username, String password) {
         if (UserServices.verifyUser(username, password)) {
             System.out.println("Login successful for user: " + username);
+            ///  Store the logged-in username globally for session management
+            SessionManager.username = username;
             return true;
         } else {
             System.out.println("Login failed for user: " + username);

@@ -5,6 +5,7 @@
 <?import javafx.scene.layout.*?>
 
 <ScrollPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="controller.household.HouseholdOngoingController"
             prefWidth="1000.0" prefHeight="800.0"
             fitToWidth="true"
             style="-fx-background-color: transparent;">

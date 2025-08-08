@@ -9,6 +9,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import model.SessionManager;
 import util.MessageBox;
 
 public class RegisterController {
@@ -142,7 +143,11 @@ public class RegisterController {
                 // Here you would typically verify the OTP with your backend service
                 if (handleRegister()) {
                     System.out.println("Registration successful!");
-                    // Redirect to login page or main application page
+
+                    /// Set username globally after registration
+                    SessionManager.username = userNameField.getText();
+
+                    /// @@@ Redirect to login page or main application page
                 } else {
                     System.out.println("something unexpected happened, please try again.");
                 }
