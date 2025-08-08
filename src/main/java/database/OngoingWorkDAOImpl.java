@@ -18,7 +18,7 @@ public class OngoingWorkDAOImpl implements OngoingWorkDAO {
     @Override
     public List<OngoingWork> getOngoingWorksForUser(String username) {
 
-        /// temporary solution ⬇️
+        /// temporary solution ⬇️, This is not final we have to change it.
 
         List<OngoingWork> ongoingWorks = new ArrayList<>();
         String sql = "SELECT task_name, description, date, status FROM requests WHERE household_username = ? AND status != 'Completed'";

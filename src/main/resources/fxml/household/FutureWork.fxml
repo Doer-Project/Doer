@@ -4,6 +4,7 @@
 <?import javafx.scene.layout.*?>
 
 <AnchorPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="controller.household.FutureWorkController"
             prefWidth="1000.0" prefHeight="800.0"
             style="-fx-background-color: #E8F5E9;">
 
