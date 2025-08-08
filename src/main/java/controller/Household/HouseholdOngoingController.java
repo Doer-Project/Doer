@@ -1,7 +1,6 @@
 package controller.household;
 
 import app.OngoingWorkService;
-import com.sun.net.httpserver.Request;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -31,10 +30,7 @@ public class HouseholdOngoingController {
 
             if (ongoingWorks.isEmpty()) {
                 /// ui can change later, this is temporary ui
-                Label noDataLabel = new Label("No ongoing work available");
-                noDataLabel.setStyle("-fx-font-size: 24px; -fx-text-fill: #777;");
-                container.getChildren().add(noDataLabel);
-                container.setAlignment(Pos.CENTER);
+                showNoRequestsMessage();
             } else {
                 /// if data is available for ongoing work then pass the list to another method
                 loadOngoingRequests(ongoingWorks);
