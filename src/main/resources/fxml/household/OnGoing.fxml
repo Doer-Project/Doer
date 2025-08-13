@@ -14,7 +14,7 @@
         <AnchorPane prefWidth="1000.0" prefHeight="800.0"
                     style="-fx-background-color: #F0FDF4;">
 
-            <!-- Title -->
+            <!-- Title. -->
             <Label text="Ongoing Work"
                    layoutX="40" layoutY="30"
                    style="-fx-font-size: 30px; -fx-text-fill: #1B4242; -fx-font-family: 'Verdana'; -fx-font-weight: bold;" />

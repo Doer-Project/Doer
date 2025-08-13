@@ -13,7 +13,7 @@
            layoutX="40.0" layoutY="30.0"
            style="-fx-font-size: 30px; -fx-text-fill: #1B4242; -fx-font-family: 'Verdana'; -fx-font-weight: bold;" />
 
-    <!-- Make the VBox section scrollable -->
+    <!-- Make the VBox section scrollable. -->
     <ScrollPane layoutX="40.0" layoutY="90.0" prefWidth="920.0" prefHeight="700.0"
                 fitToWidth="true" fitToHeight="true"
                 style="-fx-background-color: transparent;">

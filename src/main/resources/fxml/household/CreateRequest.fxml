@@ -9,7 +9,7 @@
             prefWidth="1000" prefHeight="800"
             style="-fx-background-color: linear-gradient(to bottom right, #1B4242, #4FBDBA, #CDEED6);">
 
-    <!-- Title -->
+    <!-- Title. -->
     <Label text="Create New Request"
            layoutX="40" layoutY="30"
            style="-fx-font-size: 32px; -fx-text-fill: white; -fx-font-family: 'Verdana'; -fx-font-weight: bold;" />

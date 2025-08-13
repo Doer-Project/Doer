@@ -9,7 +9,7 @@
             prefWidth="1200.0" prefHeight="700.0"
             style="-fx-background-color: linear-gradient(to bottom right, #E8F5E9, #C8E6C9);">
 
-    <!-- Sidebar -->
+    <!-- Sidebar. -->
     <left>
         <VBox prefWidth="240.0" spacing="18.0"
               style="-fx-background-color: rgba(255,255,255,0.2); -fx-background-radius: 0 25 25 0;">
