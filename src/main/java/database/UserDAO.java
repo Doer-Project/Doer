@@ -25,7 +25,11 @@ public class UserDAO {
         statement.setString(1, email);
         resultSet = statement.executeQuery();
 
-        return resultSet.getString("username");
+        if (resultSet.next()) {
+            return resultSet.getString("username");
+        } else {
+            return null;
+        }
     }
 
     public boolean registerHousehold(Household user) throws SQLException {
@@ -86,17 +90,39 @@ public class UserDAO {
         return true;
     }
 
-    public boolean  loginUser (String userName, String passwordHash, boolean isWorker) throws SQLException {
-        PreparedStatement statement = connection.prepareStatement("SELECT * FROM users WHERE username = ?");
-        statement.setString(1, userName);
+    public boolean verifyUser(String username, String password) {
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT acc_type FROM users WHERE username = ?");
+            resultSet = statement.executeQuery();
 
-        resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                if (resultSet.getString(1).equals("household")) {
+                    statement = connection.prepareStatement("SELECT password FROM household WHERE username = ?");
+                } else {
+                    statement = connection.prepareStatement("SELECT password FROM worker WHERE username = ?");
+                }
+                statement.setString(1, username);
+                resultSet = statement.executeQuery();
 
-        if (resultSet.next()) {
-            System.out.println("Login successful for user: " + userName);
-            return true;
-        } else {
-            System.out.println("Login failed for user: " + userName);
+                if (resultSet.next()) {
+                    String storedPassword = resultSet.getString("password");
+                    if (storedPassword.equals(password)) {
+                        System.out.println("Worker user verified successfully.");
+                        return true;
+                    } else {
+                        System.out.println("Invalid password for worker user.");
+                        return false;
+                    }
+                } else {
+                    System.out.println("Worker user not found.");
+                    return false;
+                }
+            } else {
+                System.out.println("User verification failed (user not found).");
+                return false;
+            }
+        } catch (SQLException e) {
+            System.err.println("Error verifying user: " + e.getMessage());
             return false;
         }
     }

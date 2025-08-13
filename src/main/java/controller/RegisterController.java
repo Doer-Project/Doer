@@ -9,6 +9,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import model.SessionManager;
 import util.MessageBox;
 
 public class RegisterController {
@@ -70,9 +71,9 @@ public class RegisterController {
 
     public boolean handleRegister() {
         if (householdRadio.isSelected()) {
-            return UserServices.registerHousehold(firstNameField.getText(), lastNameField.getText(), "h_"+userNameField.getText(), emailField.getText(), ageField.getText(), genderCombo.getValue(), address.getText(), city.getText(), pinCode.getText(),passwordField.getText());
+            return UserServices.registerHousehold(firstNameField.getText(), lastNameField.getText(), userNameField.getText(), emailField.getText(), ageField.getText(), genderCombo.getValue(), address.getText(), city.getText(), pinCode.getText(),passwordField.getText());
         } else {
-            return UserServices.registerWorker(firstNameField.getText(), lastNameField.getText(), "w_"+userNameField.getText(), emailField.getText(), ageField.getText(), genderCombo.getValue(), category.getValue(), experience.getText(), passwordField.getText(), preferredCity.getText());
+            return UserServices.registerWorker(firstNameField.getText(), lastNameField.getText(), userNameField.getText(), emailField.getText(), ageField.getText(), genderCombo.getValue(), category.getValue(), experience.getText(), passwordField.getText(), preferredCity.getText());
         }
     }
 
@@ -101,7 +102,7 @@ public class RegisterController {
         dynamicFields.getChildren().clear();
 
         category = new ComboBox<>();
-        category.getItems().addAll("Plumber", "Electrician", "Cleaner", "Cook", "Gardener");
+        category.getItems().addAll("Plumber", "Electrician", "Cleaner", "Painter", "Cook", "Gardener");
         category.setPromptText("Select Category");
         category.setMaxWidth(300);
         category.setStyle("-fx-background-color: #F5F5F5; " +
@@ -142,7 +143,11 @@ public class RegisterController {
                 // Here you would typically verify the OTP with your backend service
                 if (handleRegister()) {
                     System.out.println("Registration successful!");
-                    // Redirect to login page or main application page
+
+                    /// Set username globally after registration
+                    SessionManager.username = userNameField.getText();
+
+                    /// @@@ Redirect to login page or main application page
                 } else {
                     System.out.println("something unexpected happened, please try again.");
                 }

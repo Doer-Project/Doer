@@ -5,7 +5,7 @@
 
 <AnchorPane xmlns:fx="http://javafx.com/fxml"
             fx:controller="controller.LoginController"
-            prefWidth="600" prefHeight="500"
+            prefWidth="1400" prefHeight="900"
             style="-fx-background-color: linear-gradient(to bottom right, #1B4242, #4FBDBA, #CDEED6);">
 
     <!-- App Title -->
