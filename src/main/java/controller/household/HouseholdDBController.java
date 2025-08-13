@@ -29,7 +29,7 @@ public class HouseholdDBController {
     public void onGoingWork() {
         resetButtonStyles();
         btnOngoing.setStyle(activeStyle());
-        loadUI("onGoing.fxml");
+        loadUI("OnGoing.fxml");
     }
 
     @FXML
