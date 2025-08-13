@@ -22,7 +22,7 @@ public class HouseholdDBController {
     public void createNewRequest() {
         resetButtonStyles();
         btnNewRequest.setStyle(activeStyle());
-        loadUI("createRequest.fxml");
+        loadUI("CreateRequest.fxml");
     }
 
     @FXML
