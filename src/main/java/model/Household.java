@@ -6,6 +6,7 @@ public class Household extends User {
     private String city;
     private String passwordHash;
 
+
     public Household() {
         super();
     }
@@ -62,6 +63,24 @@ public class Household extends User {
 
     public String getPin_code() {
         return pin_code;
+    }
+
+    // setters
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setPin_code(String pin_code) {
+        this.pin_code = pin_code;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash;
     }
 
     @Override

@@ -7,6 +7,7 @@ public class Worker extends User {
     private String preferredLocation;
     private String passwordHash;
 
+
     public Worker() {}
 
     public Worker(String firstName, String lastName, String userName, String email, int age, String gender, String category, int experience, String passwordHash, String preferredLocation) {
@@ -61,6 +62,24 @@ public class Worker extends User {
 
     public String getPreferredLocation() {
         return preferredLocation;
+    }
+
+    // setter
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public void setExperience(int experience) {
+        this.experience = experience;
+    }
+
+    public void setPreferredLocation(String preferredLocation) {
+        this.preferredLocation = preferredLocation;
+    }
+
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash;
     }
 
     @Override

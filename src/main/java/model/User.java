@@ -7,6 +7,8 @@ public abstract class User {
     protected String email;
     protected int age;
     protected String gender;
+    private String photoPath;
+
 
     public User() {
     }
@@ -32,6 +34,41 @@ public abstract class User {
     public abstract int getAge();
 
     public abstract String getGender();
+    public String getPhotoPath() {
+        return photoPath;
+    }
+
+
+
+    // setter
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public void setPhotoPath(String photoPath) {
+        this.photoPath = photoPath;
+    }
 
     @Override
     public String toString() {

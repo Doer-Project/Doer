@@ -50,7 +50,13 @@ public class HouseholdDBController {
     public void viewProfile() {
         resetButtonStyles();
         btnProfile.setStyle(activeStyle());
-        loadUI("profile.fxml");
+        Node node = null;
+        try {
+            node = FXMLLoader.load(getClass().getResource("/fxml/Profile.fxml"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        contentPane.getChildren().setAll(node);
     }
 
     private void loadUI(String fxmlFile) {
