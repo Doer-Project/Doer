@@ -16,7 +16,7 @@ public class FutureWorkDAOImpl implements FutureWorkDAO {
     }
 
     @Override
-    public List<FutureWork> getFutureWorkForUser(String username) throws SQLException {
+    public List<FutureWork> getFutureWorkForUser(String username) {
         List<FutureWork> futureWorks = new ArrayList<>();
 // ----------------   will be replace
         String sql = "SELECT category, scheduled_date, time, description, status FROM future_work WHERE username = ?";
@@ -34,6 +34,8 @@ public class FutureWorkDAOImpl implements FutureWorkDAO {
                 );
                 futureWorks.add(fw);
             }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
 // ----------------   will be replace
         return futureWorks;

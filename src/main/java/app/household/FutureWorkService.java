@@ -19,7 +19,7 @@ public class FutureWorkService {
         this.dao = new FutureWorkDAOImpl(conn);
     }
 
-    public List<FutureWork> getFutureWorksForUser(String username) throws SQLException {
+    public List<FutureWork> getFutureWorksForUser(String username){
         return dao.getFutureWorkForUser(username);
     }
 }
