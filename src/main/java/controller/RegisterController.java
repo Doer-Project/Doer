@@ -45,6 +45,8 @@ public class RegisterController {
     private String otp = "";
     private ToggleGroup accountTypeGroup;
 
+    UserServices userServices = new UserServices();
+
     @FXML
     public void initialize() {
         accountTypeGroup = new ToggleGroup();
@@ -58,7 +60,7 @@ public class RegisterController {
                 Stage stage = (javafx.stage.Stage) goToLoginLink.getScene().getWindow();
                 stage.setScene(new javafx.scene.Scene(loginRoot, 1400, 800));
             } catch (Exception e) {
-                e.printStackTrace();
+                System.out.println("Error loading Login Page: " + e.getMessage());
                 MessageBox.showError("Error", "Failed to load login page.");
             }
         });
@@ -120,9 +122,9 @@ public class RegisterController {
 
     public boolean handleRegister(){
         if (householdRadio.isSelected()) {
-            return UserServices.registerHousehold("household", firstNameField.getText(), lastNameField.getText(), emailField.getText(),passwordField.getText(), ageField.getText(), genderCombo.getValue(), address.getText(), city.getText(), pinCode.getText());
+            return userServices.registerHousehold("household", firstNameField.getText(), lastNameField.getText(), emailField.getText(),passwordField.getText(), ageField.getText(), genderCombo.getValue(), address.getText(), city.getText(), pinCode.getText());
         } else {
-            return UserServices.registerWorker("worker", firstNameField.getText(), lastNameField.getText(), emailField.getText(), passwordField.getText(), ageField.getText(), genderCombo.getValue(), category.getValue(), experience.getText(), workArea.getText());
+            return userServices.registerWorker("worker", firstNameField.getText(), lastNameField.getText(), emailField.getText(), passwordField.getText(), ageField.getText(), genderCombo.getValue(), category.getValue(), experience.getText(), workArea.getText());
         }
     }
 

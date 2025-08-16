@@ -7,7 +7,13 @@ import util.MessageBox;
 import util.Validations;
 
 public class UserServices {
-    public static boolean registerHousehold(String role, String firstName, String lastName, String email, String password, String age, String gender, String address, String city, String pin_code){
+    private static UserDAO userDAO;
+
+    public UserServices() {
+        userDAO = new UserDAO();
+    }
+
+    public boolean registerHousehold(String role, String firstName, String lastName, String email, String password, String age, String gender, String address, String city, String pin_code){
         if (!(Validations.isAlphabetOnly(firstName) || Validations.isAlphabetOnly(lastName))) {
             MessageBox.showAlert("Invalid Input", "First name and last name must contain only alphabets.");
             return false;
@@ -40,7 +46,6 @@ public class UserServices {
 
         Household user = new Household(role, firstName, lastName, email, password, ageInt, gender, address, city, pinCodeInt);
 
-        UserDAO userDAO = new UserDAO();
         if (userDAO.registerHousehold(user)) {
             MessageBox.showInfo("Registration Successful", "Household registered successfully.");
             return true;
@@ -50,7 +55,7 @@ public class UserServices {
         }
     }
 
-    public static boolean registerWorker(String role, String firstName, String lastName, String email, String password, String age, String gender, String category, String experience, String workArea){
+    public boolean registerWorker(String role, String firstName, String lastName, String email, String password, String age, String gender, String category, String experience, String workArea){
         if (!(Validations.isAlphabetOnly(firstName) || Validations.isAlphabetOnly(lastName))) {
             MessageBox.showAlert("Invalid Input", "First name and last name must contain only alphabets.");
             return false;
@@ -87,7 +92,6 @@ public class UserServices {
 
         Worker user = new Worker(role, firstName, lastName, email, password, ageInt, gender, category, experienceInt, workArea);
 
-        UserDAO userDAO = new UserDAO();
         if (userDAO.registerWorker(user)) {
             MessageBox.showInfo("Registration Successful", "Worker registered successfully.");
             return true;
@@ -97,12 +101,12 @@ public class UserServices {
         }
     }
 
-    public static boolean verifyUser(String email, String password) {
+    public boolean verifyUser(String email, String password) {
         if (!Validations.isValidEmail(email)) {
             MessageBox.showAlert("Invalid Input", "Email format is invalid.");
             return false;
         }
-        UserDAO userDAO = new UserDAO();
+
         if (userDAO.verifyUser(email, password)) {
             System.out.println("User verified successfully.");
             return true;

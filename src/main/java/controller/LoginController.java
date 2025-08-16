@@ -25,6 +25,8 @@ public class LoginController {
     private boolean otpSent = false;
     private String otp = "";
 
+    UserServices userServices = new UserServices();
+
     @FXML
     public void initialize() {
         goToRegisterLink.setOnAction(event -> {
@@ -34,7 +36,8 @@ public class LoginController {
                 Stage stage = (Stage) goToRegisterLink.getScene().getWindow();
                 stage.setScene(new Scene(registerRoot, 1400, 800));
             } catch (Exception e) {
-                e.printStackTrace();
+                System.out.println("Error loading Register Page: " + e.getMessage());
+                MessageBox.showAlert("Error", "Could not load the registration page. Please try again later.");
             }
         });
     }
@@ -72,7 +75,7 @@ public class LoginController {
     }
 
     private boolean verifyCredentials(String email, String password) {
-        if (UserServices.verifyUser(email, password)) {
+        if (userServices.verifyUser(email, password)) {
             System.out.println("Login successful for user: " + email);
             return true;
         } else {

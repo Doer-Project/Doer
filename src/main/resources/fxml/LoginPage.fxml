@@ -29,13 +29,16 @@
 
         <!-- Login Fields -->
         <VBox spacing="15" alignment="CENTER">
-            <TextField fx:id="usernameField" promptText="Username" maxWidth="300"
+            <TextField fx:id="emailField" promptText="Username" maxWidth="300"
                        style="-fx-background-radius: 12; -fx-padding: 12; -fx-pref-height: 40;
                               -fx-background-color: #F5F5F5; -fx-border-color: #B0BEC5; -fx-border-radius: 12;" />
 
             <PasswordField fx:id="passwordField" promptText="Password" maxWidth="300"
                            style="-fx-background-radius: 12; -fx-padding: 12; -fx-pref-height: 40;
                                   -fx-background-color: #F5F5F5; -fx-border-color: #B0BEC5; -fx-border-radius: 12;" />
+
+            <TextField fx:id="otpField" promptText="Enter OTP" visible="false" managed="false" maxWidth="300"
+                       style="-fx-background-radius: 10; -fx-padding: 10; -fx-pref-height: 40;" />
 
             <Button fx:id="sendOtpBtn" text="Send OTP" onAction="#handleOtpOrLogin"
                     style="-fx-background-color: linear-gradient(to right, #FFB75E, #ED8F03);
