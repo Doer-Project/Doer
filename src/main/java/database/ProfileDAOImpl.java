@@ -1,8 +1,5 @@
 package database;
 
-import model.Household;
-import model.User;
-import model.Worker;
 import util.DatabaseConnection;
 
 import java.sql.*;

@@ -2,7 +2,6 @@ package app;
 
 import database.ProfileDAO;
 import database.ProfileDAOImpl;
-import model.User;
 import util.DatabaseConnection;
 import util.MessageBox;
 

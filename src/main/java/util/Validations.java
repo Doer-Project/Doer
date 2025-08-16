@@ -1,18 +1,6 @@
 package util;
 
 public class Validations {
-    /**
-     * Validate username:
-     * - between alphabet (a-z), (A,Z) and number (0,9) & (_) allowed
-     * - no space or special characters allowed
-     * - 3 to 20 length
-     *
-     * @param username;
-     * @return true if username is valid, otherwise false
-     */
-    public static boolean isValidUsername(String username) {
-        return username.matches("^[a-zA-Z0-9_]{3,20}$");
-    }
 
     /**
      * Validates a strong password:

@@ -7,7 +7,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.FutureWork;
-import model.SessionManager;
 import util.MessageBox;
 
 import java.sql.SQLException;

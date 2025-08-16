@@ -1,7 +1,5 @@
 package controller.household;
 
-import app.household.FutureWorkService;
-import app.household.OngoingWorkService;
 import app.household.PastWorkService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -9,10 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import model.FutureWork;
-import model.OngoingWork;
 import model.PastWork;
-import model.SessionManager;
 import util.MessageBox;
 
 import java.sql.SQLException;
