@@ -5,6 +5,7 @@
 
 <?import java.awt.Rectangle?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml"
+            fx:id="mainContentArea"
             fx:controller="controller.household.WorkReqController"
             prefWidth="1000" prefHeight="800"
             style="-fx-background-color: linear-gradient(to bottom right, #0F2027, #203A43, #2C5364);">
@@ -79,10 +80,10 @@
 
             <!-- Buttons -->
             <HBox spacing="20" alignment="CENTER_RIGHT" prefWidth="790">
-                <Button fx:id="resetButton" text="Reset" onAction="#resetForm"
+                <Button fx:id="resetButton" text="Reset"
                         style="-fx-background-color: transparent; -fx-text-fill: #203A43; -fx-border-color: #203A43; -fx-border-radius: 10; -fx-padding: 8 24;" />
 
-                <Button fx:id="submitButton" text="Submit Request" onAction="#saveRequest"
+                <Button fx:id="submitButton" text="Submit Request"
                         style="-fx-background-color: linear-gradient(to right, #FFB75E, #ED8F03); -fx-text-fill: white; -fx-background-radius: 10; -fx-padding: 8 24;" />
             </HBox>
 
