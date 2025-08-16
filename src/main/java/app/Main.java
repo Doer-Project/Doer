@@ -16,6 +16,7 @@ public class Main extends Application {
 //        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/HouseHoldDB.fxml"));
         Parent root = loader.load();
         primaryStage.setTitle("DOER");
+        primaryStage.setScene(new Scene(root, 1400, 800));
         primaryStage.setScene(new Scene(root, 1400, 900));
         primaryStage.show();
     }

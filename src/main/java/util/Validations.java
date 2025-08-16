@@ -1,5 +1,7 @@
 package util;
 
+import database.UserDAO;
+
 public class Validations {
 
     /**
@@ -39,5 +41,9 @@ public class Validations {
      */
     public static boolean isAlphabetOnly(String input) {
         return input.matches("^[a-zA-z]{3,10}+$");
+    }
+
+    public static boolean isRegistered(String email){
+        return new UserDAO().isRegistered(email);
     }
 }

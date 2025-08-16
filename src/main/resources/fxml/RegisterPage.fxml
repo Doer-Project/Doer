@@ -1,86 +1,96 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-        <?import javafx.scene.control.*?>
-        <?import javafx.scene.layout.*?>
-        <?import javafx.collections.FXCollections?>
-        <?import java.lang.String?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
 
 <AnchorPane xmlns:fx="http://javafx.com/fxml"
             fx:controller="controller.RegisterController"
-            prefWidth="1400" prefHeight="900"
+            prefWidth="1400" prefHeight="800"
             style="-fx-background-color: linear-gradient(to bottom right, #0F2027, #203A43, #2C5364);">
 
-<!-- Big Panel Split into Two Sections -->
-<HBox layoutX="250" layoutY="50" prefWidth="900" prefHeight="700" spacing="0" alignment="TOP_CENTER"
-      style="-fx-background-radius: 15; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 5);">
+    <!-- Centering container -->
+    <StackPane prefWidth="1400" prefHeight="800">
+        <HBox maxWidth="900" maxHeight="700" alignment="TOP_CENTER"
+              style="-fx-background-radius: 15;
+                     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 15, 0, 0, 6);
+                     -fx-background-color: transparent;">
 
-    <!-- Left Slim Section -->
-    <VBox prefWidth="250" spacing="10" alignment="CENTER" style="-fx-background-color: linear-gradient(to right, #FF9F57, #E8781C);
-                        -fx-background-radius: 15 0 0 15;
-                        -fx-effect: drop shadow(gaussian, rgba(0,0,0,0.25), 5, 0, 0, 2);">
-        <Label text="DOER"
-               style="-fx-font-size: 42px; -fx-text-fill: #203A43; -fx-font-family: 'Verdana'; -fx-font-weight: bold;" />
-        <Label text="Create an Account"
-               style="-fx-font-size: 20px; -fx-text-fill: #203A43; -fx-font-weight: bold;" />
-        <Label text="Register to find or offer services."
-               style="-fx-font-size: 14px; -fx-text-fill: #203A43;" />
-    </VBox>
+            <!-- Left Slim Section -->
+            <VBox prefWidth="250" spacing="10" alignment="CENTER"
+                  style="-fx-background-color: linear-gradient(to right, #FF9F57, #E8781C);
+                         -fx-background-radius: 15 0 0 15;
+                         -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 5, 0, 0, 2);">
+                <Label text="DOER"
+                       style="-fx-font-size: 42px; -fx-text-fill: #203A43; -fx-font-family: 'Verdana'; -fx-font-weight: bold;" />
+                <Label text="Create an Account"
+                       style="-fx-font-size: 20px; -fx-text-fill: #203A43; -fx-font-weight: bold;" />
+                <Label text="Register to find or offer services."
+                       style="-fx-font-size: 14px; -fx-text-fill: #203A43;" />
+            </VBox>
 
-    <!-- Right Wider Section -->
-    <VBox prefWidth="650" spacing="20" alignment="CENTER" style="-fx-background-color: white; -fx-background-radius: 0 15 15 0; -fx-padding: 30;">
+            <!-- Right Wider Section with scroll -->
+            <ScrollPane fitToWidth="true" fitToHeight="true"
+                        style="-fx-background-color: transparent; -fx-background-insets: 0;">
+                <VBox prefWidth="650" spacing="20" alignment="CENTER"
+                      style="-fx-background-color: white;
+                             -fx-background-radius: 0 15 15 0;
+                             -fx-padding: 30;">
+                    <Label text="Register"
+                           style="-fx-font-size: 24px; -fx-text-fill: #1B4242; -fx-font-weight: bold;" />
 
-        <!-- Registration Form Fields -->
-        <Label text="Register"
-               style="-fx-font-size: 24px; -fx-text-fill: #1B4242; -fx-font-weight: bold;" />
+                    <TextField fx:id="firstNameField" promptText="First Name" maxWidth="400"
+                               style="-fx-background-radius: 10; -fx-padding: 10; -fx-pref-height: 40;" />
+                    <TextField fx:id="lastNameField" promptText="Last Name" maxWidth="400"
+                               style="-fx-background-radius: 10; -fx-padding: 10; -fx-pref-height: 40;" />
+                    <TextField fx:id="emailField" promptText="Email" maxWidth="400"
+                               style="-fx-background-radius: 10; -fx-padding: 10; -fx-pref-height: 40;" />
+                    <PasswordField fx:id="passwordField" promptText="Create a strong password" maxWidth="400"
+                                   style="-fx-background-radius: 10; -fx-padding: 10; -fx-pref-height: 40;" />
+                    <PasswordField fx:id="confirmPasswordField" promptText="Confirm password" maxWidth="400"
+                                   style="-fx-background-radius: 10; -fx-padding: 10; -fx-pref-height: 40;" />
+                    <TextField fx:id="ageField" promptText="Age" maxWidth="400"
+                               style="-fx-background-radius: 10; -fx-padding: 10; -fx-pref-height: 40;" />
 
-        <TextField fx:id="firstNameField" promptText="First Name" maxWidth="400"
-                   style="-fx-background-radius: 10; -fx-padding: 10; -fx-pref-height: 40;" />
-        <TextField fx:id="lastNameField" promptText="Last Name" maxWidth="400"
-                   style="-fx-background-radius: 10; -fx-padding: 10; -fx-pref-height: 40;" />
-        <TextField fx:id="emailField" promptText="Email" maxWidth="400"
-                   style="-fx-background-radius: 10; -fx-padding: 10; -fx-pref-height: 40;" />
-        <PasswordField fx:id="passwordField" promptText="Create a strong password" maxWidth="400"
-                       style="-fx-background-radius: 10; -fx-padding: 10; -fx-pref-height: 40;" />
-        <PasswordField fx:id="confirmPasswordField" promptText="Confirm password" maxWidth="400"
-                       style="-fx-background-radius: 10; -fx-padding: 10; -fx-pref-height: 40;" />
-        <TextField fx:id="ageField" promptText="Age" maxWidth="400"
-                   style="-fx-background-radius: 10; -fx-padding: 10; -fx-pref-height: 40;" />
+                    <ComboBox fx:id="genderCombo" promptText="Select Gender" maxWidth="400" prefHeight="40"
+                              style="-fx-background-color: #F5F5F5; -fx-background-radius: 10;
+                                     -fx-border-radius: 10; -fx-border-color: #1B4242;
+                                     -fx-border-width: 1; -fx-font-size: 14px; -fx-padding: 5 10;">
+                        <items>
+                            <FXCollections fx:factory="observableArrayList">
+                                <String fx:value="Male" />
+                                <String fx:value="Female" />
+                                <String fx:value="Other" />
+                            </FXCollections>
+                        </items>
+                    </ComboBox>
 
-        <ComboBox fx:id="genderCombo" promptText="Select Gender" maxWidth="400" prefHeight="40"
-                  style="-fx-background-color: #F5F5F5; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #1B4242; -fx-border-width: 1; -fx-font-size: 14px; -fx-padding: 5 10;">
-            <items>
-                <FXCollections fx:factory="observableArrayList">
-                    <String fx:value="Male" />
-                    <String fx:value="Female" />
-                    <String fx:value="Other" />
-                </FXCollections>
-            </items>
-        </ComboBox>
+                    <HBox spacing="10" alignment="CENTER">
+                        <RadioButton fx:id="householdRadio" text="Household"
+                                     style="-fx-text-fill: #1B4242;" />
+                        <RadioButton fx:id="workerRadio" text="Worker (Doer)"
+                                     style="-fx-text-fill: #1B4242;" />
+                    </HBox>
 
-        <HBox spacing="10" alignment="CENTER">
-            <RadioButton fx:id="householdRadio" text="Household"
-                         style="-fx-text-fill: #1B4242;" />
-            <RadioButton fx:id="workerRadio" text="Worker (Doer)"
-                         style="-fx-text-fill: #1B4242;" />
+                    <VBox fx:id="dynamicFields" spacing="10" maxWidth="400" alignment="CENTER" />
+
+                    <TextField fx:id="otpField" promptText="Enter OTP" visible="false" managed="false" maxWidth="400"
+                               style="-fx-background-radius: 10; -fx-padding: 10; -fx-pref-height: 40;" />
+
+                    <Button fx:id="otpButton" text="Send OTP" onAction="#handleOtp"
+                            style="-fx-background-color: linear-gradient(to right, #FF9F57, #E8781C);
+                                   -fx-text-fill: white;
+                                   -fx-background-radius: 12;
+                                   -fx-padding: 8 20;
+                                   -fx-font-size: 14px;
+                                   -fx-font-weight: bold;
+                                   -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 6, 0, 0, 2);" />
+
+                    <Hyperlink fx:id="goToLoginLink" text="Already have an account? Login"
+                               style="-fx-text-fill: orange; -fx-underline: false;" />
+                </VBox>
+            </ScrollPane>
         </HBox>
-
-        <VBox fx:id="dynamicFields" spacing="10" maxWidth="400" alignment="CENTER" />
-
-        <TextField fx:id="otpField" promptText="Enter OTP" visible="false" managed="false" maxWidth="400"
-                   style="-fx-background-radius: 10; -fx-padding: 10; -fx-pref-height: 40;" />
-
-        <Button fx:id="otpButton" text="Send OTP" onAction="#handleOtp"
-                style="-fx-background-color: linear-gradient(to right, #FF9F57, #E8781C);
-                        -fx-text-fill: white;
-                        -fx-background-radius: 12;
-                        -fx-padding: 8 20;
-                        -fx-font-size: 14px;
-                        -fx-font-weight: bold;
-                        -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 6, 0, 0, 2);" />
-
-        <Hyperlink fx:id="goToLoginLink" text="Already have an account? Login"
-                   style="-fx-text-fill: orange; -fx-underline: false;" />
-
-    </VBox>
-</HBox>
+    </StackPane>
 </AnchorPane>
