@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 
 import app.UserServices;
 
+import model.SessionManager;
 import util.MessageBox;
 import util.OTP;
 
@@ -65,6 +66,8 @@ public class LoginController {
                 System.out.println("Invalid OTP entered.");
                 MessageBox.showAlert("Invalid OTP", "The OTP you entered is incorrect. Please try again.");
             } else {
+                SessionManager.setUserID(""); // Set the user ID by getUserIDbyEmail(emailField.getText());
+
                 System.out.println("OTP verified successfully.");
                 MessageBox.showInfo("Login Successful", "You have logged in successfully.");
 

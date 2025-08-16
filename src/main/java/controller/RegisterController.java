@@ -1,6 +1,5 @@
 package controller;
 
-import app.UserServices;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -8,6 +7,8 @@ import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import app.UserServices;
+import model.SessionManager;
 import util.MessageBox;
 import util.OTP;
 
@@ -121,10 +122,12 @@ public class RegisterController {
     }
 
     public boolean handleRegister(){
+        String userID = ""; // call userID generator method here
+        SessionManager.setUserID(userID);
         if (householdRadio.isSelected()) {
-            return userServices.registerHousehold("household", firstNameField.getText(), lastNameField.getText(), emailField.getText(),passwordField.getText(), ageField.getText(), genderCombo.getValue(), address.getText(), city.getText(), pinCode.getText());
+            return userServices.registerHousehold(userID, firstNameField.getText(), lastNameField.getText(), emailField.getText(),passwordField.getText(), ageField.getText(), genderCombo.getValue(), address.getText(), city.getText(), pinCode.getText());
         } else {
-            return userServices.registerWorker("worker", firstNameField.getText(), lastNameField.getText(), emailField.getText(), passwordField.getText(), ageField.getText(), genderCombo.getValue(), category.getValue(), experience.getText(), workArea.getText());
+            return userServices.registerWorker(userID, firstNameField.getText(), lastNameField.getText(), emailField.getText(), passwordField.getText(), ageField.getText(), genderCombo.getValue(), category.getValue(), experience.getText(), workArea.getText());
         }
     }
 
