@@ -13,7 +13,7 @@
 <StackPane fx:id="rootPane"
            fx:controller="controller.ProfileController"
            xmlns:fx="http://javafx.com/fxml/1"
-           prefWidth="1200" prefHeight="800"
+           prefWidth="1000" prefHeight="800"
            style="-fx-background-color: linear-gradient(to bottom right, #0F2027, #203A43, #2C5364);">
 
     <!-- Centered Card -->

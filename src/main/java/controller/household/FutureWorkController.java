@@ -41,7 +41,8 @@ public class FutureWorkController {
             
         } catch (Exception e) {
             e.printStackTrace();
-            MessageBox.showError("Loading Error", "Could not load future work data.");
+//            MessageBox.showError("Loading Error", "Could not load future work data.");
+            MessageBox.showError("Loading Error", "Could not load future work .");
         }
     }
 

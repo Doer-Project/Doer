@@ -6,7 +6,7 @@
 
 <BorderPane xmlns:fx="http://javafx.com/fxml"
             fx:controller="controller.household.HouseholdDBController"
-            prefWidth="1200.0" prefHeight="700.0"
+            prefWidth="1400.0" prefHeight="900.0"
             style="-fx-background-color: linear-gradient(to bottom right, #E8F5E9, #C8E6C9);">
 
     <!-- Sidebar. -->

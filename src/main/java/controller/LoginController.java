@@ -33,7 +33,7 @@ public class LoginController {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/RegisterPage.fxml"));
                 Parent registerRoot = loader.load();
                 Stage stage = (Stage) goToRegisterLink.getScene().getWindow();
-                stage.setScene(new Scene(registerRoot, 700, 650));
+                stage.setScene(new Scene(registerRoot, 1400, 900));
             } catch (Exception e) {
                 e.printStackTrace();
             }

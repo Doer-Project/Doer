@@ -58,7 +58,7 @@ public class RegisterController {
                 FXMLLoader loader = new javafx.fxml.FXMLLoader(getClass().getResource("/fxml/LoginPage.fxml"));
                 Parent loginRoot = loader.load();
                 Stage stage = (javafx.stage.Stage) goToLoginLink.getScene().getWindow();
-                stage.setScene(new javafx.scene.Scene(loginRoot, 600, 500));
+                stage.setScene(new javafx.scene.Scene(loginRoot, 1400, 900));
             } catch (Exception e) {
                 e.printStackTrace();
                 MessageBox.showError("Error", "Failed to load login page.");
