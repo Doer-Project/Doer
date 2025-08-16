@@ -2,73 +2,44 @@ package model;
 
 public class Household extends User {
     private String address;
-    private String pin_code;
     private String city;
-    private String passwordHash;
+    private int pin_code;
 
-    public Household() {
-        super();
-    }
+    public Household() {}
 
-    public Household(String firstName, String lastName, String userName, String email, int age, String gender, String address, String city, String pin_code, String passwordHash) {
-        super(firstName, lastName, userName, email, age, gender);
+    public Household(String role, String firstName, String lastName, String email, String password, int age, String gender, String address, String city, int pin_code) {
+        super(role, firstName, lastName, email, password, age, gender);
         this.address = address;
         this.pin_code = pin_code;
         this.city = city;
-        this.passwordHash = passwordHash;
-    }
-
-    @Override
-    public String getFirstName() {
-        return firstName;
-    }
-
-    @Override
-    public String getLastName() {
-        return lastName;
-    }
-
-    @Override
-    public String getUserName() {
-        return userName;
-    }
-
-    @Override
-    public String getEmail() {
-        return email;
-    }
-
-    @Override
-    public int getAge() {
-        return age;
-    }
-
-    @Override
-    public String getGender() {
-        return gender;
-    }
-
-    public String getCity() {
-        return city;
     }
 
     public String getAddress() {
         return address;
     }
 
-    public String getPasswordHash() {
-        return passwordHash;
+    public String getCity() {
+        return city;
     }
 
-    public String getPin_code() {
+    public int getPin_code() {
         return pin_code;
     }
 
     @Override
     public String toString() {
-        return "Household{" + super.toString() +
-                ", city='" + city + '\'' +
+        return "Household{" +
+                "pin_code='" + pin_code + '\'' +
                 ", address='" + address + '\'' +
+                ", city='" + city + '\'' +
+                ", userID='" + userID + '\'' +
+                ", role='" + role + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", age=" + age +
+                ", gender='" + gender + '\'' +
                 '}';
     }
 }

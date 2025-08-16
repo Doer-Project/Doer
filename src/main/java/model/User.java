@@ -1,47 +1,57 @@
 package model;
 
 public abstract class User {
+    protected String userID;
+    protected String role;
     protected String firstName;
     protected String lastName;
-    protected String userName;
     protected String email;
+    protected String password;
     protected int age;
     protected String gender;
 
     public User() {
     }
 
-    public User(String firstName, String lastName, String userName, String email, int age, String gender) {
+    public User(String role, String firstName, String lastName, String email, String password, int age, String gender) {
+        this.role = role;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.userName = userName;
         this.email = email;
+        this.password = password;
         this.age = age;
         this.gender = gender;
     }
 
-    // Common getters
-    public abstract String getFirstName();
+    public String getUserID() {
+        return userID;
+    }
 
-    public abstract String getLastName();
+    public String getRole() {
+        return role;
+    }
 
-    public abstract String getUserName();
+    public String getFirstName() {
+        return firstName;
+    }
 
-    public abstract String getEmail();
+    public String getLastName() {
+        return lastName;
+    }
 
-    public abstract int getAge();
+    public String getEmail() {
+        return email;
+    }
 
-    public abstract String getGender();
+    public String getPassword() {
+        return password;
+    }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", userName='" + userName + '\'' +
-                ", email='" + email + '\'' +
-                ", age=" + age +
-                ", gender='" + gender + '\'' +
-                '}';
+    public int getAge() {
+        return age;
+    }
+
+    public String getGender() {
+        return gender;
     }
 }

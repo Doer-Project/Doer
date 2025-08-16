@@ -1,8 +1,5 @@
 package controller;
 
-import app.UserServices;
-import database.UserDAO;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -13,8 +10,10 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import app.UserServices;
+
 import util.MessageBox;
-import util.Validations;
+import util.OTP;
 
 public class LoginController {
     @FXML private TextField emailField;
@@ -24,6 +23,7 @@ public class LoginController {
     @FXML private Hyperlink goToRegisterLink;
 
     private boolean otpSent = false;
+    private String otp = "";
 
     @FXML
     public void initialize() {
@@ -32,59 +32,52 @@ public class LoginController {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/RegisterPage.fxml"));
                 Parent registerRoot = loader.load();
                 Stage stage = (Stage) goToRegisterLink.getScene().getWindow();
-                stage.setScene(new Scene(registerRoot, 700, 650));
+                stage.setScene(new Scene(registerRoot, 1400, 800));
             } catch (Exception e) {
                 e.printStackTrace();
             }
         });
     }
 
-    public boolean handleLogin() {
-        if (Validations.isValidEmail(emailField.getText())) {
-            emailField.setText(UserServices.getUserEmail(emailField.getText()));
-            return handleLogin();
-        }
-        else {
-            // Validate username and password fields
-            return verifyCredentials(emailField.getText(), passwordField.getText());
-        }
-    }
+    public void handleOtpOrLogin() {
+        if (!validateLoginFields() || !verifyCredentials(emailField.getText(), passwordField.getText())) return;
 
-    private boolean verifyCredentials(String username, String password) {
-        if (UserServices.verifyUser(username, password)) {
-            System.out.println("Login successful for user: " + username);
-            return true;
-        } else {
-            System.out.println("Login failed for user: " + username);
-            return false;
-        }
-    }
-
-
-    public void handleOtpOrLogin(ActionEvent actionEvent) {
-        if (!validateLoginFields() || !handleLogin()) return;
-        String username = "", password = "";
         if (!otpSent) {
-            username = emailField.getText();
-            password = passwordField.getText();
-
-            // Send OTP logic
-
             System.out.println("Sending OTP to: " + emailField.getText());
+
+            otp = OTP.sendOtp(emailField.getText());
+            System.out.println("OTP sent: " + otp);
+
             otpField.setVisible(true);
             otpField.setManaged(true);
             sendOtpBtn.setText("Login");
             otpSent = true;
         } else {
-            if (!username.equals(emailField.getText()) || !password.equals(passwordField.getText())) {
-                System.out.println("Username or Password has changed since OTP was sent.");
-                MessageBox.showAlert("Error", "Username or Password has changed since OTP was sent.");
-                return;
+            System.out.println("Verifying OTP: " + otpField.getText());
+
+            if (otpField.getText().isEmpty()) {
+                System.out.println("OTP field is empty.");
+                MessageBox.showAlert("Missing OTP", "Please enter the OTP sent to your email.");
+            } else if (!otpField.getText().equals(otp)) {
+                System.out.println("Invalid OTP entered.");
+                MessageBox.showAlert("Invalid OTP", "The OTP you entered is incorrect. Please try again.");
+            } else {
+                System.out.println("OTP verified successfully.");
+                MessageBox.showInfo("Login Successful", "You have logged in successfully.");
+
+                // Load the dashboard or next page
             }
 
-            // Verify OTP logic
+        }
+    }
 
-            System.out.println("Verifying OTP: " + otpField.getText());
+    private boolean verifyCredentials(String email, String password) {
+        if (UserServices.verifyUser(email, password)) {
+            System.out.println("Login successful for user: " + email);
+            return true;
+        } else {
+            System.out.println("Login failed for user: " + email);
+            return false;
         }
     }
 

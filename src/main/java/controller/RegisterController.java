@@ -1,7 +1,6 @@
 package controller;
 
 import app.UserServices;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -17,7 +16,6 @@ public class RegisterController {
     /// Basic fields
     @FXML private TextField firstNameField;
     @FXML private TextField lastNameField;
-    @FXML private TextField userNameField;
     @FXML private PasswordField passwordField;
     @FXML private PasswordField confirmPasswordField;
     @FXML private TextField ageField;
@@ -31,13 +29,13 @@ public class RegisterController {
 
     /// household specific fields
     @FXML private TextField address;
-    @FXML private TextField pinCode;
     @FXML private TextField city;
+    @FXML private TextField pinCode;
 
     /// worker specific fields
     @FXML private ComboBox<String> category;
+    @FXML private TextField workArea;
     @FXML private TextField experience;
-    @FXML private TextField preferredCity;
 
     @FXML private VBox dynamicFields;
 
@@ -49,7 +47,6 @@ public class RegisterController {
 
     @FXML
     public void initialize() {
-        // Make radio buttons mutually exclusive
         accountTypeGroup = new ToggleGroup();
         householdRadio.setToggleGroup(accountTypeGroup);
         workerRadio.setToggleGroup(accountTypeGroup);
@@ -59,7 +56,7 @@ public class RegisterController {
                 FXMLLoader loader = new javafx.fxml.FXMLLoader(getClass().getResource("/fxml/LoginPage.fxml"));
                 Parent loginRoot = loader.load();
                 Stage stage = (javafx.stage.Stage) goToLoginLink.getScene().getWindow();
-                stage.setScene(new javafx.scene.Scene(loginRoot, 600, 500));
+                stage.setScene(new javafx.scene.Scene(loginRoot, 1400, 800));
             } catch (Exception e) {
                 e.printStackTrace();
                 MessageBox.showError("Error", "Failed to load login page.");
@@ -70,30 +67,24 @@ public class RegisterController {
         workerRadio.setOnAction(e -> loadWorkerFields());
     }
 
-    public boolean handleRegister() {
-        if (householdRadio.isSelected()) {
-            return UserServices.registerHousehold(firstNameField.getText(), lastNameField.getText(), userNameField.getText(), emailField.getText(), ageField.getText(), genderCombo.getValue(), address.getText(), city.getText(), pinCode.getText(),passwordField.getText());
-        } else {
-            return UserServices.registerWorker(firstNameField.getText(), lastNameField.getText(), userNameField.getText(), emailField.getText(), ageField.getText(), genderCombo.getValue(), category.getValue(), experience.getText(), passwordField.getText(), preferredCity.getText());
-        }
-    }
-
-
     /// loading household specific fields when household radio button is selected
     private void loadHouseholdFields() {
         dynamicFields.getChildren().clear();
 
         address = new TextField();
         address.setPromptText("Address");
-        address.setStyle("-fx-background-color: #F5F5F5; -fx-background-radius: 10; -fx-padding: 10;");
+        address.setMaxWidth(400);
+        address.setStyle("-fx-background-radius: 10; -fx-padding: 10; -fx-pref-height: 40;");
 
         pinCode = new TextField();
         pinCode.setPromptText("PinCode");
-        pinCode.setStyle("-fx-background-color: #F5F5F5; -fx-background-radius: 10; -fx-padding: 10;");
+        pinCode.setMaxWidth(400);
+        pinCode.setStyle("-fx-background-radius: 10; -fx-padding: 10; -fx-pref-height: 40;");
 
         city = new TextField();
         city.setPromptText("City");
-        city.setStyle("-fx-background-color: #F5F5F5; -fx-background-radius: 10; -fx-padding: 10;");
+        city.setMaxWidth(400);
+        city.setStyle("-fx-background-radius: 10; -fx-padding: 10; -fx-pref-height: 40;");
 
         dynamicFields.getChildren().addAll(address, pinCode, city);
     }
@@ -105,7 +96,7 @@ public class RegisterController {
         category = new ComboBox<>();
         category.getItems().addAll("Plumber", "Electrician", "Cleaner", "Painter", "Cook", "Gardener");
         category.setPromptText("Select Category");
-        category.setMaxWidth(300);
+        category.setMaxWidth(400);
         category.setStyle("-fx-background-color: #F5F5F5; " +
                 "-fx-background-radius: 10; " +
                 "-fx-border-radius: 10; " +
@@ -114,22 +105,30 @@ public class RegisterController {
                 "-fx-font-size: 14px; " +
                 "-fx-padding: 5 10;");
 
-        preferredCity = new TextField();
-        preferredCity.setPromptText("Preferred Location to work");
-        preferredCity.setMaxWidth(300);
-        preferredCity.setStyle("-fx-background-color: #F5F5F5; -fx-background-radius: 10; -fx-padding: 10;");
+        workArea = new TextField();
+        workArea.setPromptText("Preferred Location to work");
+        workArea.setMaxWidth(400);
+        workArea.setStyle("-fx-background-radius: 10; -fx-padding: 10; -fx-pref-height: 40;");
 
         experience = new TextField();
         experience.setPromptText("Years of Experience");
-        experience.setMaxWidth(300);
-        experience.setStyle("-fx-background-color: #F5F5F5; -fx-background-radius: 10; -fx-padding: 10;");
+        experience.setMaxWidth(400);
+        experience.setStyle("-fx-background-radius: 10; -fx-padding: 10; -fx-pref-height: 40;");
 
-        dynamicFields.getChildren().addAll(category, preferredCity, experience);
+        dynamicFields.getChildren().addAll(category, workArea, experience);
+    }
+
+    public boolean handleRegister(){
+        if (householdRadio.isSelected()) {
+            return UserServices.registerHousehold("household", firstNameField.getText(), lastNameField.getText(), emailField.getText(),passwordField.getText(), ageField.getText(), genderCombo.getValue(), address.getText(), city.getText(), pinCode.getText());
+        } else {
+            return UserServices.registerWorker("worker", firstNameField.getText(), lastNameField.getText(), emailField.getText(), passwordField.getText(), ageField.getText(), genderCombo.getValue(), category.getValue(), experience.getText(), workArea.getText());
+        }
     }
 
     /// Handle OTP button click
     public void handleOtp() {
-        if (!validateFields()) return;
+        if (!validateEmptyFields()) return;
         if (!otpSent) {
             // Logic to send OTP
             System.out.println("Sending OTP to: " + emailField.getText());
@@ -148,17 +147,17 @@ public class RegisterController {
 
                 if (otpField.getText().equals(otp)) {
                     System.out.println("OTP verified successfully.");
+                    if (handleRegister()) {
+                        System.out.println("Registration successful!");
+                        MessageBox.showInfo("Registration Successful", "You have been registered successfully.");
+
+                        // Load the dashboard or next page
+                    } else {
+                        System.out.println("something unexpected happened, please try again.");
+                    }
                 } else {
                     System.out.println("Invalid OTP. Please try again.");
                     MessageBox.showAlert("Invalid OTP", "The OTP you entered is incorrect. Please try again.");
-                    return;
-                }
-
-                if (handleRegister()) {
-                    System.out.println("Registration successful!");
-                    // Redirect to login page or main application page
-                } else {
-                    System.out.println("something unexpected happened, please try again.");
                 }
             } else {
                 System.out.println("Registration failed. Please check your details.");
@@ -168,10 +167,9 @@ public class RegisterController {
     }
 
     /// Validate all fields before sending OTP or registering (except OTP)
-    private boolean validateFields() {
+    private boolean validateEmptyFields() {
         if (firstNameField.getText().trim().isEmpty() ||
             lastNameField.getText().trim().isEmpty() ||
-            userNameField.getText().trim().isEmpty() ||
             ageField.getText().trim().isEmpty() ||
             passwordField.getText().trim().isEmpty() ||
             confirmPasswordField.getText().trim().isEmpty() ||
@@ -192,12 +190,12 @@ public class RegisterController {
         }
 
         if (householdRadio.isSelected()) {
-            if (address.getText().trim().isEmpty() || city.getText().trim().isEmpty()){
+            if (address.getText().trim().isEmpty() || city.getText().trim().isEmpty() || pinCode.getText().trim().isEmpty()) {
                 MessageBox.showAlert("Household Registration", "Please fill in household details.");
                 return false;
             }
         } else if (workerRadio.isSelected()) {
-            if (category.getValue() == null || experience.getText().trim().isEmpty()) {
+            if (category.getValue() == null || experience.getText().trim().isEmpty() || workArea.getText().trim().isEmpty()) {
                 MessageBox.showAlert("Worker Registration", "Please fill in worker details.");
                 return false;
             }

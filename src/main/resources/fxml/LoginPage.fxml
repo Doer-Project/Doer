@@ -5,43 +5,46 @@
 
 <AnchorPane xmlns:fx="http://javafx.com/fxml"
             fx:controller="controller.LoginController"
-            prefWidth="600" prefHeight="500"
-            style="-fx-background-color: linear-gradient(to bottom right, #1B4242, #4FBDBA, #CDEED6);">
+            prefWidth="1400" prefHeight="800"
+            style="-fx-background-color: linear-gradient(to bottom right, #0F2027, #203A43, #2C5364);">
 
-    <!-- App Title -->
-    <Label text="DOER"
-           layoutX="40" layoutY="40"
-           style="-fx-font-size: 42px; -fx-text-fill: white; -fx-font-family: 'Verdana'; -fx-font-weight: bold;"/>
+    <!-- Center Container -->
+    <VBox layoutX="500" layoutY="200" prefWidth="400" prefHeight="500" spacing="25" alignment="CENTER"
+          style="
+            -fx-background-color: white;
+            -fx-background-radius: 20;
+            -fx-padding: 30;
+            -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 25, 0, 0, 8);
+          ">
 
-    <!-- Left-side text -->
-    <VBox layoutX="30" layoutY="120" spacing="10" prefWidth="220">
-        <Label text="Welcome Back!"
-               style="-fx-font-size: 18px; -fx-text-fill: white; -fx-font-weight: bold;" />
-        <Label text="Log in to manage your tasks and workers."
-               wrapText="true"
-               style="-fx-font-size: 14px; -fx-text-fill: white;"/>
-    </VBox>
+        <!-- Title & Welcome -->
+        <VBox alignment="CENTER" spacing="8">
+            <Label text="DOER"
+                   style="-fx-font-size: 42px; -fx-text-fill: #203A43; -fx-font-family: 'Verdana'; -fx-font-weight: bold;" />
+            <Label text="Welcome Back"
+                   style="-fx-font-size: 20px; -fx-text-fill: #2C5364; -fx-font-weight: bold;" />
+            <Label text="Login to your account"
+                   style="-fx-font-size: 14px; -fx-text-fill: #3B6B6B;" />
+        </VBox>
 
-    <!-- Login Form -->
-    <VBox alignment="CENTER" spacing="15" layoutX="300" layoutY="100" prefWidth="250">
+        <!-- Login Fields -->
+        <VBox spacing="15" alignment="CENTER">
+            <TextField fx:id="usernameField" promptText="Username" maxWidth="300"
+                       style="-fx-background-radius: 12; -fx-padding: 12; -fx-pref-height: 40;
+                              -fx-background-color: #F5F5F5; -fx-border-color: #B0BEC5; -fx-border-radius: 12;" />
 
-        <Label text="Login"
-               style="-fx-font-size: 24px; -fx-text-fill: white; -fx-font-weight: bold;"/>
+            <PasswordField fx:id="passwordField" promptText="Password" maxWidth="300"
+                           style="-fx-background-radius: 12; -fx-padding: 12; -fx-pref-height: 40;
+                                  -fx-background-color: #F5F5F5; -fx-border-color: #B0BEC5; -fx-border-radius: 12;" />
 
-        <TextField fx:id="emailField" promptText="Email or Username" maxWidth="220"
-                   style="-fx-background-radius: 10; -fx-padding: 10;"/>
+            <Button fx:id="sendOtpBtn" text="Send OTP" onAction="#handleOtpOrLogin"
+                    style="-fx-background-color: linear-gradient(to right, #FFB75E, #ED8F03);
+                           -fx-text-fill: white; -fx-background-radius: 12; -fx-padding: 8 20;
+                           -fx-pref-height: 40; -fx-font-size: 14px; -fx-font-weight: bold;
+                           -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 8, 0, 0, 2);" />
 
-        <PasswordField fx:id="passwordField" promptText="Password" maxWidth="220"
-                       style="-fx-background-radius: 10; -fx-padding: 10;"/>
-
-        <TextField fx:id="otpField" promptText="Enter OTP" visible="false" managed="false" maxWidth="220"
-                   style="-fx-background-radius: 10; -fx-padding: 10;"/>
-
-        <Button fx:id="sendOtpBtn" text="Send OTP" onAction="#handleOtpOrLogin"
-                style="-fx-background-color: #4FBDBA; -fx-text-fill: white; -fx-background-radius: 10; -fx-padding: 10 20;"/>
-
-        <Hyperlink fx:id="goToRegisterLink" text="Don't have an account? Register"
-                   style="-fx-text-fill: white; -fx-underline: false;"/>
-
+            <Hyperlink fx:id="goToRegisterLink" text="Don't have an account? Register"
+                       style="-fx-text-fill: #203A43; -fx-font-size: 12px; -fx-underline: false;" />
+        </VBox>
     </VBox>
 </AnchorPane>
