@@ -3,6 +3,7 @@ package controller.household;
 import app.household.WorkReqService;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import model.SessionManager;
 import model.WorkRequest;
 import util.MessageBox;
 
@@ -59,7 +60,7 @@ public class WorkReqController {
         String area = areaTextField.getText();
         double budget = parseDouble(budgetField.getText());
         LocalDate date = requestDatePicker.getValue();
-        String householdId = SessionManager.username;
+        String householdId = SessionManager.getUserID();
 
         WorkRequest request = WorkReqService.createRequest(
                 title, description, categoryId, city, area, budget, date, householdId

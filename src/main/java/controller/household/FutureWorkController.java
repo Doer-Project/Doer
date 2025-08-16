@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.FutureWork;
+import model.SessionManager;
 import util.MessageBox;
 
 import java.sql.SQLException;
@@ -47,7 +48,7 @@ public class FutureWorkController {
 
     private void loadFutureWorks() {
         try {
-            String username = SessionManager.username;
+            String username = SessionManager.getUserID();
             FutureWorkService service = new FutureWorkService();
             List<FutureWork> list = service.getFutureWorksForUser(username);
 
