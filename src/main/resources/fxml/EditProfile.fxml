@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+
+<StackPane fx:id="rootPane"
+           xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="controller.EditProfileController"
+           prefWidth="1000" prefHeight="800"
+           style="-fx-background-color: linear-gradient(to bottom right, #0F2027, #203A43, #2C5364);">
+
+    <!-- Centered Card -->
+    <VBox alignment="CENTER" spacing="14"
+          maxWidth="650" maxHeight="600"
+          StackPane.alignment="CENTER"
+          style="
+              -fx-background-color: white;
+              -fx-background-radius: 20;
+              -fx-padding: 30;
+              -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 20, 0, 0, 6);
+          ">
+
+        <!-- Profile Image -->
+        <StackPane>
+            <!--            fx:id="profileImage"-->
+            <ImageView
+                    fitWidth="100" fitHeight="100"
+                    preserveRatio="true" pickOnBounds="true">
+                <clip>
+                    <Circle radius="50" centerX="50" centerY="50"/>
+                </clip>
+            </ImageView>
+            <Button fx:id="btnChangePhoto" text="Change"
+                    style="
+                        -fx-background-color: linear-gradient(to right, #FF9F57, #E8781C);
+                        -fx-text-fill: white;
+                        -fx-background-radius: 12;
+                        -fx-padding: 3 10;
+                        -fx-font-size: 11px;
+                        -fx-font-weight: bold;
+                        -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 4, 0, 0, 2);
+                    "
+                    StackPane.alignment="BOTTOM_CENTER" translateY="8"/>
+        </StackPane>
+
+        <!-- Full Name -->
+        <VBox spacing="5" prefWidth="580">
+            <Label text="Full Name" style="-fx-font-weight: bold; -fx-font-size: 16px; -fx-text-fill: #203A43;"/>
+            <TextField fx:id="txtFullName" promptText="Enter full name"
+                       style="-fx-background-radius: 12; -fx-border-radius: 12; -fx-padding: 6 10;"/>
+        </VBox>
+
+        <!-- Email -->
+        <VBox spacing="5" prefWidth="580">
+            <Label text="Email" style="-fx-font-weight: bold; -fx-font-size: 16px; -fx-text-fill: #203A43;"/>
+            <TextField fx:id="txtEmail" promptText="Enter email" editable="false"
+                       style="-fx-opacity: 0.85; -fx-background-radius: 12; -fx-border-radius: 12; -fx-padding: 6 10;"/>
+        </VBox>
+
+        <!-- Address -->
+        <VBox spacing="5" prefWidth="580">
+            <Label text="Address" style="-fx-font-weight: bold; -fx-font-size: 16px; -fx-text-fill: #203A43;"/>
+            <TextField fx:id="txtAddress" promptText="Enter address"
+                       style="-fx-background-radius: 12; -fx-border-radius: 12; -fx-padding: 6 10;"/>
+        </VBox>
+
+        <!-- Gender -->
+        <VBox spacing="5" prefWidth="580">
+            <Label text="Gender" style="-fx-font-weight: bold; -fx-font-size: 16px; -fx-text-fill: #203A43;"/>
+            <ComboBox fx:id="cmbGender" prefWidth="580"
+                      style="-fx-background-radius: 12; -fx-border-radius: 12;"/>
+        </VBox>
+
+        <Separator prefWidth="120"/>
+
+        <!-- Buttons -->
+        <HBox spacing="14" alignment="CENTER">
+            <Button fx:id="btnSave" text="Save Changes" onAction="#saveBtn"
+                    style="
+                        -fx-background-color: linear-gradient(to right, #FF9F57, #E8781C);
+                        -fx-text-fill: white;
+                        -fx-background-radius: 12;
+                        -fx-padding: 8 20;
+                        -fx-font-size: 14px;
+                        -fx-font-weight: bold;
+                        -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 4, 0, 0, 2);
+                    "/>
+            <Button fx:id="btnCancel" text="Cancel" onAction="#cancleBtn"
+                    style="
+                        -fx-background-color: transparent;
+                        -fx-text-fill: #203A43;
+                        -fx-border-color: #203A43;
+                        -fx-border-radius: 12;
+                        -fx-padding: 8 20;
+                        -fx-font-size: 14px;
+                        -fx-font-weight: bold;
+                    "/>
+        </HBox>
+
+    </VBox>
+</StackPane>
