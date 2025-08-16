@@ -14,7 +14,7 @@ import app.UserServices;
 
 import model.SessionManager;
 import util.MessageBox;
-import util.OTP;
+//import util.OTP;
 
 public class LoginController {
     @FXML private TextField emailField;
@@ -49,8 +49,8 @@ public class LoginController {
         if (!otpSent) {
             System.out.println("Sending OTP to: " + emailField.getText());
 
-            otp = OTP.sendOtp(emailField.getText());
-            System.out.println("OTP sent: " + otp);
+//            otp = OTP.sendOtp(emailField.getText());
+//            System.out.println("OTP sent: " + otp);
 
             otpField.setVisible(true);
             otpField.setManaged(true);

@@ -22,13 +22,11 @@
                        style="-fx-background-radius: 12;">
 
                 <columns>
-                    <TableColumn fx:id="colWorkId" text="Work ID" prefWidth="100.0"/>
-                    <TableColumn fx:id="colService" text="Service" prefWidth="150.0"/>
+                    <TableColumn fx:id="colWorkId" text="Work ID" prefWidth="150.0"/>
+                    <TableColumn fx:id="colService" text="Service" prefWidth="250.0"/>
                     <TableColumn fx:id="colCustomer" text="Customer" prefWidth="150.0"/>
                     <TableColumn fx:id="colScheduledDate" text="Scheduled Date" prefWidth="150.0"/>
-                    <TableColumn fx:id="colTime" text="Time" prefWidth="100.0"/>
-                    <TableColumn fx:id="colAddress" text="Address" prefWidth="150.0"/>
-                    <TableColumn fx:id="colAmount" text="Expected Amount" prefWidth="100.0"/>
+                    <TableColumn fx:id="colAddress" text="Address" prefWidth="250.0"/>
                 </columns>
             </TableView>
 

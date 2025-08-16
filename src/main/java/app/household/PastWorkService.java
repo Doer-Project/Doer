@@ -1,5 +1,6 @@
 package app.household;
 
+import database.household.PastWorkDAO;
 import database.household.PastWorkDAOImpl;
 import model.PastWork;
 import util.DatabaseConnection;
@@ -9,13 +10,11 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class PastWorkService {
-    private PastWorkDAOImpl dao;
-    public PastWorkService() throws SQLException {
-        Connection conn = DatabaseConnection.getConnection();
-        dao = new PastWorkDAOImpl(conn);
-    }
 
-    public List<PastWork> getPastWorkForUser(String username) {
-        return dao.getPastWorkForUser(username);
+    public List<PastWork> getPastWorkForUser(String username) throws SQLException {
+        try (Connection conn = DatabaseConnection.getConnection()) {
+            PastWorkDAO dao = new PastWorkDAOImpl(conn);
+            return dao.getPastWorkForUser(username);
+        }
     }
 }
