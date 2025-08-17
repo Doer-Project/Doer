@@ -2,6 +2,7 @@ package app;
 
 import database.UserDAO;
 import model.Household;
+import model.SessionManager;
 import model.Worker;
 import util.MessageBox;
 import util.Validations;
@@ -37,17 +38,20 @@ public class UserServices {
             MessageBox.showAlert("Invalid Input", "Age must be a valid number.");
             return false;
         }
-        try {
-            pinCodeInt = Integer.parseInt(pin_code);
-        } catch (NumberFormatException e) {
-            MessageBox.showAlert("Invalid Input", "Pin code must be a valid number.");
+        if (!Validations.isValidPinCode(pin_code)) {
+            MessageBox.showAlert("Invalid Input", "Pin code must be a valid 6-digit number.");
             return false;
+        } else {
+            pinCodeInt = Integer.parseInt(pin_code);
         }
 
         Household user = new Household(role, firstName, lastName, email, password, ageInt, gender, address, city, pinCodeInt);
 
-        if (userDAO.registerHousehold(user)) {
-            MessageBox.showInfo("Registration Successful", "Household registered successfully.");
+        String userId = userDAO.generateHouseholdId(user);
+        SessionManager.setUserID(userId);
+
+        if (userDAO.registerHousehold(userId, user)) {
+            System.out.println("Household registered successfully: " + firstName + " " + lastName);
             return true;
         } else {
             MessageBox.showError("Registration Failed", "Failed to register household.");
@@ -92,8 +96,11 @@ public class UserServices {
 
         Worker user = new Worker(role, firstName, lastName, email, password, ageInt, gender, category, experienceInt, workArea);
 
-        if (userDAO.registerWorker(user)) {
-            MessageBox.showInfo("Registration Successful", "Worker registered successfully.");
+        String userId = userDAO.generateWorkerId(user);
+        SessionManager.setUserID(userId);
+
+        if (userDAO.registerWorker(userId, user)) {
+            System.out.println("Worker registered successfully: " + firstName + " " + lastName);
             return true;
         } else {
             MessageBox.showError("Registration Failed", "Failed to register worker.");
@@ -114,5 +121,9 @@ public class UserServices {
             MessageBox.showError("Verification Failed", "Invalid email or password.");
             return false;
         }
+    }
+
+    public String getUserIdByEmail(String email) {
+        return userDAO.getUserIdByEmail(email);
     }
 }

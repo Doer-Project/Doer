@@ -1,14 +1,15 @@
 package controller.household;
 
-import app.household.FutureWorkService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import model.FutureWork;
-import util.MessageBox;
 
+import app.household.FutureWorkService;
+import util.MessageBox;
+import model.FutureWork;
+import model.SessionManager;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -39,15 +40,14 @@ public class FutureWorkController {
             loadFutureWorks();
             
         } catch (Exception e) {
-            e.printStackTrace();
-//            MessageBox.showError("Loading Error", "Could not load future work data.");
+            System.out.println("Error initializing FutureWorkController: " + e.getMessage());
             MessageBox.showError("Loading Error", "Could not load future work .");
         }
     }
 
     private void loadFutureWorks() {
         try {
-            String username = SessionManager.username;
+            String username = SessionManager.getUserID();
             FutureWorkService service = new FutureWorkService();
             List<FutureWork> list = service.getFutureWorksForUser(username);
 
@@ -55,7 +55,7 @@ public class FutureWorkController {
             futureWorkData.setAll(list);
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("Error loading future works: " + e.getMessage());
             MessageBox.showError("Loading Error", "Failed to load future work data.");
         }
     }

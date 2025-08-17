@@ -8,6 +8,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.PastWork;
+import model.SessionManager;
 import util.MessageBox;
 
 import java.sql.SQLException;
@@ -66,7 +67,7 @@ public class PastWorkController {
 
     private void loadPastWorks() {
         try {
-            String username = SessionManager.username;
+            String username = SessionManager.getUserID();
             PastWorkService service = new PastWorkService();
             List<PastWork> list = service.getPastWorkForUser(username);
 

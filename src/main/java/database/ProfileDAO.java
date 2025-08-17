@@ -1,5 +1,7 @@
 package database;
 
+import model.User;
+
 import java.sql.SQLException;
 
 public interface ProfileDAO {

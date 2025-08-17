@@ -2,6 +2,8 @@ package util;
 
 import database.UserDAO;
 
+import java.time.LocalDate;
+
 public class Validations {
     /**
      * Validates a strong password:
@@ -44,5 +46,9 @@ public class Validations {
 
     public static boolean isRegistered(String email){
         return new UserDAO().isRegistered(email);
+    }
+
+    public static boolean isValidPinCode(String pinCode) {
+        return pinCode != null && pinCode.matches("^\\d{6}$");
     }
 }

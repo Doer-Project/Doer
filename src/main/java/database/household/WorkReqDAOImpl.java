@@ -1,36 +1,40 @@
 package database.household;
 
 import model.WorkRequest;
+import util.DatabaseConnection;
 
 import java.sql.*;
 
 public class WorkReqDAOImpl implements WorkReqDAO {
 
-    private Connection connection;
+    private static Connection connection;
 
-    public WorkReqDAOImpl(Connection connection) {
-        this.connection = connection;
+    public WorkReqDAOImpl() {
+        try {
+            connection = DatabaseConnection.getConnection();
+        } catch (SQLException e) {
+            System.out.println("Error connecting to database: " + e.getMessage());
+            throw new RuntimeException(e);
+        }
     }
 
     // Insert new work request
     public boolean insert(WorkRequest request) {
-        String sql = "INSERT INTO work_requests " +
-                "(title, description, category_id, city, area, budget, request_date, household_id) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO workrequests (household_id, title, category, description, preferred_work_date, address, city, pincode) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-            stmt.setString(1, request.getTitle());
-            stmt.setString(2, request.getDescription());
-            stmt.setInt(3, request.getCategoryId());
-            stmt.setString(4, request.getCity());
-            stmt.setString(5, request.getArea());
-            stmt.setDouble(6, request.getBudget());
-            stmt.setDate(7, Date.valueOf(request.getRequestDate()));
-            stmt.setString(8, request.getHouseholdId());
+            stmt.setString(1, request.getHouseholdId());
+            stmt.setString(2, request.getTitle());
+            stmt.setString(3, request.getCategory());
+            stmt.setString(4, request.getDescription());
+            stmt.setDate(5, Date.valueOf(request.getRequestDate()));
+            stmt.setString(6, request.getArea());
+            stmt.setString(7, request.getCity());
+            stmt.setInt(8, request.getPinCode());
 
             int rows = stmt.executeUpdate();
             return rows > 0;
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("Error inserting work request: " + e.getMessage());
             return false;
         }
     }

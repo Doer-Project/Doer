@@ -8,6 +8,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import model.OngoingWork;
 import util.MessageBox;
+import model.SessionManager;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -21,7 +22,7 @@ public class HouseholdOngoingController {
         try {
             ///  object for calling method like getOngoingWorksForUser(username)
             OngoingWorkService service = new OngoingWorkService();
-            String username = SessionManager.username;
+            String username = SessionManager.getUserID();
 
             List<OngoingWork> ongoingWorks = service.getOngoingWorksForUser(username);
             ///  it is for to delete the previous ui element;

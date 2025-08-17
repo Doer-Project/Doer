@@ -3,12 +3,12 @@ package controller;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import app.UserServices;
-import model.SessionManager;
 import util.MessageBox;
 import util.OTP;
 
@@ -46,7 +46,7 @@ public class RegisterController {
     private String otp = "";
     private ToggleGroup accountTypeGroup;
 
-    UserServices userServices = new UserServices();
+    private final UserServices userServices = new UserServices();
 
     @FXML
     public void initialize() {
@@ -122,12 +122,10 @@ public class RegisterController {
     }
 
     public boolean handleRegister(){
-        String userID = ""; // call userID generator method here
-        SessionManager.setUserID(userID);
         if (householdRadio.isSelected()) {
-            return userServices.registerHousehold(userID, firstNameField.getText(), lastNameField.getText(), emailField.getText(),passwordField.getText(), ageField.getText(), genderCombo.getValue(), address.getText(), city.getText(), pinCode.getText());
+            return userServices.registerHousehold("household", firstNameField.getText(), lastNameField.getText(), emailField.getText(),passwordField.getText(), ageField.getText(), genderCombo.getValue(), address.getText(), city.getText(), pinCode.getText());
         } else {
-            return userServices.registerWorker(userID, firstNameField.getText(), lastNameField.getText(), emailField.getText(), passwordField.getText(), ageField.getText(), genderCombo.getValue(), category.getValue(), experience.getText(), workArea.getText());
+            return userServices.registerWorker("worker", firstNameField.getText(), lastNameField.getText(), emailField.getText(), passwordField.getText(), ageField.getText(), genderCombo.getValue(), category.getValue(), experience.getText(), workArea.getText());
         }
     }
 
@@ -156,7 +154,31 @@ public class RegisterController {
                         System.out.println("Registration successful!");
                         MessageBox.showInfo("Registration Successful", "You have been registered successfully.");
 
-                        // Load the dashboard or next page
+                        if (householdRadio.isSelected()) {
+                            try {
+                                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/household/HouseholdDB.fxml"));
+                                Parent homeRoot = loader.load();
+                                Stage stage = (Stage) otpButton.getScene().getWindow();
+                                stage.setScene(new Scene(homeRoot, 1400, 800));
+                                stage.setTitle("Household Dashboard");
+                                stage.show();
+                            } catch (Exception e) {
+                                System.out.println("Error loading Home Page: " + e.getMessage());
+                                MessageBox.showError("Error", "Failed to load home page.");
+                            }
+                        } else {
+                            try {
+                                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/worker/WorkerDB.fxml"));
+                                Parent homeRoot = loader.load();
+                                Stage stage = (Stage) otpButton.getScene().getWindow();
+                                stage.setScene(new Scene(homeRoot, 1400, 800));
+                                stage.setTitle("Worker Dashboard");
+                                stage.show();
+                            } catch (Exception e) {
+                                System.out.println("Error loading Home Page: " + e.getMessage());
+                                MessageBox.showError("Error", "Failed to load home page.");
+                            }
+                        }
                     } else {
                         System.out.println("something unexpected happened, please try again.");
                     }

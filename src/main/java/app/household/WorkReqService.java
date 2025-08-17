@@ -3,46 +3,64 @@ package app.household;
 import database.household.WorkReqDAO;
 import database.household.WorkReqDAOImpl;
 import model.WorkRequest;
-import util.DatabaseConnection;
 import util.MessageBox;
+import util.Validations;
 
-import java.sql.Connection;
-import java.sql.SQLException;
 import java.time.LocalDate;
 
 public class WorkReqService {
 
-    private WorkReqDAO dao;
+    private static WorkReqDAO dao;
 
     // Constructor: initialize DAO with DB connection
-    public WorkReqService() throws SQLException {
-        Connection conn = DatabaseConnection.getConnection();
-        this.dao = new WorkReqDAOImpl(conn);
+    public WorkReqService(){
+        dao = new WorkReqDAOImpl();
     }
 
-    public static WorkRequest createRequest(String title, String description, int categoryId,
-                                            String city, String area, double budget,
-                                            LocalDate date, String householdId) {
-        // Basic validations
-        if (title == null || title.trim().isEmpty()) return null;
-        if (description == null || description.trim().isEmpty()) return null;
-        if (budget <= 0){
-            MessageBox.showAlert("Validation Error", "Please enter a valid budget!");
+    public WorkRequest createRequest(String title, String description, String category, String city, String area, String pinCode, LocalDate date, String householdId) {
+        if (title == null || title.trim().isEmpty()) {
+            MessageBox.showAlert("Validation Error", "Please enter a valid title!");
             return null;
         }
-        if (date == null) {
-            MessageBox.showAlert("Validation Error", "Please enter a valid Date!");
+        if (description == null || description.trim().isEmpty()) {
+            MessageBox.showAlert("Validation Error", "Please enter a valid description!");
             return null;
         }
-        if (city == null || city.trim().isEmpty()) return null;
+        if (category == null || category.trim().isEmpty()) {
+            MessageBox.showAlert("Validation Error", "Please select a valid category!");
+            return null;
+        }
+        if (city == null || city.trim().isEmpty()) {
+            MessageBox.showAlert("Validation Error", "Please enter a valid city!");
+            return null;
+        }
+        if (area == null || area.trim().isEmpty()) {
+            MessageBox.showAlert("Validation Error", "Please enter a valid area!");
+            return null;
+        }
+        if (date == null || date.isBefore(LocalDate.now())) {
+            MessageBox.showAlert("Validation Error", "Please select a valid date!");
+            return null;
+        }
 
-        // Valid → create object
-        return new WorkRequest(title, description, categoryId, city, area, budget, date, householdId);
+        int pinCodeInt;
+        if (!Validations.isValidPinCode(pinCode)) {
+            MessageBox.showAlert("Validation Error", "Please enter a valid pin code!");
+            return null;
+        } else {
+            pinCodeInt = Integer.parseInt(pinCode);
+        }
+
+
+        return new WorkRequest(title, description, category, city, area, pinCodeInt, date, householdId);
     }
 
     // Save WorkRequest, return true if success
-    public boolean saveWorkRequest(WorkRequest request) {
+    public boolean saveWorkRequest(String title, String description, String category, String city, String area, String pinCode, LocalDate date, String householdId) {
+        WorkRequest request = createRequest(title, description, category, city, area, pinCode, date, householdId);
+
         if (request == null) return false;
+
         return dao.insert(request);
     }
 }
