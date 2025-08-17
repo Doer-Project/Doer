@@ -1,5 +1,6 @@
 package app.household;
 
+import database.household.OngoingWorkDAO;
 import database.household.OngoingWorkDAOImpl;
 import model.OngoingWork;
 import util.DatabaseConnection;
@@ -9,14 +10,11 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class OngoingWorkService {
-    private OngoingWorkDAOImpl dao;
 
-    public OngoingWorkService() throws SQLException {
-        Connection conn = DatabaseConnection.getConnection();
-        this.dao = new OngoingWorkDAOImpl(conn);
-    }
-
-    public List<OngoingWork> getOngoingWorksForUser(String username) {
-        return dao.getOngoingWorksForUser(username);
+    public List<OngoingWork> getOngoingWorksForUser(String username) throws SQLException {
+        try (Connection conn = DatabaseConnection.getConnection()) {
+            OngoingWorkDAO dao = new OngoingWorkDAOImpl(conn);
+            return dao.getOngoingWorksForUser(username);
+        }
     }
 }

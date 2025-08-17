@@ -5,6 +5,7 @@
 <?import javafx.geometry.Insets?>
 
 <AnchorPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="controller.worker.UpcomingJobController"
             prefWidth="1000.0" prefHeight="800.0"
             style="-fx-background-color: #E3F2FD;">
 

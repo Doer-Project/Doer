@@ -11,15 +11,10 @@ import java.util.List;
 
 public class FutureWorkService {
 
-    private FutureWorkDAO dao;
-
-    ///  get connection and set to the FutureWorkDAOImpl
-    public FutureWorkService() throws SQLException {
-        Connection conn = DatabaseConnection.getConnection();
-        this.dao = new FutureWorkDAOImpl(conn);
-    }
-
-    public List<FutureWork> getFutureWorksForUser(String username){
-        return dao.getFutureWorkForUser(username);
+    public List<FutureWork> getFutureWorksForUser(String username) throws SQLException {
+        try (Connection conn = DatabaseConnection.getConnection()) {
+            FutureWorkDAO dao = new FutureWorkDAOImpl(conn);
+            return dao.getFutureWorkForUser(username);
+        }
     }
 }

@@ -12,21 +12,14 @@ import java.time.LocalDate;
 
 public class WorkReqService {
 
-    private WorkReqDAO dao;
-
-    // Constructor: initialize DAO with DB connection
-    public WorkReqService() throws SQLException {
-        Connection conn = DatabaseConnection.getConnection();
-        this.dao = new WorkReqDAOImpl(conn);
-    }
-
+    // ✅ Create WorkRequest object with validations
     public static WorkRequest createRequest(String title, String description, int categoryId,
                                             String city, String area, double budget,
                                             LocalDate date, String householdId) {
         // Basic validations
         if (title == null || title.trim().isEmpty()) return null;
         if (description == null || description.trim().isEmpty()) return null;
-        if (budget <= 0){
+        if (budget <= 0) {
             MessageBox.showAlert("Validation Error", "Please enter a valid budget!");
             return null;
         }
@@ -40,9 +33,13 @@ public class WorkReqService {
         return new WorkRequest(title, description, categoryId, city, area, budget, date, householdId);
     }
 
-    // Save WorkRequest, return true if success
-    public boolean saveWorkRequest(WorkRequest request) {
+    // ✅ Save WorkRequest with fresh connection each time
+    public boolean saveWorkRequest(WorkRequest request) throws SQLException {
         if (request == null) return false;
-        return dao.insert(request);
+
+        try (Connection conn = DatabaseConnection.getConnection()) {
+            WorkReqDAO dao = new WorkReqDAOImpl(conn);
+            return dao.insert(request);
+        }
     }
 }
