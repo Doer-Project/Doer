@@ -2,7 +2,6 @@
 //
 //import database.ProfileDAO;
 //import database.ProfileDAOImpl;
-//import model.User;
 //import util.DatabaseConnection;
 //import util.MessageBox;
 //
@@ -27,16 +26,16 @@
 //    }
 //
 //    // Fetch user by username
-////    public User getUserByUsername(String username) {
-////        try {
-////            return dao.getUserByUsername(username);
-////        } catch (SQLException e) {
-////            MessageBox.showError("Database Error", "Failed to fetch user:\n" + e.getMessage());
-////            return null;
-////        }
-////    }
+//    public User getUserByUsername(String username) {
+//        try {
+//            return dao.getUserByUsername(username);
+//        } catch (SQLException e) {
+//            MessageBox.showError("Database Error", "Failed to fetch user:\n" + e.getMessage());
+//            return null;
+//        }
+//    }
 //
-////    public boolean updateUser(User user, boolean confirm) throws SQLException {
-////        return profileDAO.updateUser(user, confirm);
-////    }
+//    public boolean updateUser(User user, boolean confirm) throws SQLException {
+//        return profileDAO.updateUser(user, confirm);
+//    }
 //}

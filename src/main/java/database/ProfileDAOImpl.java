@@ -1,6 +1,5 @@
 //package database;
 //
-//import model.Household;
 //import model.User;
 //import util.DatabaseConnection;
 //

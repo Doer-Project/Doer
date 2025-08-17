@@ -48,14 +48,20 @@ public class WorkerDBController {
     public void pastWork(ActionEvent event) {
         resetButtonStyles();
         btnPastWork.setStyle(activeStyle());
-        loadUI("Completed_job.fxml");
+        loadUI("CompletedJobs.fxml");
     }
 
     // DUMMY - KEEP AS IS
     public void profile(ActionEvent event) {
         resetButtonStyles();
         btnProfile.setStyle(activeStyle());
-        loadUI("create_req.fxml");
+        try {
+            Node node = FXMLLoader.load(getClass().getResource("/fxml/Profile.fxml"));
+            contentPane.getChildren().setAll(node);
+        } catch (IOException e) {
+            System.out.println("Error loading UI: Profile.fxml");
+            e.printStackTrace();
+        }
     }
 
     private void loadUI(String fxmlFile) {

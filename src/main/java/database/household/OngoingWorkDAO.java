@@ -1,6 +1,6 @@
 package database.household;
 
-import model.OngoingWork;
+import model.household.OngoingWork;
 import java.util.List;
 
 public interface OngoingWorkDAO {

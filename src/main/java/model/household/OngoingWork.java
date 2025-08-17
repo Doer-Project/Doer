@@ -1,4 +1,4 @@
-package model;
+package model.household;
 
 public class OngoingWork {
     private String taskName;

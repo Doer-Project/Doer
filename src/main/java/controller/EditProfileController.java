@@ -15,6 +15,7 @@
 //import java.io.IOException;
 //import java.sql.SQLException;
 //
+/////  object issue
 //import static model.SessionManager.currentUser;
 //
 //public class EditProfileController {
@@ -37,6 +38,8 @@
 //    @FXML
 //    public void initialize() {
 //        try {
+//
+//            ///  object issue , i think we will create a method which return a user type of object so no more change require
 //            if (currentUser != null) {
 //                // Full Name
 //                String fullName = currentUser.getFirstName();
@@ -100,6 +103,9 @@
 //        }
 //    }
 //
+//
+//    ///  after this save button work successfully , the new object pass to the DAO class ,
+//    ///      & a query of update will run according the object data provided
 //    @FXML
 //    public void saveBtn(ActionEvent event) throws SQLException, IOException {
 //        /// uncomment this after db connect
