@@ -10,11 +10,11 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-import app.UserServices;
 
+import app.UserServices;
 import model.SessionManager;
 import util.MessageBox;
-//import util.OTP;
+import util.OTP;
 
 public class LoginController {
     @FXML private TextField emailField;
@@ -49,8 +49,8 @@ public class LoginController {
         if (!otpSent) {
             System.out.println("Sending OTP to: " + emailField.getText());
 
-//            otp = OTP.sendOtp(emailField.getText());
-//            System.out.println("OTP sent: " + otp);
+            otp = OTP.sendOtp(emailField.getText());
+            System.out.println("OTP sent: " + otp);
 
             otpField.setVisible(true);
             otpField.setManaged(true);
@@ -66,12 +66,20 @@ public class LoginController {
                 System.out.println("Invalid OTP entered.");
                 MessageBox.showAlert("Invalid OTP", "The OTP you entered is incorrect. Please try again.");
             } else {
-                SessionManager.setUserID(""); // Set the user ID by getUserIDbyEmail(emailField.getText());
+                SessionManager.setUserID(userServices.getUserIdByEmail(emailField.getText()));
 
                 System.out.println("OTP verified successfully.");
                 MessageBox.showInfo("Login Successful", "You have logged in successfully.");
 
-                // Load the dashboard or next page
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/household/HouseholdDB.fxml"));
+                    Parent homeRoot = loader.load();
+                    Stage stage = (Stage) sendOtpBtn.getScene().getWindow();
+                    stage.setScene(new Scene(homeRoot, 1400, 800));
+                } catch (Exception e) {
+                    System.out.println("Error loading Home Page: " + e.getMessage());
+                    MessageBox.showError("Error", "Failed to load home page.");
+                }
             }
 
         }

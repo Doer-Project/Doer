@@ -2,8 +2,9 @@ package util;
 
 import database.UserDAO;
 
-public class Validations {
+import java.time.LocalDate;
 
+public class Validations {
     /**
      * Validates a strong password:
      * - At least 8 characters to maximum 15 characters
@@ -45,5 +46,9 @@ public class Validations {
 
     public static boolean isRegistered(String email){
         return new UserDAO().isRegistered(email);
+    }
+
+    public static boolean isValidPinCode(String pinCode) {
+        return pinCode != null && pinCode.matches("^\\d{6}$");
     }
 }
