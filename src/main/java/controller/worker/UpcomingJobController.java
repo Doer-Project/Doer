@@ -1,60 +1,51 @@
 package controller.worker;
 
-import app.worker.UpcomingJobService;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import app.FutureWorkService;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import model.worker.UpcomingJob;
-import model.SessionManager;
-import util.MessageBox;
+import model.FutureWork;
 
-import java.sql.SQLException;
 import java.util.List;
 
 public class UpcomingJobController {
 
-    @FXML private TableView<UpcomingJob> upcomingTable;
-    @FXML private TableColumn<UpcomingJob, String> colWorkId;
-    @FXML private TableColumn<UpcomingJob, String> colService;
-    @FXML private TableColumn<UpcomingJob, String> colCustomer;
-    @FXML private TableColumn<UpcomingJob, String> colScheduledDate;
-    @FXML private TableColumn<UpcomingJob, String> colAddress;
+    @FXML private TableView<FutureWork> upcomingJobsTable;
+    @FXML private TableColumn<FutureWork, Integer> colTaskId;
+    @FXML private TableColumn<FutureWork, String> colTitle;
+    @FXML private TableColumn<FutureWork, Integer> colHouseholdId;
+    @FXML private TableColumn<FutureWork, java.time.LocalDate> colDate;
+    @FXML private TableColumn<FutureWork, String> colAddress;
+    @FXML private TableColumn<FutureWork, String> colStatus;
+    @FXML private TableColumn<FutureWork, Integer> colRating;
 
-    private ObservableList<UpcomingJob> upcomingJobData = FXCollections.observableArrayList();
+    private FutureWorkService service;
 
+    @FXML
     public void initialize() {
         try {
-            // Mapping table columns with model properties
-            colWorkId.setCellValueFactory(new PropertyValueFactory<>("workId"));
-            colService.setCellValueFactory(new PropertyValueFactory<>("service"));
-            colCustomer.setCellValueFactory(new PropertyValueFactory<>("customer"));
-            colScheduledDate.setCellValueFactory(new PropertyValueFactory<>("scheduledDate"));
-            colAddress.setCellValueFactory(new PropertyValueFactory<>("address"));
-            // Attach ObservableList to TableView
-            upcomingTable.setItems(upcomingJobData);
+            service = new FutureWorkService();
 
-            // Load data initially
-            loadUpcomingJobs();
+            colTaskId.setCellValueFactory(new PropertyValueFactory<>("taskId"));
+            colTitle.setCellValueFactory(new PropertyValueFactory<>("title"));
+            colHouseholdId.setCellValueFactory(new PropertyValueFactory<>("householdId"));
+            colDate.setCellValueFactory(new PropertyValueFactory<>("date"));
+            colStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
+            colRating.setCellValueFactory(new PropertyValueFactory<>("rating"));
 
+            loadData(2); // replace 2 with logged-in workerId
         } catch (Exception e) {
             e.printStackTrace();
-            MessageBox.showError("Loading Error", "Could not load upcoming jobs.");
         }
     }
 
-    private void loadUpcomingJobs() {
+    private void loadData(int workerId) {
         try {
-            String workerId = SessionManager.getUserID(); // assuming worker is logged in
-            UpcomingJobService service = new UpcomingJobService();
-            List<UpcomingJob> list = service.getUpcomingJobsForWorker(workerId);
-
-            upcomingJobData.setAll(list);
-
-        } catch (SQLException e) {
+            List<FutureWork> list = service.getFutureWorksForWorker(workerId);
+            upcomingJobsTable.getItems().setAll(list);
+        } catch (Exception e) {
             e.printStackTrace();
-            MessageBox.showError("Loading Error", "Failed to load upcoming jobs.");
         }
     }
 }

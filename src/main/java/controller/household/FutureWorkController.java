@@ -1,63 +1,50 @@
 package controller.household;
 
-import app.household.FutureWorkService;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import app.FutureWorkService;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import model.household.FutureWork;
-import model.SessionManager;
-import util.MessageBox;
+import model.FutureWork;
 
-import java.sql.SQLException;
 import java.util.List;
 
 public class FutureWorkController {
-    @FXML
-    private TableView<FutureWork> futureWorkTable;
-    @FXML private TableColumn<FutureWork, String> colCategory;
-    @FXML private TableColumn<FutureWork, String> colDate;
-    @FXML private TableColumn<FutureWork, String> colTime;
-    @FXML private TableColumn<FutureWork, String> colDescription;
-    @FXML private TableColumn<FutureWork, String> colStatus;
 
-    private ObservableList<FutureWork> futureWorkData = FXCollections.observableArrayList();
-    public void initialize(){
+    @FXML private TableView<FutureWork> futureWorkTable;
+    @FXML private TableColumn<FutureWork, Integer> colTaskId;
+    @FXML private TableColumn<FutureWork, String> colTitle;
+    @FXML private TableColumn<FutureWork, Integer> colWorkerId;
+    @FXML private TableColumn<FutureWork, java.time.LocalDate> colDate;
+    @FXML private TableColumn<FutureWork, String> colStatus;
+    @FXML private TableColumn<FutureWork, Integer> colRating;
+
+    private FutureWorkService service;
+
+    @FXML
+    public void initialize() {
         try {
-///  remain to learn this
-            colCategory.setCellValueFactory(new PropertyValueFactory<>("category"));
-            colDate.setCellValueFactory(new PropertyValueFactory<>("scheduledDate"));
-            colTime.setCellValueFactory(new PropertyValueFactory<>("time"));
-            colDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
+            service = new FutureWorkService();
+
+            colTaskId.setCellValueFactory(new PropertyValueFactory<>("task_Id"));
+            colTitle.setCellValueFactory(new PropertyValueFactory<>("title"));
+            colWorkerId.setCellValueFactory(new PropertyValueFactory<>("worker_Id"));
+            colDate.setCellValueFactory(new PropertyValueFactory<>("preferred_work_date"));
+            colRating.setCellValueFactory(new PropertyValueFactory<>("household_rating"));
             colStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
 
-
-            // Set ObservableList once to TableView
-            futureWorkTable.setItems(futureWorkData);
-
-            // Load initial data
-            loadFutureWorks();
-            
+            loadData(2); // replace 3 with logged-in householdId
         } catch (Exception e) {
             e.printStackTrace();
-//            MessageBox.showError("Loading Error", "Could not load future work data.");
-            MessageBox.showError("Loading Error", "Could not load future work .");
         }
     }
 
-    private void loadFutureWorks() {
+    private void loadData(int householdId) {
         try {
-            String username = SessionManager.getUserID();
-            FutureWorkService service = new FutureWorkService();
-            List<FutureWork> list = service.getFutureWorksForUser(username);
-
-            // Update existing ObservableList (clears and adds new items)
-            futureWorkData.setAll(list);
-
-        } catch (SQLException e) {
+            List<FutureWork> list = service.getFutureWorksForHousehold(householdId);
+            futureWorkTable.getItems().setAll(list);
+        } catch (Exception e) {
             e.printStackTrace();
-            MessageBox.showError("Loading Error", "Failed to load future work data.");
         }
     }
 }

@@ -12,11 +12,6 @@ public class PastTask {
     private int rating;
     private String review;
 
-    // getters
-
-
-
-
     ///  household
     public PastTask(int taskId, String title, int workerId, LocalDate date, int rating, String review) {
         this.taskId = taskId;
