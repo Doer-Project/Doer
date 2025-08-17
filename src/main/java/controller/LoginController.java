@@ -71,14 +71,28 @@ public class LoginController {
                 System.out.println("OTP verified successfully.");
                 MessageBox.showInfo("Login Successful", "You have logged in successfully.");
 
-                try {
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/household/HouseholdDB.fxml"));
-                    Parent homeRoot = loader.load();
-                    Stage stage = (Stage) sendOtpBtn.getScene().getWindow();
-                    stage.setScene(new Scene(homeRoot, 1400, 800));
-                } catch (Exception e) {
-                    System.out.println("Error loading Home Page: " + e.getMessage());
-                    MessageBox.showError("Error", "Failed to load home page.");
+                if (SessionManager.getUserID().startsWith("H")) {
+                    try {
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/household/HouseholdDB.fxml"));
+                        Parent homeRoot = loader.load();
+                        Stage stage = (Stage) sendOtpBtn.getScene().getWindow();
+                        stage.setTitle("Household Dashboard");
+                        stage.setScene(new Scene(homeRoot, 1400, 800));
+                    } catch (Exception e) {
+                        System.out.println("Error loading Home Page: " + e.getMessage());
+                        MessageBox.showError("Error", "Failed to load home page.");
+                    }
+                } else {
+                    try {
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/worker/WorkerDB.fxml"));
+                        Parent homeRoot = loader.load();
+                        Stage stage = (Stage) sendOtpBtn.getScene().getWindow();
+                        stage.setTitle("Worker Dashboard");
+                        stage.setScene(new Scene(homeRoot, 1400, 800));
+                    } catch (Exception e) {
+                        System.out.println("Error loading Home Page: " + e.getMessage());
+                        MessageBox.showError("Error", "Failed to load home page.");
+                    }
                 }
             }
 
