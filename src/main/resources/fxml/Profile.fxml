@@ -11,7 +11,6 @@
 <?import javafx.scene.shape.Circle?>
 
 <StackPane fx:id="rootPane"
-           fx:controller="controller.ProfileController"
            xmlns:fx="http://javafx.com/fxml/1"
            prefWidth="1000" prefHeight="800"
            style="-fx-background-color: linear-gradient(to bottom right, #0F2027, #203A43, #2C5364);">
@@ -52,7 +51,8 @@
             <!-- Address -->
             <HBox spacing="10" alignment="CENTER_LEFT">
                 <Label text="📍" style="-fx-font-size: 16px;"/>
-                <Label fx:id="lblAddress" text="City, Country" style="-fx-text-fill: #3B6B6B; -fx-font-size: 14px;" wrapText="true"/>
+                <Label fx:id="lblAddress" text="City, Country" style="-fx-text-fill: #3B6B6B; -fx-font-size: 14px;"
+                       wrapText="true"/>
             </HBox>
 
             <!-- User Type -->
@@ -73,7 +73,7 @@
 
         <!-- Buttons -->
         <HBox spacing="16" alignment="CENTER">
-            <Button fx:id="btnEdit" text="Edit Profile" onAction="#editProfile"
+            <Button fx:id="btnEdit" text="Edit Profile"
                     style="
                         -fx-background-color: linear-gradient(to right, #FF9F57, #E8781C);
                         -fx-text-fill: white;
@@ -93,16 +93,16 @@
                         -fx-font-weight: bold;
                         -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 6, 0, 0, 2);
                     "/>
-            <Button fx:id="btnHistory" text="History" onAction="#history"
-                    style="
-                        -fx-background-color: linear-gradient(to right, #FF9F57, #E8781C);
-                        -fx-text-fill: white;
-                        -fx-background-radius: 12;
-                        -fx-padding: 8 20;
-                        -fx-font-size: 14px;
-                        -fx-font-weight: bold;
-                        -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 6, 0, 0, 2);
-                    "/>
+<!--            <Button fx:id="btnHistory" text="History"-->
+<!--                    style="-->
+<!--                        -fx-background-color: linear-gradient(to right, #FF9F57, #E8781C);-->
+<!--                        -fx-text-fill: white;-->
+<!--                        -fx-background-radius: 12;-->
+<!--                        -fx-padding: 8 20;-->
+<!--                        -fx-font-size: 14px;-->
+<!--                        -fx-font-weight: bold;-->
+<!--                        -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 6, 0, 0, 2);-->
+<!--                    "/>-->
         </HBox>
 
     </VBox>
