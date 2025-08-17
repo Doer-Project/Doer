@@ -20,6 +20,7 @@ public class FutureWorkDAOImpl implements FutureWorkDAO {
         List<FutureWork> list = new ArrayList<>();
 
         ///  can add date condition
+        System.out.println("above query");
         String sql = "SELECT aw.task_id, wr.title, aw.worker_id, wr.preferred_work_date, aw.status, aw.household_rating FROM workrequests wr LEFT JOIN assignedtasks aw ON wr.request_id = aw.request_id WHERE wr.household_id = ?;";
 
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -29,17 +30,19 @@ public class FutureWorkDAOImpl implements FutureWorkDAO {
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
+                System.out.println("inside loop");
                 FutureWork fw = new FutureWork(
                         rs.getInt("task_id"),
                         rs.getString("title"),
                         rs.getInt("worker_id"),
                         rs.getDate("preferred_work_date") != null ? rs.getDate("preferred_work_date").toLocalDate() : null,
                         rs.getString("status"),
-                        rs.getObject("rating") != null ? rs.getInt("rating") : null
+                        rs.getInt("household_rating")
                 );
                 list.add(fw);
             }
         }
+        System.out.println("returning list");
         return list;
     }
 

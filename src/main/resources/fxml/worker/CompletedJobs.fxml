@@ -23,12 +23,12 @@
                        style="-fx-background-radius: 12;">
 
                 <columns>
-                    <TableColumn fx:id="colWorkId" text="Work ID" prefWidth="100.0"/>
-                    <TableColumn fx:id="colCustomer" text="Customer" prefWidth="150.0"/>
-                    <TableColumn fx:id="colService" text="Service" prefWidth="150.0"/>
-                    <TableColumn fx:id="colDate" text="Date Completed" prefWidth="150.0"/>
-                    <TableColumn fx:id="colRating" text="Rating" prefWidth="100.0"/>
-                    <TableColumn fx:id="colReview" text="Review" prefWidth="150.0"/>
+                    <TableColumn fx:id="colWorkId" text="Work ID" prefWidth="100.0" style="-fx-alignment: CENTER;"/>
+                    <TableColumn fx:id="colCustomer" text="Customer" prefWidth="150.0" style="-fx-alignment: CENTER;"/>
+                    <TableColumn fx:id="colService" text="Service" prefWidth="150.0" style="-fx-alignment: CENTER;"/>
+                    <TableColumn fx:id="colDate" text="Date Completed" prefWidth="150.0" style="-fx-alignment: CENTER;"/>
+                    <TableColumn fx:id="colRating" text="Rating" prefWidth="100.0" style="-fx-alignment: CENTER;"/>
+                    <TableColumn fx:id="colReview" text="Review" prefWidth="150.0" style="-fx-alignment: CENTER;"/>
                 </columns>
             </TableView>
 

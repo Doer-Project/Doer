@@ -21,12 +21,12 @@
             <TableView fx:id="futureWorkTable" prefHeight="650.0" prefWidth="920.0"
                        style="-fx-background-radius: 12;">
                 <columns>
-                    <TableColumn fx:id="colTaskId" text="Work ID" prefWidth="100.0"/>
-                    <TableColumn fx:id="colTitle" text="Service" prefWidth="250.0"/>
-                    <TableColumn fx:id="colWorkerId" text="Worker ID" prefWidth="120.0"/>
-                    <TableColumn fx:id="colDate" text="Date" prefWidth="170.0"/>
-                    <TableColumn fx:id="colRating" text="Raing" prefWidth="100.0"/>
-                    <TableColumn fx:id="colStatus" text="Status" prefWidth="150.0"/>
+                    <TableColumn fx:id="colTaskId" text="Work ID" prefWidth="100.0" style="-fx-alignment: CENTER;"/>
+                    <TableColumn fx:id="colTitle" text="Service" prefWidth="250.0" style="-fx-alignment: CENTER;"/>
+                    <TableColumn fx:id="colWorkerId" text="Worker ID" prefWidth="120.0" style="-fx-alignment: CENTER;"/>
+                    <TableColumn fx:id="colDate" text="Date" prefWidth="170.0" style="-fx-alignment: CENTER;"/>
+                    <TableColumn fx:id="colRating" text="Raing" prefWidth="100.0" style="-fx-alignment: CENTER;"/>
+                    <TableColumn fx:id="colStatus" text="Status" prefWidth="150.0" style="-fx-alignment: CENTER;"/>
                 </columns>
             </TableView>
 

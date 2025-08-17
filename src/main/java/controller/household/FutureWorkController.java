@@ -24,13 +24,14 @@ public class FutureWorkController {
     @FXML
     public void initialize() {
         try {
+            System.out.println("controller");
             service = new FutureWorkService();
 
-            colTaskId.setCellValueFactory(new PropertyValueFactory<>("task_Id"));
+            colTaskId.setCellValueFactory(new PropertyValueFactory<>("taskId"));
             colTitle.setCellValueFactory(new PropertyValueFactory<>("title"));
-            colWorkerId.setCellValueFactory(new PropertyValueFactory<>("worker_Id"));
-            colDate.setCellValueFactory(new PropertyValueFactory<>("preferred_work_date"));
-            colRating.setCellValueFactory(new PropertyValueFactory<>("household_rating"));
+            colWorkerId.setCellValueFactory(new PropertyValueFactory<>("workerId"));
+            colDate.setCellValueFactory(new PropertyValueFactory<>("date"));
+            colRating.setCellValueFactory(new PropertyValueFactory<>("rating"));
             colStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
 
             loadData(2); // replace 3 with logged-in householdId
@@ -41,6 +42,7 @@ public class FutureWorkController {
 
     private void loadData(int householdId) {
         try {
+            System.out.println("going to service");
             List<FutureWork> list = service.getFutureWorksForHousehold(householdId);
             futureWorkTable.getItems().setAll(list);
         } catch (Exception e) {

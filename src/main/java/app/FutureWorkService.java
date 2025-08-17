@@ -14,6 +14,7 @@ public class FutureWorkService {
     // Get future works for a specific household
     public List<FutureWork> getFutureWorksForHousehold(int householdId) throws SQLException {
         try (Connection conn = DatabaseConnection.getConnection()) {
+            System.out.println("insdie service");
             FutureWorkDAO dao = new FutureWorkDAOImpl(conn);
             return dao.getFutureWorkByHousehold(householdId);
         }
