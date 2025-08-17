@@ -11,7 +11,7 @@ import java.util.List;
 
 public class UpcomingJobController {
 
-    @FXML private TableView<FutureWork> upcomingJobsTable;
+    @FXML private TableView<FutureWork> upcomingTable;
     @FXML private TableColumn<FutureWork, Integer> colTaskId;
     @FXML private TableColumn<FutureWork, String> colTitle;
     @FXML private TableColumn<FutureWork, Integer> colHouseholdId;
@@ -25,16 +25,18 @@ public class UpcomingJobController {
     @FXML
     public void initialize() {
         try {
+            System.out.println("In controller");
             service = new FutureWorkService();
 
             colTaskId.setCellValueFactory(new PropertyValueFactory<>("taskId"));
             colTitle.setCellValueFactory(new PropertyValueFactory<>("title"));
             colHouseholdId.setCellValueFactory(new PropertyValueFactory<>("householdId"));
             colDate.setCellValueFactory(new PropertyValueFactory<>("date"));
+            colAddress.setCellValueFactory(new PropertyValueFactory<>("address"));
             colStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
             colRating.setCellValueFactory(new PropertyValueFactory<>("rating"));
 
-            loadData(2); // replace 2 with logged-in workerId
+            loadData(4); // replace 2 with logged-in workerId
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -43,7 +45,7 @@ public class UpcomingJobController {
     private void loadData(int workerId) {
         try {
             List<FutureWork> list = service.getFutureWorksForWorker(workerId);
-            upcomingJobsTable.getItems().setAll(list);
+            upcomingTable.getItems().setAll(list);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -6,17 +6,15 @@ public class FutureWork {
 
     private int taskId;
     private String title;
-    private int householdId;
-    private int workerId;
+    private Integer householdId;  // nullable
+    private Integer workerId;     // nullable
     private LocalDate date;
     private String status;
-    private int rating;
+    private Integer rating;       // nullable
     private String address;
 
-    // Constructor
-
-    ///  for household
-    public FutureWork(int taskId, String title, int workerId, LocalDate date, String status, Integer rating) {
+    // Constructor for Household view (show worker info only)
+    public FutureWork(int taskId, String title, Integer workerId, LocalDate date, String status, Integer rating) {
         this.taskId = taskId;
         this.title = title;
         this.workerId = workerId;
@@ -25,87 +23,58 @@ public class FutureWork {
         this.rating = rating;
     }
 
-    ///  for Worker
-    public FutureWork(int taskId, int householdId, String title, String address, LocalDate date, String status, Integer rating) {
+    // Constructor for Worker view (show household info + address)
+    public FutureWork(int taskId, Integer householdId, String title, String address, LocalDate date, String status, Integer rating) {
         this.taskId = taskId;
         this.title = title;
+        this.householdId = householdId;
         this.address = address;
-        this.householdId = householdId;
         this.date = date;
         this.status = status;
         this.rating = rating;
     }
 
-   // getters
-
-
-    public int getTaskId() {
-        return taskId;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public Integer getHouseholdId() {
-        return householdId;
-    }
-
-    public Integer getWorkerId() {
-        return workerId;
-    }
-
-    public LocalDate getDate() {
-        return date;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public Integer getRating() {
-        return rating;
-    }
-
-    // setters
-
-
-    public void setTaskId(int taskId) {
+    // Full constructor (optional)
+    public FutureWork(int taskId, String title, Integer householdId, Integer workerId, String address, LocalDate date, String status, Integer rating) {
         this.taskId = taskId;
-    }
-
-    public void setTitle(String title) {
         this.title = title;
-    }
-
-    public void setHouseholdId(Integer householdId) {
         this.householdId = householdId;
-    }
-
-    public void setWorkerId(Integer workerId) {
         this.workerId = workerId;
-    }
-
-    public void setDate(LocalDate date) {
+        this.address = address;
         this.date = date;
-    }
-
-    public void setStatus(String status) {
         this.status = status;
-    }
-
-    public void setRating(Integer rating) {
         this.rating = rating;
     }
 
-    /// toString ( just for developers)
+    // Getters
+    public int getTaskId() { return taskId; }
+    public String getTitle() { return title; }
+    public Integer getHouseholdId() { return householdId; }
+    public Integer getWorkerId() { return workerId; }
+    public LocalDate getDate() { return date; }
+    public String getStatus() { return status; }
+    public Integer getRating() { return rating; }
+    public String getAddress() { return address; }
+
+    // Setters
+    public void setTaskId(int taskId) { this.taskId = taskId; }
+    public void setTitle(String title) { this.title = title; }
+    public void setHouseholdId(Integer householdId) { this.householdId = householdId; }
+    public void setWorkerId(Integer workerId) { this.workerId = workerId; }
+    public void setDate(LocalDate date) { this.date = date; }
+    public void setStatus(String status) { this.status = status; }
+    public void setRating(Integer rating) { this.rating = rating; }
+    public void setAddress(String address) { this.address = address; }
+
+    // toString for debugging
     @Override
     public String toString() {
         return "FutureWork{" +
-                "workId=" + taskId +
+                "taskId=" + taskId +
                 ", title='" + title + '\'' +
                 ", householdId=" + householdId +
                 ", workerId=" + workerId +
+                ", address='" + address + '\'' +
                 ", date=" + date +
                 ", status='" + status + '\'' +
                 ", rating=" + rating +
