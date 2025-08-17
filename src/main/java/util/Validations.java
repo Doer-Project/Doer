@@ -1,8 +1,6 @@
 package util;
 
-import database.UserDAO;
-
-import java.time.LocalDate;
+import database.UserDAOImpl;
 
 public class Validations {
     /**
@@ -45,7 +43,7 @@ public class Validations {
     }
 
     public static boolean isRegistered(String email){
-        return new UserDAO().isRegistered(email);
+        return new UserDAOImpl().isRegistered(email);
     }
 
     public static boolean isValidPinCode(String pinCode) {

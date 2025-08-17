@@ -1,6 +1,6 @@
 package app;
 
-import database.UserDAO;
+import database.UserDAOImpl;
 import model.Household;
 import model.SessionManager;
 import model.Worker;
@@ -8,10 +8,10 @@ import util.MessageBox;
 import util.Validations;
 
 public class UserServices {
-    private static UserDAO userDAO;
+    private static UserDAOImpl userDAO;
 
     public UserServices() {
-        userDAO = new UserDAO();
+        userDAO = new UserDAOImpl();
     }
 
     public boolean registerHousehold(String role, String firstName, String lastName, String email, String password, String age, String gender, String address, String city, String pin_code){

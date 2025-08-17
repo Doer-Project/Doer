@@ -20,7 +20,7 @@ public class WorkerDBController {
 
     @FXML private StackPane contentPane;
 
-    // DUMMY - KEEP AS IS
+    /// have to change
     @FXML
     public void availableRequest() {
         resetButtonStyles();

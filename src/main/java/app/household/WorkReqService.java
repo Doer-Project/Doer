@@ -2,7 +2,7 @@ package app.household;
 
 import database.household.WorkReqDAO;
 import database.household.WorkReqDAOImpl;
-import model.WorkRequest;
+import model.household.WorkRequest;
 import util.MessageBox;
 import util.Validations;
 

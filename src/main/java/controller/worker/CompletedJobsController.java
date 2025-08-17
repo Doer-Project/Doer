@@ -25,6 +25,7 @@ public class CompletedJobsController {
     @FXML
     public void initialize() {
         try {
+            /// checking
 //            System.out.println("Inside controller");
             service = new PastWorkService();
             colWorkId.setCellValueFactory(new PropertyValueFactory<>("taskId"));
