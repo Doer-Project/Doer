@@ -8,6 +8,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import model.PastTask;
 
 import java.util.List;
+import java.util.Objects;
 
 public class CompletedJobsController {
     @FXML private TableView<PastTask> completedTable;
@@ -24,6 +25,8 @@ public class CompletedJobsController {
     @FXML
     public void initialize() {
         try {
+//            System.out.println("Inside controller");
+            service = new PastWorkService();
             colWorkId.setCellValueFactory(new PropertyValueFactory<>("taskId"));
             colService.setCellValueFactory(new PropertyValueFactory<>("title"));
             colCustomer.setCellValueFactory(new PropertyValueFactory<>("householdId"));
@@ -32,7 +35,7 @@ public class CompletedJobsController {
             colReview.setCellValueFactory(new PropertyValueFactory<>("review"));
 
 
-            loadData(1); // replace 1 with logged-in workerId
+            loadData(3); // replace 1 with logged-in workerId
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -40,6 +43,7 @@ public class CompletedJobsController {
 
     private void loadData(int workerId) {
         try {
+//            System.out.println("Going to service");
             List<PastTask> list = service.getPastWorksForWorker(workerId);
             completedTable.getItems().setAll(list);
         } catch (Exception e) {

@@ -10,8 +10,8 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
 //        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/LoginPage.fxml"));
-//        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/household/HouseHoldDB.fxml"));
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/worker/WorkerDB.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/household/HouseHoldDB.fxml"));
+//        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/worker/WorkerDB.fxml"));
 //        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/RegisterPage.fxml"));
 //        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/HouseHoldDB.fxml"));
         Parent root = loader.load();

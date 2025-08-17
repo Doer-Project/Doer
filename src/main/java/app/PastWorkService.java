@@ -23,8 +23,9 @@ public class PastWorkService {
         }
     }
 
-    public List<PastTask> getPastWorksForWorker(int workerId) throws SQLException {
+    public List<PastTask> getPastWorksForWorker(int workerId) {
         try (Connection conn = DatabaseConnection.getConnection()) {
+//            System.out.println("In service");
             PastWorkDAO dao = new PastWorkDAOImpl(conn);
             return dao.getPastWorksByWorker(workerId);
         } catch (SQLException e) {

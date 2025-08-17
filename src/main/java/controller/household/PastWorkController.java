@@ -23,6 +23,7 @@ public class PastWorkController {
     @FXML
     public void initialize() {
         try {
+            service = new PastWorkService();
             colWorkId.setCellValueFactory(new PropertyValueFactory<>("taskId"));
             colService.setCellValueFactory(new PropertyValueFactory<>("title"));
             colWorker.setCellValueFactory(new PropertyValueFactory<>("workerId"));

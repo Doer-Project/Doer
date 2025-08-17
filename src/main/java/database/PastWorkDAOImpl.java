@@ -18,7 +18,19 @@ public class PastWorkDAOImpl implements PastWorkDAO {
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, householdId);
             ResultSet rs = stmt.executeQuery();
-            return mapResultSet(rs);
+            List<PastTask> list = new ArrayList<>();
+            while (rs.next()) {
+                list.add(new PastTask(
+                        rs.getInt("task_id"),
+                        rs.getString("title"),
+                        rs.getObject("worker_id", Integer.class),
+                        rs.getDate("date") != null ? rs.getDate("date").toLocalDate() : null,
+                        rs.getObject("rating", Integer.class),
+                        rs.getString("review")
+                ));
+//            System.out.println(list.get(0));
+            }
+            return list;
         }
     }
 
@@ -26,26 +38,23 @@ public class PastWorkDAOImpl implements PastWorkDAO {
     public List<PastTask> getPastWorksByWorker(int workerId) throws SQLException {
         String sql = "SELECT * FROM pastwork WHERE worker_id = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+//            System.out.println("successfully execute");
             stmt.setInt(1, workerId);
             ResultSet rs = stmt.executeQuery();
-            return mapResultSet(rs);
+            List<PastTask> list = new ArrayList<>();
+            while (rs.next()) {
+//                System.out.println(rs.getInt("worker_Id"));
+                list.add(new PastTask(
+                        rs.getInt("task_id"),
+                        rs.getObject("household_id", Integer.class),
+                        rs.getString("title"),
+                        rs.getDate("date") != null ? rs.getDate("date").toLocalDate() : null,
+                        rs.getObject("rating", Integer.class),
+                        rs.getString("review")
+                ));
+//            System.out.println(list.get(0));
+            }
+            return list;
         }
-    }
-
-    private List<PastTask> mapResultSet(ResultSet rs) throws SQLException {
-        List<PastTask> list = new ArrayList<>();
-        while (rs.next()) {
-            list.add(new PastTask(
-                    rs.getInt("past_id"),
-                    rs.getInt("task_id"),
-                    rs.getObject("worker_id", Integer.class),
-                    rs.getObject("household_id", Integer.class),
-                    rs.getString("title"),
-                    rs.getDate("date") != null ? rs.getDate("date").toLocalDate() : null,
-                    rs.getObject("rating", Integer.class),
-                    rs.getString("review")
-            ));
-        }
-        return list;
     }
 }

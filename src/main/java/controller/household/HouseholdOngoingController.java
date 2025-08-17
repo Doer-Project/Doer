@@ -20,6 +20,7 @@ public class HouseholdOngoingController {
 
     public void initialize() {
         try {
+//            System.out.println("inside controller");
             ///  object for calling method like getOngoingWorksForUser(username)
             OngoingWorkService service = new OngoingWorkService();
             String username = SessionManager.getUserID();
@@ -62,6 +63,13 @@ public class HouseholdOngoingController {
             rightBox.setAlignment(Pos.TOP_RIGHT);
             Label statusLabel = new Label("Status: " + work.getStatus());
             Button viewDetailsButton = new Button("View Details");
+            viewDetailsButton.setStyle("-fx-background-color: linear-gradient(to right, #FF9F57, #E8781C);\n" +
+                    "                        -fx-text-fill: white;\n" +
+                    "                        -fx-background-radius: 12;\n" +
+                    "                        -fx-padding: 8 20;\n" +
+                    "                        -fx-font-size: 14px;\n" +
+                    "                        -fx-font-weight: bold;\n" +
+                    "                        -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 6, 0, 0, 2);");
             viewDetailsButton.setOnAction(e -> showDetailsPopup(work));
             rightBox.getChildren().addAll(statusLabel, viewDetailsButton);
 

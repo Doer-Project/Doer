@@ -20,17 +20,19 @@ public class OngoingWorkDAOImpl implements OngoingWorkDAO {
         /// temporary solution ⬇️, This is not final we have to change it.
 
         List<OngoingWork> ongoingWorks = new ArrayList<>();
-        String sql = "SELECT task_name, description, date, status FROM requests WHERE household_username = ? AND status != 'Completed'";
+        String sql = "SELECT title, description, preferred_work_date, status FROM workrequests WHERE household_id = ?";
 
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, username);
+//            stmt.setString(1, username);
+            /// checking
+        stmt.setInt(1,2);
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
                 ongoingWorks.add(new OngoingWork(
-                        rs.getString("task_name"),
+                        rs.getString("title"),
                         rs.getString("description"),
-                        rs.getString("date"),
+                        rs.getString("preferred_work_date"),
                         rs.getString("status")
                 ));
             }

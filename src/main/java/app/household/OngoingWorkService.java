@@ -13,6 +13,7 @@ public class OngoingWorkService {
 
     public List<OngoingWork> getOngoingWorksForUser(String username) throws SQLException {
         try (Connection conn = DatabaseConnection.getConnection()) {
+//            System.out.println("inside sevice");
             OngoingWorkDAO dao = new OngoingWorkDAOImpl(conn);
             return dao.getOngoingWorksForUser(username);
         }

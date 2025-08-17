@@ -15,16 +15,28 @@ public class PastTask {
     // getters
 
 
-    public PastTask(int pastId, int taskId, int workerId, int householdId, String title, LocalDate date, int rating, String review) {
-        this.pastId = pastId;
+
+
+    ///  household
+    public PastTask(int taskId, String title, int workerId, LocalDate date, int rating, String review) {
         this.taskId = taskId;
         this.workerId = workerId;
+        this.title = title;
+        this.date = date;
+        this.rating = rating;
+        this.review = review;
+    }
+
+    ///  worker
+    public PastTask(int taskId, int householdId, String title, LocalDate date, int rating, String review) {
+        this.taskId = taskId;
         this.householdId = householdId;
         this.title = title;
         this.date = date;
         this.rating = rating;
         this.review = review;
     }
+
 
     public int getPastId() {
         return pastId;
