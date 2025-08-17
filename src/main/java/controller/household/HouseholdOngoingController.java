@@ -6,7 +6,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
-import model.OngoingWork;
+import model.household.OngoingWork;
 import model.SessionManager;
 import util.MessageBox;
 
@@ -106,11 +106,6 @@ public class HouseholdOngoingController {
                         "Date: " + work.getDate() + "\n" +
                         "Status: " + work.getStatus()
         );
-        alert.showAndWait();
-    }
-
-    private void showError(String message) {
-        Alert alert = new Alert(Alert.AlertType.ERROR, message, ButtonType.OK);
         alert.showAndWait();
     }
 }

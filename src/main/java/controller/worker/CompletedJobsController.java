@@ -1,4 +1,4 @@
-package controller.household;
+package controller.worker;
 
 import app.PastWorkService;
 import javafx.fxml.FXML;
@@ -9,14 +9,15 @@ import model.PastTask;
 
 import java.util.List;
 
-public class PastWorkController {
+public class CompletedJobsController {
     @FXML private TableView<PastTask> completedTable;
     @FXML private TableColumn<PastTask, Integer> colWorkId;
     @FXML private TableColumn<PastTask, String> colService;
-    @FXML private TableColumn<PastTask, Integer> colWorker;
+    @FXML private TableColumn<PastTask, Integer> colCustomer;
     @FXML private TableColumn<PastTask, java.time.LocalDate> colDate;
     @FXML private TableColumn<PastTask, Integer> colRating;
     @FXML private TableColumn<PastTask, String> colReview;
+    @FXML private TableColumn<PastTask, java.math.BigDecimal> colAmount;
 
     private PastWorkService service;
 
@@ -25,21 +26,21 @@ public class PastWorkController {
         try {
             colWorkId.setCellValueFactory(new PropertyValueFactory<>("taskId"));
             colService.setCellValueFactory(new PropertyValueFactory<>("title"));
-            colWorker.setCellValueFactory(new PropertyValueFactory<>("workerId"));
+            colCustomer.setCellValueFactory(new PropertyValueFactory<>("householdId"));
             colDate.setCellValueFactory(new PropertyValueFactory<>("date"));
             colRating.setCellValueFactory(new PropertyValueFactory<>("rating"));
             colReview.setCellValueFactory(new PropertyValueFactory<>("review"));
 
-            ///  user_id will pass in this class and use here
-            loadData(1); // replace 1 with logged-in householdId
+
+            loadData(1); // replace 1 with logged-in workerId
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private void loadData(int householdId) {
+    private void loadData(int workerId) {
         try {
-            List<PastTask> list = service.getPastWorksForHousehold(householdId);
+            List<PastTask> list = service.getPastWorksForWorker(workerId);
             completedTable.getItems().setAll(list);
         } catch (Exception e) {
             e.printStackTrace();

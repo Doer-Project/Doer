@@ -1,6 +1,6 @@
 package database.household;
 
-import model.OngoingWork;
+import model.household.OngoingWork;
 
 import java.sql.*;
 import java.util.ArrayList;

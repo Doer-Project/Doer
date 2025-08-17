@@ -1,4 +1,4 @@
-package model;
+package model.household;
 
 public class FutureWork {
     private String category;

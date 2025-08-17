@@ -48,7 +48,7 @@ public class WorkerDBController {
     public void pastWork(ActionEvent event) {
         resetButtonStyles();
         btnPastWork.setStyle(activeStyle());
-        loadUI("Completed_job.fxml");
+        loadUI("CompletedJobs.fxml");
     }
 
     // DUMMY - KEEP AS IS

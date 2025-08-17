@@ -1,6 +1,6 @@
 package database.household;
 
-import model.WorkRequest;
+import model.household.WorkRequest;
 
 import java.sql.*;
 

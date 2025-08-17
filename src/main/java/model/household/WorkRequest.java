@@ -1,4 +1,4 @@
-package model;
+package model.household;
 
 import java.time.*;
 ///  This is class basically have details of request creation by household side.

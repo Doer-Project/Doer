@@ -6,7 +6,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import model.UpcomingJob;
+import model.worker.UpcomingJob;
 import model.SessionManager;
 import util.MessageBox;
 

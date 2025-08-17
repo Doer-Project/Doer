@@ -1,4 +1,6 @@
-package model;
+package model.worker;
+
+import model.User;
 
 public class Worker extends User {
 

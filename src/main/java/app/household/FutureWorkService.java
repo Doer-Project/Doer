@@ -2,7 +2,7 @@ package app.household;
 
 import database.household.FutureWorkDAO;
 import database.household.FutureWorkDAOImpl;
-import model.FutureWork;
+import model.household.FutureWork;
 import util.DatabaseConnection;
 
 import java.sql.Connection;

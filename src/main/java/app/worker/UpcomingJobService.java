@@ -2,7 +2,7 @@ package app.worker;
 
 import database.worker.UpcomingJobDAO;
 import database.worker.UpcomingJobDAOImpl;
-import model.UpcomingJob;
+import model.worker.UpcomingJob;
 import util.DatabaseConnection;
 
 import java.sql.Connection;

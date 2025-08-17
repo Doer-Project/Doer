@@ -4,7 +4,7 @@ import app.household.WorkReqService;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import model.SessionManager;
-import model.WorkRequest;
+import model.household.WorkRequest;
 import util.MessageBox;
 
 import java.time.LocalDate;
@@ -71,8 +71,6 @@ public class WorkReqController {
             if (success) {
                 MessageBox.showInfo("Success", "Work request saved successfully!");
                 resetForm();
-            } else {
-                MessageBox.showAlert("DB Error", "Failed to save work request.");
             }
         } else {
             MessageBox.showAlert("Validation Error", "Please fill all fields correctly.");

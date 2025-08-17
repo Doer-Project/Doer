@@ -1,4 +1,4 @@
-package model;
+package model.worker;
 
 public class UpcomingJob {
     private String workId;

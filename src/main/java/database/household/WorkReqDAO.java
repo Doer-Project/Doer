@@ -1,6 +1,6 @@
 package database.household;
 
-import model.WorkRequest;
+import model.household.WorkRequest;
 
 public interface WorkReqDAO {
     public boolean insert(WorkRequest request);

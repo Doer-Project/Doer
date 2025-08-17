@@ -2,7 +2,7 @@ package app.household;
 
 import database.household.WorkReqDAO;
 import database.household.WorkReqDAOImpl;
-import model.WorkRequest;
+import model.household.WorkRequest;
 import util.DatabaseConnection;
 import util.MessageBox;
 
@@ -34,12 +34,16 @@ public class WorkReqService {
     }
 
     // ✅ Save WorkRequest with fresh connection each time
-    public boolean saveWorkRequest(WorkRequest request) throws SQLException {
+    public boolean saveWorkRequest(WorkRequest request) {
         if (request == null) return false;
 
         try (Connection conn = DatabaseConnection.getConnection()) {
             WorkReqDAO dao = new WorkReqDAOImpl(conn);
             return dao.insert(request);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            MessageBox.showAlert("DB Error", "Failed to save work request.");
+            return false;
         }
     }
 }

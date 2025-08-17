@@ -1,8 +1,8 @@
 package app;
 
 import database.UserDAO;
-import model.Household;
-import model.Worker;
+import model.household.Household;
+import model.worker.Worker;
 import util.MessageBox;
 import util.Validations;
 

@@ -1,6 +1,6 @@
 package database.household;
 
-import model.FutureWork;
+import model.household.FutureWork;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

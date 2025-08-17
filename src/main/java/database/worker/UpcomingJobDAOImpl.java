@@ -1,6 +1,6 @@
 package database.worker;
 
-import model.UpcomingJob;
+import model.worker.UpcomingJob;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

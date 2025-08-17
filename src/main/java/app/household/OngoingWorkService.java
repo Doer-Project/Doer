@@ -2,7 +2,7 @@ package app.household;
 
 import database.household.OngoingWorkDAO;
 import database.household.OngoingWorkDAOImpl;
-import model.OngoingWork;
+import model.household.OngoingWork;
 import util.DatabaseConnection;
 
 import java.sql.Connection;

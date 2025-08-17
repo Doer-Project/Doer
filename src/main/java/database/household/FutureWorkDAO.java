@@ -1,8 +1,7 @@
 package database.household;
 
-import model.FutureWork;
+import model.household.FutureWork;
 
-import java.sql.SQLException;
 import java.util.List;
 
 public interface FutureWorkDAO {

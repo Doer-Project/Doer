@@ -1,4 +1,6 @@
-package model;
+package model.household;
+
+import model.User;
 
 public class Household extends User {
     private String address;
