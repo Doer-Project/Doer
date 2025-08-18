@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
@@ -31,15 +29,15 @@
 
         <!-- Profile Image -->
         <StackPane>
-            <!--            fx:id="profileImage"-->
             <ImageView
+                fx:id="profileImage"
                     fitWidth="100" fitHeight="100"
                     preserveRatio="true" pickOnBounds="true">
                 <clip>
                     <Circle radius="50" centerX="50" centerY="50"/>
                 </clip>
             </ImageView>
-            <Button fx:id="btnChangePhoto" text="Change"
+            <Button fx:id="btnChangePhoto" text="Change" onAction="#changePhotoBtn"
                     style="
                         -fx-background-color: linear-gradient(to right, #FF9F57, #E8781C);
                         -fx-text-fill: white;
@@ -59,25 +57,11 @@
                        style="-fx-background-radius: 12; -fx-border-radius: 12; -fx-padding: 6 10;"/>
         </VBox>
 
-        <!-- Email -->
-        <VBox spacing="5" prefWidth="580">
-            <Label text="Email" style="-fx-font-weight: bold; -fx-font-size: 16px; -fx-text-fill: #203A43;"/>
-            <TextField fx:id="txtEmail" promptText="Enter email" editable="false"
-                       style="-fx-opacity: 0.85; -fx-background-radius: 12; -fx-border-radius: 12; -fx-padding: 6 10;"/>
-        </VBox>
-
         <!-- Address -->
         <VBox spacing="5" prefWidth="580">
             <Label text="Address" style="-fx-font-weight: bold; -fx-font-size: 16px; -fx-text-fill: #203A43;"/>
             <TextField fx:id="txtAddress" promptText="Enter address"
                        style="-fx-background-radius: 12; -fx-border-radius: 12; -fx-padding: 6 10;"/>
-        </VBox>
-
-        <!-- Gender -->
-        <VBox spacing="5" prefWidth="580">
-            <Label text="Gender" style="-fx-font-weight: bold; -fx-font-size: 16px; -fx-text-fill: #203A43;"/>
-            <ComboBox fx:id="cmbGender" prefWidth="580"
-                      style="-fx-background-radius: 12; -fx-border-radius: 12;"/>
         </VBox>
 
         <Separator prefWidth="120"/>

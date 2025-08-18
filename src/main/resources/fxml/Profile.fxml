@@ -11,6 +11,7 @@
 <?import javafx.scene.shape.Circle?>
 
 <StackPane fx:id="rootPane"
+           fx:controller="controller.ProfileController"
            xmlns:fx="http://javafx.com/fxml/1"
            prefWidth="1000" prefHeight="800"
            style="-fx-background-color: linear-gradient(to bottom right, #0F2027, #203A43, #2C5364);">
@@ -73,7 +74,7 @@
 
         <!-- Buttons -->
         <HBox spacing="16" alignment="CENTER">
-            <Button fx:id="btnEdit" text="Edit Profile"
+            <Button fx:id="btnEdit" text="Edit Profile" onAction="#editProfile"
                     style="
                         -fx-background-color: linear-gradient(to right, #FF9F57, #E8781C);
                         -fx-text-fill: white;

@@ -1,167 +1,121 @@
-//package controller;
-//
-//import app.UserProfileService;
-//import javafx.scene.control.*;
-//import javafx.scene.image.Image;
-//import javafx.event.ActionEvent;
-//import javafx.fxml.FXML;
-//import javafx.fxml.FXMLLoader;
-//import javafx.scene.Parent;
-//import javafx.scene.image.ImageView;
-//import javafx.scene.layout.StackPane;
-//import util.MessageBox;
-//
-//import java.io.File;
-//import java.io.IOException;
-//import java.sql.SQLException;
-//
-/////  object issue
-//import static model.SessionManager.currentUser;
-//
-//public class EditProfileController {
-//
-//    @FXML
-//    private TextField txtFullName, txtEmail, txtUsername, txtAge, txtAddress;
-//
-//    @FXML
-//    private ComboBox<String> cmbGender;
-//
-//    @FXML
-//    private ImageView profileImage;
-//
-//    @FXML
-//    private StackPane rootPane;
-//
-//    @FXML
-//    private Label lblUserType;
-//
-//    @FXML
-//    public void initialize() {
-//        try {
-//
-//            ///  object issue , i think we will create a method which return a user type of object so no more change require
-//            if (currentUser != null) {
-//                // Full Name
-//                String fullName = currentUser.getFirstName();
-//                if (currentUser.getLastName() != null && !currentUser.getLastName().isEmpty()) {
-//                    fullName += " " + currentUser.getLastName();
-//                }
-//                txtFullName.setText(fullName);
-//
-//                // Common fields
-//                txtEmail.setText(currentUser.getEmail());
-//                txtUsername.setText(currentUser.getUserName());
-//                txtAge.setText(String.valueOf(currentUser.getAge()));
-//
-//                // Gender dropdown
-//                cmbGender.getItems().addAll("Male", "Female", "Other");
-//                cmbGender.setValue(currentUser.getGender());
-//
-//                // Address + user type
-//                if (currentUser instanceof Household) {
-//                    txtAddress.setText(((Household) currentUser).getAddress());
-//                    lblUserType.setText("Household");
-//                } else if (currentUser instanceof Worker) {
-//                    txtAddress.setText(((Worker) currentUser).getPreferredLocation());
-//                    lblUserType.setText("Worker");
-//                } else {
-//                    lblUserType.setText("Unknown");
-//                }
-//
-//                // Profile Image
-//                loadProfileImage(currentUser.getPhotoPath());
+package controller;
+
+import app.UserProfileService;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.StackPane;
+import javafx.stage.FileChooser;
+import util.MessageBox;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
+
+public class EditProfileController {
+
+    @FXML private TextField txtFullName, txtAddress;
+    @FXML private Label txtEmail, lblUserType, lblGender;
+    @FXML private ImageView profileImage;
+    @FXML private StackPane rootPane;
+
+    private static final String DEFAULT_IMAGE = "/images/default.jpeg";
+
+    private String userId;
+    private String userType;
+
+    @FXML
+    public void initialize() {
+        try {
+            userId = model.SessionManager.getUserID();
+//            if (userId == null) {
+//                MessageBox.showError("Load Error", "No user ID found.");
+//                return;
 //            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
-//
-//    private void loadProfileImage(String path) {
-//        try {
-//            if (path != null && !path.isEmpty()) {
-//                File file = new File(path);
-//                if (file.exists()) {
-//                    profileImage.setImage(new Image(file.toURI().toString()));
-//                    return;
-//                }
-//            }
-//            // Default if no image or file missing
-//            String defaultPath = getClass().getResource("/images/default.jpeg").toExternalForm();
-//            profileImage.setImage(new Image(defaultPath));
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
-//
-//    @FXML
-//    public void cancleBtn(ActionEvent event) {
-//        try {
-//            Parent root = FXMLLoader.load(getClass().getResource("/fxml/Profile.fxml"));
-//            rootPane.getChildren().setAll(root);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
-//
-//
-//    ///  after this save button work successfully , the new object pass to the DAO class ,
-//    ///      & a query of update will run according the object data provided
-//    @FXML
-//    public void saveBtn(ActionEvent event) throws SQLException, IOException {
-//        /// uncomment this after db connect
-////        if (currentUser == null) return;
-//        /// delete this after db connect
-//        if (currentUser == null) {
-//            Parent editView = FXMLLoader.load(getClass().getResource("/fxml/Profile.fxml"));
-//            rootPane.getChildren().setAll(editView);
-//        }
-//        // Name split
-//        String[] parts = txtFullName.getText().trim().split(" ", 2);
-//        currentUser.setFirstName(parts[0]);
-//        if (parts.length > 1) currentUser.setLastName(parts[1]);
-//        else currentUser.setLastName("");
-//
-//        // Address
-//        if (currentUser instanceof Household) {
-//            ((Household) currentUser).setAddress(txtAddress.getText());
-//        } else if (currentUser instanceof Worker) {
-//            ((Worker) currentUser).setPreferredLocation(txtAddress.getText());
-//        }
-//
-//        // Gender
-//        currentUser.setGender(cmbGender.getValue());
-//        Alert confirmAlert = new Alert(
-//                Alert.AlertType.CONFIRMATION,
-//                "Do you want to save the changes?",
-//                ButtonType.YES, ButtonType.NO
-//        );
-//        confirmAlert.setTitle("Confirm Changes");
-//        confirmAlert.showAndWait();
-//
-//        boolean confirm = (confirmAlert.getResult() == ButtonType.YES);
-//
-//        // --- Call Service ---
-//        UserProfileService profileService = new UserProfileService();
-//        boolean success = profileService.updateUser(currentUser, confirm);
-//
-//
-//        if (success) {
-//            MessageBox.showInfo("Success", "Profile updated successfully!");
-//        } else if (!success) {
-//            MessageBox.showInfo("Changes Discarded", "Your changes were not saved.");
-//        } else {
-//            MessageBox.showAlert("Update Failed", "Could not update your profile. Please try again.");
-//        }
-//
-//
-//        Alert alert = new Alert(Alert.AlertType.INFORMATION, "Profile updated successfully!");
-//        alert.showAndWait();
-//
-//        try {
-//            Parent editView = FXMLLoader.load(getClass().getResource("/fxml/Profile.fxml"));
-//            rootPane.getChildren().setAll(editView);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
-//}
+
+            // Fetch user data: [firstName, lastName, email, address/work_area, userType, gender]
+            List<String> userData = UserProfileService.getUserDataList(userId);
+            if (userData != null && userData.size() >= 6) {
+                txtFullName.setText(userData.get(0) + " " + userData.get(1));
+                txtAddress.setText(userData.get(3));
+                userType = userData.get(4);
+                try {
+                    if (getClass().getResource(DEFAULT_IMAGE) == null) {
+                        System.out.println("Default image not found at " + DEFAULT_IMAGE);
+                    }
+
+                    // Load default image
+                    profileImage.setImage(new Image(getClass().getResourceAsStream(DEFAULT_IMAGE)));
+                } catch (Exception e) {
+                    System.out.println("Failed to load default image: " + e.getMessage());
+                }
+            }
+        } catch (Exception e) {
+            MessageBox.showError("Load Error", "Error loading profile:\n" + e.getMessage());
+        }
+    }
+
+    @FXML
+    public void cancleBtn(ActionEvent event) {
+        try {
+            Parent profileView = FXMLLoader.load(getClass().getResource("/fxml/Profile.fxml"));
+            rootPane.getChildren().setAll(profileView);
+        } catch (IOException e) {
+            MessageBox.showError("Navigation Error", e.getMessage());
+        }
+    }
+
+    @FXML
+    public void saveBtn(ActionEvent event) {
+        try {
+            String[] parts = txtFullName.getText().trim().split(" ", 2);
+            String firstName = parts[0];
+            String lastName = (parts.length > 1) ? parts[1] : "";
+            String addressOrWorkArea = txtAddress.getText().trim();
+//            String userType = lblUserType.getText();
+//            System.out.println(userType);
+
+            // Confirm save
+            Alert confirmAlert = new Alert(Alert.AlertType.CONFIRMATION,
+                    "Do you want to save changes?",
+                    ButtonType.YES, ButtonType.NO);
+            confirmAlert.setTitle("Confirm Changes");
+            confirmAlert.showAndWait();
+            if (confirmAlert.getResult() != ButtonType.YES) return;
+
+            // Update DB
+            boolean success = UserProfileService.updateUserProfile(userId, firstName, lastName, addressOrWorkArea, userType);
+
+            if (success) {
+                MessageBox.showInfo("Success", "Profile updated successfully!");
+                Parent profileView = FXMLLoader.load(getClass().getResource("/fxml/Profile.fxml"));
+                rootPane.getChildren().setAll(profileView);
+            } else {
+                MessageBox.showAlert("Update Failed", "Could not update profile.");
+            }
+
+        } catch (Exception e) {
+            MessageBox.showError("Save Error", e.getMessage());
+        }
+    }
+
+    @FXML
+    private void changePhotoBtn(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Select Profile Photo");
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg", "*.gif")
+        );
+
+        File selectedFile = fileChooser.showOpenDialog(profileImage.getScene().getWindow());
+        if (selectedFile != null) {
+            profileImage.setImage(new Image(selectedFile.toURI().toString()));
+            // Store path or copy file to your app folder for saving in DB
+        }
+    }
+
+}

@@ -20,7 +20,7 @@ public class WorkerDBController {
 
     @FXML private StackPane contentPane;
 
-    // DUMMY - KEEP AS IS
+    /// have to change
     @FXML
     public void availableRequest() {
         resetButtonStyles();
@@ -32,7 +32,7 @@ public class WorkerDBController {
     public void todaySchedule(ActionEvent event) {
         resetButtonStyles();
         btnTodaySchedule.setStyle(activeStyle());
-        loadUI("TodaySchedule.fxml");
+        loadUI("OngoingJobs.fxml");
     }
 
     // ✅ REAL - SHOW UPCOMING
