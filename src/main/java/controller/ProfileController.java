@@ -27,7 +27,7 @@ public class ProfileController {
     @FXML private ImageView profileImage;
     @FXML private StackPane rootPane;
 
-    private static final String DEFAULT_IMAGE = "/images/default_profile.png";
+    private static final String DEFAULT_IMAGE = "/images/default.jpeg";
 
     @FXML
     private void initialize() {
@@ -37,16 +37,16 @@ public class ProfileController {
     private void loadUserProfile() {
         try {
             String userId = SessionManager.getUserID();
-            if (userId == null) {
-                MessageBox.showError("Profile Load Error", "No user is logged in.");
-                return;
-            }
+//            if (userId == null) {
+//                MessageBox.showError("Profile Load Error", "No user is logged in.");
+//                return;
+//            }
 
             // Get user data as List<String>
             // Order: [firstName, lastName, email, address, userType, gender, profilePic]
             List<String> userData = UserProfileService.getUserDataList(userId);
 
-            if (userData != null && userData.size() >= 7) {
+            if (userData != null && userData.size() >= 5) {
                 // Combine frst and last name
                 String fullName = userData.get(0) + " " + userData.get(1);
                 lblName.setText(fullName);
@@ -56,10 +56,13 @@ public class ProfileController {
                 lblUserType.setText(userData.get(4));
                 lblGender.setText(userData.get(5));
 
-                String pic = userData.get(6);
-                profileImage.setImage(
-                        (pic == null || pic.isEmpty()) ? new Image(DEFAULT_IMAGE) : new Image(pic)
-                );
+
+                /// pic logic
+//                String pic = userData.get(6);
+//                profileImage.setImage(
+//                        (pic == null || pic.isEmpty()) ? new Image(DEFAULT_IMAGE) : new Image(pic)
+//                );
+                profileImage.setImage(new Image(DEFAULT_IMAGE));
             }
 
         } catch (Exception e) {
