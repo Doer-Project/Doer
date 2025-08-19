@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<ScrollPane xmlns:fx="http://javafx.com/fxml"
+            xmlns="http://javafx.com/javafx/17"
+            prefWidth="1000.0" prefHeight="800.0"
+            fitToWidth="true"
+            style="-fx-background-color: transparent;">
+
+    <content>
+        <AnchorPane prefWidth="1000.0" prefHeight="800.0" style="-fx-background-color: #E3F2FD;">
+
+            <!-- Page Title -->
+            <Label text="Available Requests"
+                   layoutX="40" layoutY="30"
+                   style="-fx-font-size: 28px; -fx-text-fill: #0D47A1; -fx-font-family: 'Verdana'; -fx-font-weight: bold;" />
+
+            <!-- Dynamic Container for Request Cards -->
+            <VBox fx:id="container"
+                  layoutX="40" layoutY="90"
+                  spacing="20" prefWidth="920"
+                  style="-fx-padding: 10;" />
+        </AnchorPane>
+    </content>
+</ScrollPane>
