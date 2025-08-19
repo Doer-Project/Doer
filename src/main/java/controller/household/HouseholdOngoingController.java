@@ -2,15 +2,19 @@ package controller.household;
 
 import app.household.OngoingWorkService;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
+import javafx.stage.Stage;
 import model.household.OngoingWork;
 import model.SessionManager;
 import util.MessageBox;
-import model.SessionManager;
-
+import model.household.OngoingWork;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -29,6 +33,7 @@ public class HouseholdOngoingController {
             List<OngoingWork> ongoingWorks = service.getOngoingWorksForUser(username);
             ///  it is for to delete the previous ui element;
             container.getChildren().clear();
+            ongoingWorks.add(new OngoingWork("bla","aa", "aa", "aa"));
 
             if (ongoingWorks.isEmpty()) {
                 /// ui can change later, this is temporary ui
@@ -107,14 +112,21 @@ public class HouseholdOngoingController {
 
     /// this 2 alerts can later add to MessageBox
     private void showDetailsPopup(OngoingWork work) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Request Details");
-        alert.setHeaderText("Task: " + work.getTaskName());
-        alert.setContentText(
-                "Description: " + work.getDescription() + "\n" +
-                        "Date: " + work.getDate() + "\n" +
-                        "Status: " + work.getStatus()
-        );
-        alert.showAndWait();
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/OngoingDetails.fxml"));
+            Parent detailsRoot = loader.load();
+
+            // Pass selected work to the controller
+            OngoingDetailsController controller = loader.getController();
+            controller.setOngoingWork(work);
+
+            // Replace the current scene or container content
+            Scene scene = new Scene(detailsRoot);
+            Stage stage = (Stage) container.getScene().getWindow(); // get current window
+            stage.setScene(scene);
+        } catch (IOException e) {
+            e.printStackTrace();
+            MessageBox.showError("Error", "Failed to open details page.");
+        }
     }
 }
