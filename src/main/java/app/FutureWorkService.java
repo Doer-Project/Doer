@@ -12,7 +12,7 @@ import java.util.List;
 public class FutureWorkService {
 
     // Get future works for a specific household
-    public List<FutureWork> getFutureWorksForHousehold(int householdId) throws SQLException {
+    public List<FutureWork> getFutureWorksForHousehold(String householdId) throws SQLException {
         try (Connection conn = DatabaseConnection.getConnection()) {
             System.out.println("insdie service");
             FutureWorkDAO dao = new FutureWorkDAOImpl(conn);
@@ -21,7 +21,7 @@ public class FutureWorkService {
     }
 
     // Get upcoming jobs for a specific worker
-    public List<FutureWork> getFutureWorksForWorker(int workerId) throws SQLException {
+    public List<FutureWork> getFutureWorksForWorker(String workerId) throws SQLException {
         try (Connection conn = DatabaseConnection.getConnection()) {
             FutureWorkDAO dao = new FutureWorkDAOImpl(conn);
             return dao.getUpcomingJobsByWorker(workerId);

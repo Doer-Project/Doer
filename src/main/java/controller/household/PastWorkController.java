@@ -6,6 +6,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.PastTask;
+import model.SessionManager;
 
 import java.util.List;
 
@@ -32,13 +33,13 @@ public class PastWorkController {
             colReview.setCellValueFactory(new PropertyValueFactory<>("review"));
 
             ///  user_id will pass in this class and use here
-            loadData(1); // replace 1 with logged-in householdId
+            loadData(SessionManager.getUserID()); // replace 1 with logged-in householdId
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private void loadData(int householdId) {
+    private void loadData(String householdId) {
         try {
             List<PastTask> list = service.getPastWorksForHousehold(householdId);
             completedTable.getItems().setAll(list);

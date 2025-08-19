@@ -23,9 +23,9 @@ public class OngoingWorkDAOImpl implements OngoingWorkDAO {
         String sql = "SELECT title, description, preferred_work_date, status FROM workrequests WHERE household_id = ?";
 
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-//            stmt.setString(1, username);
+            stmt.setString(1, username);
             /// checking
-        stmt.setInt(1,2);
+//        stmt.setInt(1,2);
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {

@@ -12,7 +12,7 @@ import util.MessageBox;
 
 public class PastWorkService {
 
-    public List<PastTask> getPastWorksForHousehold(int householdId) throws SQLException {
+    public List<PastTask> getPastWorksForHousehold(String householdId) throws SQLException {
         try (Connection conn = DatabaseConnection.getConnection()) {
             PastWorkDAO dao = new PastWorkDAOImpl(conn);
             return dao.getPastWorksByHousehold(householdId);
@@ -23,7 +23,7 @@ public class PastWorkService {
         }
     }
 
-    public List<PastTask> getPastWorksForWorker(int workerId) {
+    public List<PastTask> getPastWorksForWorker(String workerId) {
         try (Connection conn = DatabaseConnection.getConnection()) {
 //            System.out.println("In service");
             PastWorkDAO dao = new PastWorkDAOImpl(conn);
