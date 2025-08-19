@@ -25,15 +25,13 @@ public class OngoingDetailsController {
     @FXML
     private TableColumn<OngoingWork, String> colWorkerName;
     @FXML
-    private TableColumn<OngoingWork, String> colRating;
-    @FXML
     private TableColumn<OngoingWork, String> colStatus;
     @FXML
     private TableColumn<OngoingWork, String> colStartTime;
     @FXML
     private TableColumn<OngoingWork, String> colEndTime;
     @FXML
-    private TableColumn<OngoingWork, String> colExpectedCost;
+    private TableColumn<OngoingWork, String> colEstimatedCost;
     @FXML
     private TableColumn<OngoingWork, Button> colSelect;
 
@@ -49,7 +47,7 @@ public class OngoingDetailsController {
         colStatus.setCellValueFactory(data -> new SimpleObjectProperty<>(data.getValue().getStatus()));
         colStartTime.setCellValueFactory(data -> new SimpleObjectProperty<>(data.getValue().getStartTime()));
         colEndTime.setCellValueFactory(data -> new SimpleObjectProperty<>(data.getValue().getEndTime()));
-        colExpectedCost.setCellValueFactory(data -> new SimpleObjectProperty<>(data.getValue().getExpectedCost()));
+        colEstimatedCost.setCellValueFactory(data -> new SimpleObjectProperty<>(data.getValue().getExpectedCost()));
         colSelect.setCellValueFactory(data -> data.getValue().getSelectButton());
 
         loadTableData();

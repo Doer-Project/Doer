@@ -14,11 +14,6 @@
            layoutX="40.0" layoutY="30.0"
            style="-fx-font-size: 30px; -fx-text-fill: #0D47A1; -fx-font-family: 'Verdana'; -fx-font-weight: bold;" />
 
-    <!-- Back Button -->
-    <Button fx:id="backButton" text="← Back"
-            layoutX="850.0" layoutY="30.0"
-            style="-fx-background-color: #1976D2; -fx-text-fill: white; -fx-background-radius: 12; -fx-padding: 6 14; -fx-font-size: 14px;" />
-
     <!-- Scrollable Table Section -->
     <ScrollPane layoutX="40.0" layoutY="90.0" prefWidth="920.0" prefHeight="680.0"
                 fitToWidth="true" fitToHeight="true"
@@ -28,15 +23,19 @@
                        style="-fx-background-radius: 12;">
                 <columns>
                     <TableColumn fx:id="colWorkerName" text="Worker Name" prefWidth="150.0"/>
-                    <TableColumn fx:id="colWorkerId" text="Worker ID" prefWidth="100.0"/>
-                    <TableColumn fx:id="colRating" text="Rating" prefWidth="100.0"/>
-                    <TableColumn fx:id="colStatus" text="Status" prefWidth="120.0"/>
-                    <TableColumn fx:id="colEstimatedCost" text="Estimated Cost" prefWidth="120.0"/>
-                    <TableColumn fx:id="colStartTime" text="Start Time" prefWidth="120.0"/>
+                    <TableColumn fx:id="colWorkerId" text="Worker ID" prefWidth="120.0"/>
+                    <TableColumn fx:id="colStatus" text="Status" prefWidth="150.0"/>
+                    <TableColumn fx:id="colStartTime" text="Start Time" prefWidth="150.0"/>
                     <TableColumn fx:id="colEndTime" text="End Time" prefWidth="120.0"/>
+                    <TableColumn fx:id="colEstimatedCost" text="Estimated Cost" prefWidth="120.0"/>
                     <TableColumn fx:id="colSelect" text="Action" prefWidth="100.0"/>
                 </columns>
             </TableView>
         </VBox>
     </ScrollPane>
+
+    !-- Back Button -->
+    <Button fx:id="backButton" text="← Back"
+            layoutX="850.0" layoutY="30.0"
+            style="-fx-background-color: #1976D2; -fx-text-fill: white; -fx-background-radius: 12; -fx-padding: 6 14; -fx-font-size: 14px;" />
 </AnchorPane>
