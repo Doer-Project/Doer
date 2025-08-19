@@ -25,7 +25,7 @@ public class WorkerDBController {
     public void availableRequest() {
         resetButtonStyles();
         btnAvailableRequests.setStyle(activeStyle());
-        loadUI("create_req.fxml");
+        loadUI("Available_req.fxml");
     }
 
     // DUMMY - KEEP AS IS
