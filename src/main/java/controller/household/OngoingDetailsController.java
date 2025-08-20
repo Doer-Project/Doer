@@ -12,8 +12,6 @@ import javafx.stage.Stage;
 import model.household.OngoingWork;
 
 import java.io.IOException;
-import java.sql.SQLException;
-import java.util.List;
 
 public class OngoingDetailsController {
 
@@ -57,21 +55,21 @@ public class OngoingDetailsController {
     }
 
     private void loadTableData() {
-        try {
-            OngoingWorkService service = new OngoingWorkService();
-            List<OngoingWork> workerList = service.getAllOngoingWorkers(); // fetch all workers
-
-            // Limit to first 10 rows
-            if (workerList.size() > 10) {
-                workerList = workerList.subList(0, 10);
-            }
-
-            detailsTable.getItems().clear();
-            detailsTable.getItems().addAll(workerList);
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            OngoingWorkService service = new OngoingWorkService();
+//            List<OngoingWork> workerList = service.getAllOngoingWorkers(); // fetch all workers
+//
+//            // Limit to first 10 rows
+//            if (workerList.size() > 10) {
+//                workerList = workerList.subList(0, 10);
+//            }
+//
+//            detailsTable.getItems().clear();
+//            detailsTable.getItems().addAll(workerList);
+//
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
     }
 
     private void goBack() {

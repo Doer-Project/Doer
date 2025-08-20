@@ -3,25 +3,31 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<ScrollPane xmlns:fx="http://javafx.com/fxml"
-            fx:controller="controller.household.HouseholdOngoingController"
-            prefWidth="1000.0" prefHeight="800.0"
-            fitToWidth="true"
-            style="-fx-background-color: transparent;">
+<StackPane xmlns:fx="http://javafx.com/fxml"
+           fx:id="rootStack"
+           fx:controller="controller.household.HouseholdOngoingController"
+           prefWidth="1000" prefHeight="800">
 
-    <content>
-        <AnchorPane prefWidth="1000.0" prefHeight="800.0"
-                    style="-fx-background-color: linear-gradient(to bottom right, #0F2027, #203A43, #2C5364);">
+    <!-- Main content with ScrollPane -->
+    <ScrollPane fitToWidth="true" style="-fx-background-color: transparent;">
+        <content>
+            <AnchorPane prefWidth="1000.0" prefHeight="800.0"
+                        style="-fx-background-color: linear-gradient(to bottom right, #0F2027, #203A43, #2C5364);">
 
-            <!-- Title -->
-            <Label text="Ongoing Work"
-                   layoutX="40" layoutY="30"
-                   style="-fx-font-size: 30px; -fx-text-fill: #F7931E; -fx-font-family: 'Verdana'; -fx-font-weight: bold;" />
+                <!-- Title -->
+                <Label text="Ongoing Work"
+                       layoutX="40" layoutY="30"
+                       style="-fx-font-size: 30px; -fx-text-fill: #F7931E; -fx-font-family: 'Verdana'; -fx-font-weight: bold;" />
 
-            <!-- Dynamic Container -->
-            <VBox fx:id="container"
-                  layoutX="40" layoutY="90"
-                  spacing="20" prefWidth="920" />
-        </AnchorPane>
-    </content>
-</ScrollPane>
+                <!-- Dynamic Container -->
+                <VBox fx:id="container"
+                      layoutX="40" layoutY="90"
+                      spacing="20" prefWidth="920" />
+
+            </AnchorPane>
+        </content>
+    </ScrollPane>
+
+    <!-- Placeholder for popups (overlay added dynamically in controller) -->
+
+</StackPane>

@@ -13,12 +13,13 @@ import javafx.stage.Stage;
 import model.household.OngoingWork;
 import model.SessionManager;
 import util.MessageBox;
-import model.household.OngoingWork;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
 public class HouseholdOngoingController {
+    @FXML
+    private StackPane rootStack; // root of FXML
 
     @FXML
     private VBox container;
@@ -119,13 +120,27 @@ public class HouseholdOngoingController {
             OngoingDetailsController controller = loader.getController();
             controller.setOngoingWork(work);
 
-            // Replace the current scene or container content
-            Scene scene = new Scene(detailsRoot);
-            Stage stage = (Stage) container.getScene().getWindow(); // get current window
-            stage.setScene(scene);
+            // Create overlay pane
+            StackPane overlay = new StackPane();
+            overlay.setPrefSize(1000, 800);
+            overlay.setStyle("-fx-background-color: rgba(0,0,0,0.5);"); // semi-transparent background
+            overlay.getChildren().add(detailsRoot);
+            StackPane.setAlignment(detailsRoot, Pos.CENTER);
+
+            // Optional: add a close button
+            Button closeBtn = new Button("X");
+            closeBtn.setStyle("-fx-background-color: red; -fx-text-fill: white; -fx-font-weight: bold;");
+            closeBtn.setOnAction(e -> rootStack.getChildren().remove(overlay));
+            StackPane.setAlignment(closeBtn, Pos.TOP_RIGHT);
+            overlay.getChildren().add(closeBtn);
+
+            // Add overlay to rootStack
+            rootStack.getChildren().add(overlay);
+
         } catch (IOException e) {
             e.printStackTrace();
             MessageBox.showError("Error", "Failed to open details page.");
         }
     }
+
 }
