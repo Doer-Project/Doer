@@ -5,6 +5,7 @@
 
 <ScrollPane xmlns:fx="http://javafx.com/fxml"
             fx:controller="controller.worker.AvailableRequestController"
+            xmlns="http://javafx.com/javafx/17"
             prefWidth="1000.0" prefHeight="800.0"
             fitToWidth="true"
             style="-fx-background-color: transparent;">
