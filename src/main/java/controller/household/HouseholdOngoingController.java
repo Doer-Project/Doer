@@ -32,6 +32,7 @@ public class HouseholdOngoingController {
             List<OngoingWork> ongoingWorks = service.getOngoingWorksForUser(username);
             ///  it is for to delete the previous ui element;
             container.getChildren().clear();
+            ongoingWorks.add(new OngoingWork("bla","aa", "aa"));
 
             if (ongoingWorks.isEmpty()) {
                 /// ui can change later, this is temporary ui
@@ -74,7 +75,7 @@ public class HouseholdOngoingController {
                     "                        -fx-font-weight: bold;\n" +
                     "                        -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 6, 0, 0, 2);");
             viewDetailsButton.setOnAction(e -> showDetailsPopup(work));
-            rightBox.getChildren().addAll(viewDetailsButton);
+            rightBox.getChildren().add(viewDetailsButton);
 
             // Combine left and right boxes in an HBox
             // every child(LEFT & RIGHT box) in this box have space of 50 between each other
@@ -115,7 +116,7 @@ public class HouseholdOngoingController {
 
             // Pass selected work to the controller
             OngoingDetailsController controller = loader.getController();
-//            controller.setOngoingWork(work);
+            controller.setOngoingWork(work);
 
             // Replace the current scene or container content
             Scene scene = new Scene(detailsRoot);
