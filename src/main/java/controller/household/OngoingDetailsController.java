@@ -43,7 +43,6 @@ public class OngoingDetailsController {
         // Bind columns
         colWorkerId.setCellValueFactory(data -> new SimpleObjectProperty<>(data.getValue().getWorkerId()));
         colWorkerName.setCellValueFactory(data -> new SimpleObjectProperty<>(data.getValue().getWorkerName()));
-        colRating.setCellValueFactory(data -> new SimpleObjectProperty<>(data.getValue().getRating()));
         colStatus.setCellValueFactory(data -> new SimpleObjectProperty<>(data.getValue().getStatus()));
         colStartTime.setCellValueFactory(data -> new SimpleObjectProperty<>(data.getValue().getStartTime()));
         colEndTime.setCellValueFactory(data -> new SimpleObjectProperty<>(data.getValue().getEndTime()));
