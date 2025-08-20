@@ -67,7 +67,6 @@ public class HouseholdOngoingController {
             // every child in this box have space of 10 between each other
             VBox rightBox = new VBox(10);
             rightBox.setAlignment(Pos.TOP_RIGHT);
-            Label statusLabel = new Label("Status: " + work.getStatus());
             Button viewDetailsButton = new Button("View Details");
             viewDetailsButton.setStyle("-fx-background-color: linear-gradient(to right, #FF9F57, #E8781C);\n" +
                     "                        -fx-text-fill: white;\n" +
@@ -77,7 +76,7 @@ public class HouseholdOngoingController {
                     "                        -fx-font-weight: bold;\n" +
                     "                        -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 6, 0, 0, 2);");
             viewDetailsButton.setOnAction(e -> showDetailsPopup(work));
-            rightBox.getChildren().addAll(statusLabel, viewDetailsButton);
+            rightBox.getChildren().add(viewDetailsButton);
 
             // Combine left and right boxes in an HBox
             // every child(LEFT & RIGHT box) in this box have space of 50 between each other
