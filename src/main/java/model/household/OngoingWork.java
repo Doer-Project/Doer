@@ -79,10 +79,6 @@ public class OngoingWork {
         return workerName;
     }
 
-    public String getRating() {
-        return rating;
-    }
-
     public String getStartTime() {
         return startTime;
     }

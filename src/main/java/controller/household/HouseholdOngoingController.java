@@ -13,7 +13,6 @@ import javafx.stage.Stage;
 import model.household.OngoingWork;
 import model.SessionManager;
 import util.MessageBox;
-import model.household.OngoingWork;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -33,7 +32,6 @@ public class HouseholdOngoingController {
             List<OngoingWork> ongoingWorks = service.getOngoingWorksForUser(username);
             ///  it is for to delete the previous ui element;
             container.getChildren().clear();
-            ongoingWorks.add(new OngoingWork("bla","aa", "aa"));
 
             if (ongoingWorks.isEmpty()) {
                 /// ui can change later, this is temporary ui
@@ -67,7 +65,6 @@ public class HouseholdOngoingController {
             // every child in this box have space of 10 between each other
             VBox rightBox = new VBox(10);
             rightBox.setAlignment(Pos.TOP_RIGHT);
-            Label statusLabel = new Label("Status: " + work.getStatus());
             Button viewDetailsButton = new Button("View Details");
             viewDetailsButton.setStyle("-fx-background-color: linear-gradient(to right, #FF9F57, #E8781C);\n" +
                     "                        -fx-text-fill: white;\n" +
@@ -77,7 +74,7 @@ public class HouseholdOngoingController {
                     "                        -fx-font-weight: bold;\n" +
                     "                        -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 6, 0, 0, 2);");
             viewDetailsButton.setOnAction(e -> showDetailsPopup(work));
-            rightBox.getChildren().addAll(statusLabel, viewDetailsButton);
+            rightBox.getChildren().addAll(viewDetailsButton);
 
             // Combine left and right boxes in an HBox
             // every child(LEFT & RIGHT box) in this box have space of 50 between each other
@@ -113,12 +110,12 @@ public class HouseholdOngoingController {
     /// this 2 alerts can later add to MessageBox
     private void showDetailsPopup(OngoingWork work) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/OngoingDetails.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/household/OngoingDetails.fxml"));
             Parent detailsRoot = loader.load();
 
             // Pass selected work to the controller
             OngoingDetailsController controller = loader.getController();
-            controller.setOngoingWork(work);
+//            controller.setOngoingWork(work);
 
             // Replace the current scene or container content
             Scene scene = new Scene(detailsRoot);
