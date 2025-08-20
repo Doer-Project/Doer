@@ -1,5 +1,6 @@
 package controller.household;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -15,6 +16,7 @@ public class HouseholdDBController {
     @FXML private Button btnFuture;
     @FXML private Button btnCompleted;
     @FXML private Button btnProfile;
+    @FXML private Button btnInbox;
 
     @FXML private StackPane contentPane;
 
@@ -59,6 +61,22 @@ public class HouseholdDBController {
         contentPane.getChildren().setAll(node);
     }
 
+    @FXML
+    private void openInbox(ActionEvent event) {
+        resetButtonStyles();
+        btnInbox.setStyle(activeStyle());
+
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Inbox.fxml"));
+            loader.setController(new controller.household.HouseholdInboxController()); // set dashboard-specific controller
+            Node node = loader.load();
+            contentPane.getChildren().setAll(node);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
     private void loadUI(String fxmlFile) {
         try {
             Node node = FXMLLoader.load(getClass().getResource("/fxml/household/" + fxmlFile));
@@ -68,6 +86,7 @@ public class HouseholdDBController {
             e.printStackTrace();
         }
     }
+
 
     public void resetButtonStyles() {
         String defaultStyle = "-fx-background-color: #FFFFFF; -fx-background-radius: 12; -fx-text-fill: #1B4242;";
@@ -81,4 +100,5 @@ public class HouseholdDBController {
     private String activeStyle() {
         return "-fx-background-color: #007bff;-fx-background-radius: 12; -fx-text-fill: white;";
     }
+
 }

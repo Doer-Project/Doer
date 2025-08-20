@@ -17,6 +17,7 @@ public class WorkerDBController {
     @FXML private Button btnUpcomingTasks;
     @FXML private Button btnPastWork;
     @FXML private Button btnProfile;
+    @FXML private Button btnInbox;
 
     @FXML private StackPane contentPane;
 
@@ -63,6 +64,22 @@ public class WorkerDBController {
             e.printStackTrace();
         }
     }
+
+    @FXML
+    private void openInbox(ActionEvent event) {
+        resetButtonStyles();
+        btnInbox.setStyle(activeStyle());
+
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Inbox.fxml"));
+            loader.setController(new WorkerInboxController()); // set controller for Worker
+            Node node = loader.load();
+            contentPane.getChildren().setAll(node);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     private void loadUI(String fxmlFile) {
         try {
