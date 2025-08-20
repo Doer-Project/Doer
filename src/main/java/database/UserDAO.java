@@ -22,4 +22,6 @@ public interface UserDAO {
     String getSerial();
 
     String getUserIdByEmail(String email) throws SQLException;
+
+    String getEmailByUserId(String userId);
 }

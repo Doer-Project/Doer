@@ -58,10 +58,6 @@ public class ProfileController {
 
 
                 /// pic logic
-//                String pic = userData.get(6);
-//                profileImage.setImage(
-//                        (pic == null || pic.isEmpty()) ? new Image(DEFAULT_IMAGE) : new Image(pic)
-//                );
                 profileImage.setImage(new Image(DEFAULT_IMAGE));
             }
 
@@ -80,21 +76,10 @@ public class ProfileController {
         }
     }
 
-    @FXML
-    private void history(ActionEvent event) {
-        try {
-            String userId = SessionManager.getUserID();
-            List<String> userData = UserProfileService.getUserDataList(userId);
-            String userType = (userData != null && userData.size() >= 5) ? userData.get(4) : "Household";
-
-            String fxmlPath = "Worker".equalsIgnoreCase(userType) ?
-                    "/fxml/worker/PastWork.fxml" : "/fxml/household/PastWork.fxml";
-
-            Node node = FXMLLoader.load(getClass().getResource(fxmlPath));
-            rootPane.getChildren().setAll(node);
-
-        } catch (IOException e) {
-            MessageBox.showError("Navigation Error", "Unable to open history screen:\n" + e.getMessage());
+    private void changePassword(ActionEvent event){
+        try{
+            Parent changePass = FXMLLoader.load(getClass().getResource("/fxml/changePassword.fxml"))
         }
     }
+
 }

@@ -27,7 +27,4 @@
             </AnchorPane>
         </content>
     </ScrollPane>
-
-    <!-- Placeholder for popups (overlay added dynamically in controller) -->
-
 </StackPane>
