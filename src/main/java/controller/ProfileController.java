@@ -6,10 +6,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import util.MessageBox;
 
 import java.io.IOException;
@@ -76,10 +79,23 @@ public class ProfileController {
         }
     }
 
+    @FXML
     private void changePassword(ActionEvent event){
-        try{
-            Parent changePass = FXMLLoader.load(getClass().getResource("/fxml/changePassword.fxml"))
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ChangePassword.fxml"));
+        Parent root = null;
+//        rootPane.setEffect(new javafx.scene.effect.GaussianBlur(20));
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            MessageBox.showAlert("Navigation Error", "Unable to open Edit Profile screen:\n" + e.getMessage());
         }
+
+        Stage stage = new Stage();
+        stage.setTitle("Change Password");
+        stage.setScene(new Scene(root, 400, 320));
+        stage.initModality(Modality.APPLICATION_MODAL); // blocks parent
+        stage.show();
+
     }
 
 }

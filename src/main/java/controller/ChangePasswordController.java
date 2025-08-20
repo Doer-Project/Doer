@@ -1,14 +1,18 @@
 package controller;
 
 import app.UserServices;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import model.SessionManager;
 import util.MessageBox;
 
 public class ChangePasswordController {
 
+    @FXML
+    public StackPane changeID;
     @FXML
     private TextField emailField;
 
@@ -53,5 +57,10 @@ public class ChangePasswordController {
     private boolean isEmailRegistered(String email) {
         String userId = SessionManager.getUserID();
         return userServices.getEmailByUserId(userId).equals(email);
+    }
+
+    @FXML
+    public void handleCancel(ActionEvent event) {
+            changeID.getScene().getWindow().hide();
     }
 }
