@@ -72,12 +72,13 @@ public class OngoingDetailsController {
     }
 
     private void goBack() {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/household/onGoing.fxml"));
+        Stage stage = (Stage) backButton.getScene().getWindow();
+        stage.initStyle(javafx.stage.StageStyle.UNDECORATED);
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/household/onGoing.fxml"));
-            Stage stage = (Stage) backButton.getScene().getWindow();
             stage.setScene(new Scene(loader.load()));
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 
