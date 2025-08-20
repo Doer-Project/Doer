@@ -1,6 +1,5 @@
 package controller.household;
 
-import app.household.OngoingWorkService;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
