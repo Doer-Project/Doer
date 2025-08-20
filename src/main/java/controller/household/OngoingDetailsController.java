@@ -38,6 +38,8 @@ public class OngoingDetailsController {
     @FXML
     private Button backButton;
 
+    private OngoingWork ongoingWork;
+
     @FXML
     private void initialize() {
         // Bind columns
@@ -79,6 +81,14 @@ public class OngoingDetailsController {
             stage.setScene(new Scene(loader.load()));
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    public void setOngoingWork(OngoingWork work) {
+        this.ongoingWork = work;
+        if (ongoingWork != null) {
+            detailsTable.getItems().clear();
+            detailsTable.getItems().add(ongoingWork);
         }
     }
 }
