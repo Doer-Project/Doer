@@ -13,21 +13,20 @@ public class OngoingWork {
     private String description;
     private String date;
     private String status;
+    private int request_id;
 
     private String workerId = SessionManager.getUserID();
     private String workerName;
-    private String rating;
     private String startTime;
     private String endTime;
     private String expectedCost;
 
     private ObjectProperty<Button> selectButton;
 
-    public OngoingWork(String taskName, String description, String date, String status) {
+    public OngoingWork(String taskName, String description, String date) {
         this.taskName = taskName;
         this.description = description;
         this.date = date;
-        this.status = status;
     }
 
     public OngoingWork(String workerId, String workerName, String status, String startTime, String endTime, String expectedCost) {

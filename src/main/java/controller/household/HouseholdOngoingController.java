@@ -33,7 +33,7 @@ public class HouseholdOngoingController {
             List<OngoingWork> ongoingWorks = service.getOngoingWorksForUser(username);
             ///  it is for to delete the previous ui element;
             container.getChildren().clear();
-            ongoingWorks.add(new OngoingWork("bla","aa", "aa", "aa"));
+            ongoingWorks.add(new OngoingWork("bla","aa", "aa"));
 
             if (ongoingWorks.isEmpty()) {
                 /// ui can change later, this is temporary ui
