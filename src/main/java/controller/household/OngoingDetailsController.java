@@ -1,16 +1,21 @@
 package controller.household;
 
+import app.household.OngoingWorkService;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import model.SessionManager;
 import model.household.OngoingWork;
 
 import java.io.IOException;
+import java.util.List;
 
 public class OngoingDetailsController {
 
@@ -48,34 +53,32 @@ public class OngoingDetailsController {
         colEstimatedCost.setCellValueFactory(data -> new SimpleObjectProperty<>(data.getValue().getExpectedCost()));
         colSelect.setCellValueFactory(data -> data.getValue().getSelectButton());
 
-        loadTableData();
-
         backButton.setOnAction(e -> goBack());
     }
 
-    private void loadTableData() {
-//        try {
-//            OngoingWorkService service = new OngoingWorkService();
-//            List<OngoingWork> workerList = service.getAllOngoingWorkers(); // fetch all workers
-//
-//            // Limit to first 10 rows
-//            if (workerList.size() > 10) {
-//                workerList = workerList.subList(0, 10);
-//            }
-//
-//            detailsTable.getItems().clear();
-//            detailsTable.getItems().addAll(workerList);
-//
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
+    private void loadTableData(String requestId) {
+        try {
+            OngoingWorkService service = new OngoingWorkService();
+            List<OngoingWork> workerList = service.getAllOngoingWorkers(requestId); // fetch all workers
+
+            // Limit to first 10 rows
+            if (workerList.size() > 10) {
+                workerList = workerList.subList(0, 10);
+            }
+
+            detailsTable.getItems().clear();
+            detailsTable.getItems().addAll(workerList);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void goBack() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/household/onGoing.fxml"));
-            Stage stage = (Stage) backButton.getScene().getWindow();
-            stage.setScene(new Scene(loader.load()));
+            Parent ongoingRoot = loader.load();
+            ((VBox) backButton.getParent().getParent()).getChildren().setAll(ongoingRoot);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -84,8 +87,7 @@ public class OngoingDetailsController {
     public void setOngoingWork(OngoingWork work) {
         this.ongoingWork = work;
         if (ongoingWork != null) {
-            detailsTable.getItems().clear();
-            detailsTable.getItems().add(ongoingWork);
+            loadTableData(ongoingWork.getRequest_id()+"");
         }
     }
 }

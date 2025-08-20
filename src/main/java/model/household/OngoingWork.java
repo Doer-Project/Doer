@@ -16,17 +16,18 @@ public class OngoingWork {
     private int request_id;
 
     private String workerId = SessionManager.getUserID();
+
     private String workerName;
     private String startTime;
     private String endTime;
     private String expectedCost;
-
     private ObjectProperty<Button> selectButton;
 
-    public OngoingWork(String taskName, String description, String date) {
+    public OngoingWork(String taskName, String description, String date, int request_id) {
         this.taskName = taskName;
         this.description = description;
         this.date = date;
+        this.request_id = request_id;
     }
 
     public OngoingWork(String workerId, String workerName, String status, String startTime, String endTime, String expectedCost) {
@@ -89,6 +90,10 @@ public class OngoingWork {
 
     public String getExpectedCost() {
         return expectedCost;
+    }
+
+    public int getRequest_id() {
+        return request_id;
     }
 
     public ObjectProperty<Button> getSelectButton() {

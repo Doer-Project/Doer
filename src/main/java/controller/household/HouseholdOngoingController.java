@@ -14,6 +14,7 @@ import model.household.OngoingWork;
 import model.SessionManager;
 import util.MessageBox;
 import java.io.IOException;
+import java.net.URL;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -32,7 +33,6 @@ public class HouseholdOngoingController {
             List<OngoingWork> ongoingWorks = service.getOngoingWorksForUser(username);
             ///  it is for to delete the previous ui element;
             container.getChildren().clear();
-            ongoingWorks.add(new OngoingWork("bla","aa", "aa"));
 
             if (ongoingWorks.isEmpty()) {
                 /// ui can change later, this is temporary ui
@@ -74,8 +74,8 @@ public class HouseholdOngoingController {
                     "                        -fx-font-size: 14px;\n" +
                     "                        -fx-font-weight: bold;\n" +
                     "                        -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 6, 0, 0, 2);");
-            viewDetailsButton.setOnAction(e -> showDetailsPopup(work));
             rightBox.getChildren().add(viewDetailsButton);
+            viewDetailsButton.setOnAction(e -> showDetailsPopup(work));
 
             // Combine left and right boxes in an HBox
             // every child(LEFT & RIGHT box) in this box have space of 50 between each other
@@ -112,16 +112,14 @@ public class HouseholdOngoingController {
     private void showDetailsPopup(OngoingWork work) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/household/OngoingDetails.fxml"));
+
             Parent detailsRoot = loader.load();
 
             // Pass selected work to the controller
             OngoingDetailsController controller = loader.getController();
             controller.setOngoingWork(work);
 
-            // Replace the current scene or container content
-            Scene scene = new Scene(detailsRoot);
-            Stage stage = (Stage) container.getScene().getWindow(); // get current window
-            stage.setScene(scene);
+            container.getChildren().setAll(detailsRoot);
         } catch (IOException e) {
             e.printStackTrace();
             MessageBox.showError("Error", "Failed to open details page.");

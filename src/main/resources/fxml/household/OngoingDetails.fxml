@@ -2,7 +2,6 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.geometry.Insets?>
 
 <AnchorPane xmlns:fx="http://javafx.com/fxml"
             fx:controller="controller.household.OngoingDetailsController"
@@ -34,7 +33,7 @@
         </VBox>
     </ScrollPane>
 
-    !-- Back Button -->
+    <!-- Back Button -->
     <Button fx:id="backButton" text="← Back"
             layoutX="850.0" layoutY="30.0"
             style="-fx-background-color: #1976D2; -fx-text-fill: white; -fx-background-radius: 12; -fx-padding: 6 14; -fx-font-size: 14px;" />
