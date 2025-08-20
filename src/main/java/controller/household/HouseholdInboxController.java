@@ -29,7 +29,7 @@ public class HouseholdInboxController {
         // Add labels to VBox from bottom to top
         for (String msg : temp) {
             Label label = new Label(msg);
-            label.setStyle("-fx-font-size: 16px; -fx-padding: 10; -fx-background-color: #F9F9F9; -fx-background-radius: 8;");
+            label.setStyle("-fx-font-size: 16px; -fx-padding: 10; -fx-background-color: linear-gradient(to bottom, #E8F5E9, #C8E6C9); -fx-background-radius: 8;");
             messagesContainer.getChildren().add(label);
         }
     }

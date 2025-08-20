@@ -80,7 +80,7 @@ public class OngoingDetailsController {
             Parent ongoingRoot = loader.load();
             ((VBox) backButton.getParent().getParent()).getChildren().setAll(ongoingRoot);
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 
