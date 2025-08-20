@@ -113,7 +113,7 @@ public class HouseholdOngoingController {
     /// this 2 alerts can later add to MessageBox
     private void showDetailsPopup(OngoingWork work) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/OngoingDetails.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/household/OngoingDetails.fxml"));
             Parent detailsRoot = loader.load();
 
             // Pass selected work to the controller
