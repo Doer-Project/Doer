@@ -42,16 +42,18 @@ public class OngoingWork {
         /// for only worker who are intrested to work.
         if ("interested".equalsIgnoreCase(status)) {
             Button select = new Button("Select");
-
             select.setStyle("-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-weight: bold;");
             select.setOnAction(e -> {
                 System.out.println("✅ Worker selected: " + workerName);
-                // TODO: After selecting this button, we have to call the next logic of the Database
+                // TODO: handle DB logic here
             });
             this.selectButton = new SimpleObjectProperty<>(select);
         } else {
-            this.selectButton = new SimpleObjectProperty<>(null);
+            // Safe placeholder instead of null
+            this.selectButton = new SimpleObjectProperty<>(new Button("Not Interested"));
+            this.selectButton.get().setDisable(true); // Make it non-clickable
         }
+
     }
 
     public String getTaskName() {
@@ -93,4 +95,9 @@ public class OngoingWork {
     public String getExpectedCost() {
         return expectedCost;
     }
+
+    public ObjectProperty<Button> getSelectButton() {
+        return selectButton;
+    }
+
 }
