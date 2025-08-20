@@ -3,6 +3,7 @@ package database;
 import model.Household;
 import model.Worker;
 import util.DBConnection;
+import util.MessageBox;
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -169,5 +170,22 @@ public class UserDAOImpl implements UserDAO {
             System.err.println("Error fetching user ID: " + e.getMessage());
         }
         return userId;
+    }
+
+    @Override
+    public String getEmailByUserId(String userId) {
+        String sql = "Select email from users where user_id = ?";
+        String email = "";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1,userId);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()){
+                email = rs.getString("email");
+            }
+        } catch (SQLException e) {
+            MessageBox.showAlert("Databse","There is some error in Databse");
+        }
+        return email;
     }
 }
