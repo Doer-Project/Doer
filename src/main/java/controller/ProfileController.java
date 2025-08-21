@@ -6,10 +6,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import util.MessageBox;
 
 import java.io.IOException;
@@ -58,10 +61,6 @@ public class ProfileController {
 
 
                 /// pic logic
-//                String pic = userData.get(6);
-//                profileImage.setImage(
-//                        (pic == null || pic.isEmpty()) ? new Image(DEFAULT_IMAGE) : new Image(pic)
-//                );
                 profileImage.setImage(new Image(DEFAULT_IMAGE));
             }
 
@@ -81,20 +80,22 @@ public class ProfileController {
     }
 
     @FXML
-    private void history(ActionEvent event) {
+    private void changePassword(ActionEvent event){
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ChangePassword.fxml"));
+        Parent root = null;
+//        rootPane.setEffect(new javafx.scene.effect.GaussianBlur(20));
         try {
-            String userId = SessionManager.getUserID();
-            List<String> userData = UserProfileService.getUserDataList(userId);
-            String userType = (userData != null && userData.size() >= 5) ? userData.get(4) : "Household";
-
-            String fxmlPath = "Worker".equalsIgnoreCase(userType) ?
-                    "/fxml/worker/PastWork.fxml" : "/fxml/household/PastWork.fxml";
-
-            Node node = FXMLLoader.load(getClass().getResource(fxmlPath));
-            rootPane.getChildren().setAll(node);
-
+            root = loader.load();
         } catch (IOException e) {
-            MessageBox.showError("Navigation Error", "Unable to open history screen:\n" + e.getMessage());
+            MessageBox.showAlert("Navigation Error", "Unable to open Edit Profile screen:\n" + e.getMessage());
         }
+
+        Stage stage = new Stage();
+        stage.setTitle("Change Password");
+        stage.setScene(new Scene(root, 400, 320));
+        stage.initModality(Modality.APPLICATION_MODAL); // blocks parent
+        stage.show();
+
     }
+
 }

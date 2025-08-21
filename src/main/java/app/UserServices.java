@@ -126,4 +126,8 @@ public class UserServices {
     public String getUserIdByEmail(String email) {
         return userDAO.getUserIdByEmail(email);
     }
+
+    public String getEmailByUserId(String userId) {
+        return userDAO.getUserIdByEmail(userId);
+    }
 }

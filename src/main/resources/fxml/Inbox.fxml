@@ -14,6 +14,10 @@
             <padding>
                 <Insets top="20" right="20" bottom="20" left="20"/>
             </padding>
+
+            <Label text="Inbox 📥"
+                   layoutX="40.0" layoutY="30.0"
+                   style="-fx-font-size: 30px; -fx-font-family: 'Verdana'; -fx-font-weight: bold;"/>
         </VBox>
     </content>
 </ScrollPane>
