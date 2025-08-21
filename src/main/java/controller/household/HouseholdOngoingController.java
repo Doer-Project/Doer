@@ -6,15 +6,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
-import javafx.stage.Stage;
 import model.household.OngoingWork;
 import model.SessionManager;
 import util.MessageBox;
 import java.io.IOException;
-import java.net.URL;
 import java.sql.SQLException;
 import java.util.List;
 

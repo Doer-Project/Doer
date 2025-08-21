@@ -3,18 +3,11 @@ package controller.household;
 import app.household.OngoingWorkService;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-import model.SessionManager;
 import model.household.OngoingWork;
 
-import java.io.IOException;
 import java.util.List;
 
 public class OngoingDetailsController {
@@ -37,9 +30,6 @@ public class OngoingDetailsController {
     @FXML
     private TableColumn<OngoingWork, Button> colSelect;
 
-    @FXML
-    private Button backButton;
-
     private OngoingWork ongoingWork;
 
     @FXML
@@ -52,8 +42,6 @@ public class OngoingDetailsController {
         colEndTime.setCellValueFactory(data -> new SimpleObjectProperty<>(data.getValue().getEndTime()));
         colEstimatedCost.setCellValueFactory(data -> new SimpleObjectProperty<>(data.getValue().getExpectedCost()));
         colSelect.setCellValueFactory(data -> data.getValue().getSelectButton());
-
-        backButton.setOnAction(e -> goBack());
     }
 
     private void loadTableData(String requestId) {
@@ -71,16 +59,6 @@ public class OngoingDetailsController {
 
         } catch (Exception e) {
             e.printStackTrace();
-        }
-    }
-
-    private void goBack() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/household/onGoing.fxml"));
-            Parent ongoingRoot = loader.load();
-            ((VBox) backButton.getParent().getParent()).getChildren().setAll(ongoingRoot);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
         }
     }
 
