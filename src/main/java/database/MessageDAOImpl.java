@@ -35,7 +35,7 @@ public class MessageDAOImpl implements MessageDAO {
 
     // insert message into database.
     public boolean insertMessage(String receiverId, String senderName, String message) {
-        String query = "INSERT INTO notification (receiver_id, sender_name, message) VALUES (?, ?, ?)";
+        String query = "INSERT INTO notifications (receiver_id, sender_name, message) VALUES (?, ?, ?)";
 
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
