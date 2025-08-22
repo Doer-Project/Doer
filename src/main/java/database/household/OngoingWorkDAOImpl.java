@@ -20,12 +20,10 @@ public class OngoingWorkDAOImpl implements OngoingWorkDAO {
         /// temporary solution ⬇️, This is not final we have to change it.
 
         List<OngoingWork> ongoingWorks = new ArrayList<>();
-        String sql = "SELECT request_id, title, description, preferred_work_date FROM workrequests WHERE household_id = ?";
+        String sql = "SELECT request_id, title, description, preferred_work_date FROM workrequests WHERE household_id = ? and status = 'Pending'";
 
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, username);
-            /// checking
-//        stmt.setInt(1,2);
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
@@ -62,7 +60,7 @@ public class OngoingWorkDAOImpl implements OngoingWorkDAO {
                 if (userRs.next()) {
                     workerName = userRs.getString("first_name") + " " + userRs.getString("last_name");
                 }
-                ongoingWorks.add(new OngoingWork(workerId,
+                ongoingWorks.add(new OngoingWork(requestId, workerId,
                         workerName,
                         rs.getString("interest_status"),
                         rs.getString("proposed_start_time"),
@@ -74,5 +72,22 @@ public class OngoingWorkDAOImpl implements OngoingWorkDAO {
             e.printStackTrace();
         }
         return ongoingWorks;
+    }
+
+    @Override
+    public boolean hireWorker(int requestId, String workerId, String startTime, String endTime, double expectedCost) {
+        String sql = "{CALL assign_chosen_worker(?, ?, ?, ?, ?)}";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, requestId);
+            stmt.setString(2, workerId);
+            stmt.setTime(3, Time.valueOf(startTime));
+            stmt.setTime(4, Time.valueOf(endTime));
+            stmt.setDouble(5, expectedCost);
+            int rowsUpdated = stmt.executeUpdate();
+            return rowsUpdated > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 }

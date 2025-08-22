@@ -13,7 +13,6 @@ public class OngoingWorkService {
 
     public List<OngoingWork> getOngoingWorksForUser(String username) throws SQLException {
         try (Connection conn = DatabaseConnection.getConnection()) {
-//            System.out.println("inside sevice");
             OngoingWorkDAO dao = new OngoingWorkDAOImpl(conn);
             return dao.getOngoingWorksForUser(username);
         }
@@ -23,6 +22,15 @@ public class OngoingWorkService {
         try (Connection conn = DatabaseConnection.getConnection()) {
             OngoingWorkDAO dao = new OngoingWorkDAOImpl(conn);
             return dao.getAllOngoingWorks(requestId);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public boolean hireWorker(int requestId, String workerId, String startTime, String endTime, double expectedCost) {
+        try (Connection conn = DatabaseConnection.getConnection()) {
+            OngoingWorkDAO dao = new OngoingWorkDAOImpl(conn);
+            return dao.hireWorker(requestId, workerId, startTime, endTime, expectedCost);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

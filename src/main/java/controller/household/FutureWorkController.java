@@ -8,6 +8,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import model.FutureWork;
 import model.SessionManager;
 
+import java.sql.Time;
+import java.time.LocalDate;
 import java.util.List;
 
 public class FutureWorkController {
@@ -16,9 +18,11 @@ public class FutureWorkController {
     @FXML private TableColumn<FutureWork, Integer> colTaskId;
     @FXML private TableColumn<FutureWork, String> colTitle;
     @FXML private TableColumn<FutureWork, Integer> colWorkerId;
-    @FXML private TableColumn<FutureWork, java.time.LocalDate> colDate;
+    @FXML private TableColumn<FutureWork, LocalDate> colDate;
+    @FXML private TableColumn<FutureWork, Time> colStartTime;
+    @FXML private TableColumn<FutureWork, Time> colEndTime;
+    @FXML private TableColumn<FutureWork, Double> colCost;
     @FXML private TableColumn<FutureWork, String> colStatus;
-    @FXML private TableColumn<FutureWork, Integer> colRating;
 
     private FutureWorkService service;
 
@@ -32,7 +36,9 @@ public class FutureWorkController {
             colTitle.setCellValueFactory(new PropertyValueFactory<>("title"));
             colWorkerId.setCellValueFactory(new PropertyValueFactory<>("workerId"));
             colDate.setCellValueFactory(new PropertyValueFactory<>("date"));
-            colRating.setCellValueFactory(new PropertyValueFactory<>("rating"));
+            colStartTime.setCellValueFactory(new PropertyValueFactory<>("startTime"));
+            colEndTime.setCellValueFactory(new PropertyValueFactory<>("endTime"));
+            colCost.setCellValueFactory(new PropertyValueFactory<>("cost"));
             colStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
 
             loadData(SessionManager.getUserID()); // replace 3 with logged-in householdId
@@ -43,7 +49,6 @@ public class FutureWorkController {
 
     private void loadData(String householdId) {
         try {
-            System.out.println("going to service");
             List<FutureWork> list = service.getFutureWorksForHousehold(householdId);
             futureWorkTable.getItems().setAll(list);
         } catch (Exception e) {

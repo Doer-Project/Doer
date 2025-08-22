@@ -1,9 +1,11 @@
 package model.household;
 
+import app.household.OngoingWorkService;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import model.SessionManager;
 import javafx.scene.control.Button;
+import util.MessageBox;
 
 
 import java.awt.*;
@@ -23,6 +25,8 @@ public class OngoingWork {
     private String expectedCost;
     private ObjectProperty<Button> selectButton;
 
+    OngoingWorkService service = new OngoingWorkService();
+
     public OngoingWork(String taskName, String description, String date, int request_id) {
         this.taskName = taskName;
         this.description = description;
@@ -30,7 +34,8 @@ public class OngoingWork {
         this.request_id = request_id;
     }
 
-    public OngoingWork(String workerId, String workerName, String status, String startTime, String endTime, String expectedCost) {
+    public OngoingWork(String requst_id, String workerId, String workerName, String status, String startTime, String endTime, String expectedCost) {
+        this.request_id = Integer.parseInt(requst_id);
         this.status = status;
         this.workerId = workerId;
         this.workerName = workerName;
@@ -45,7 +50,13 @@ public class OngoingWork {
             select.setStyle("-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-weight: bold;");
             select.setOnAction(e -> {
                 System.out.println("✅ Worker selected: " + workerName);
-                // TODO: handle DB logic here
+                if (service.hireWorker(request_id, workerId, startTime, endTime, Double.parseDouble(expectedCost))) {
+                    select.setText("Hired");
+                    disableAllButtons();
+                } else {
+                    System.out.println("❌ Failed to hire worker: " + workerName);
+                    MessageBox.showError("Error", "Failed to hire worker. Please try again.");
+                }
             });
             this.selectButton = new SimpleObjectProperty<>(select);
         } else {
@@ -54,6 +65,12 @@ public class OngoingWork {
             this.selectButton.get().setDisable(true); // Make it non-clickable
         }
 
+    }
+
+    private void disableAllButtons() {
+        if (this.selectButton != null && this.selectButton.get() != null) {
+            this.selectButton.get().setDisable(true);
+        }
     }
 
     public String getTaskName() {

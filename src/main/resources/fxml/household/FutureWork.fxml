@@ -14,18 +14,20 @@
            style="-fx-font-size: 30px; -fx-text-fill: #1B4242; -fx-font-family: 'Verdana'; -fx-font-weight: bold;" />
 
     <!-- Make the VBox section scrollable. -->
-    <ScrollPane layoutX="40.0" layoutY="90.0" prefWidth="920.0" prefHeight="700.0"
+    <ScrollPane layoutX="40.0" layoutY="90.0" prefWidth="1050.0" prefHeight="700.0"
                 fitToWidth="true" fitToHeight="true"
                 style="-fx-background-color: transparent;">
         <VBox spacing="20.0">
-            <TableView fx:id="futureWorkTable" prefHeight="650.0" prefWidth="920.0"
+            <TableView fx:id="futureWorkTable" prefHeight="650.0" prefWidth="1050.0"
                        style="-fx-background-radius: 12;">
                 <columns>
                     <TableColumn fx:id="colTaskId" text="Work ID" prefWidth="100.0" style="-fx-alignment: CENTER;"/>
                     <TableColumn fx:id="colTitle" text="Service" prefWidth="250.0" style="-fx-alignment: CENTER;"/>
                     <TableColumn fx:id="colWorkerId" text="Worker ID" prefWidth="120.0" style="-fx-alignment: CENTER;"/>
                     <TableColumn fx:id="colDate" text="Date" prefWidth="170.0" style="-fx-alignment: CENTER;"/>
-                    <TableColumn fx:id="colRating" text="Raing" prefWidth="100.0" style="-fx-alignment: CENTER;"/>
+                    <TableColumn fx:id="colStartTime" text="Start Time" prefWidth="80.0" style="-fx-alignment: CENTER;"/>
+                    <TableColumn fx:id="colEndTime" text="End Time" prefWidth="80.0" style="-fx-alignment: CENTER;"/>
+                    <TableColumn fx:id="colCost" text="Estimated cost" prefWidth="100.0" style="-fx-alignment: CENTER;"/>
                     <TableColumn fx:id="colStatus" text="Status" prefWidth="150.0" style="-fx-alignment: CENTER;"/>
                 </columns>
             </TableView>
