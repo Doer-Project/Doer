@@ -38,7 +38,4 @@ public class WorkReqDAOImpl implements WorkReqDAO {
             return false;
         }
     }
-
-    // You can also add methods like:
-    // getById(int id), getAllByHousehold(int householdId), update(WorkRequest), delete(int id)
 }

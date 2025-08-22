@@ -1,14 +1,15 @@
 package controller.household;
 
 import app.household.OngoingWorkService;
+import datastructures.CustomList;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import model.household.OngoingWork;
-
-import java.util.List;
+import util.FXUtil;
 
 public class OngoingDetailsController {
 
@@ -47,15 +48,15 @@ public class OngoingDetailsController {
     private void loadTableData(String requestId) {
         try {
             OngoingWorkService service = new OngoingWorkService();
-            List<OngoingWork> workerList = service.getAllOngoingWorkers(requestId); // fetch all workers
+            CustomList<OngoingWork> workerList = service.getAllOngoingWorkers(requestId); // fetch all workers
 
-            // Limit to first 10 rows
             if (workerList.size() > 10) {
                 workerList = workerList.subList(0, 10);
             }
-
+            // Convert CustomList -> ObservableList
+            ObservableList<OngoingWork> obsList = FXUtil.toObservableList(workerList);
             detailsTable.getItems().clear();
-            detailsTable.getItems().addAll(workerList);
+            detailsTable.getItems().addAll(obsList);
 
         } catch (Exception e) {
             e.printStackTrace();

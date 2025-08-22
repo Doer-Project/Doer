@@ -1,10 +1,9 @@
 package database;
 
+import datastructures.CustomList;
 import model.FutureWork;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class FutureWorkDAOImpl implements FutureWorkDAO {
 
@@ -16,8 +15,8 @@ public class FutureWorkDAOImpl implements FutureWorkDAO {
 
     // Household POV: fetch future work created by a household
     @Override
-    public List<FutureWork> getFutureWorkByHousehold(String householdId) throws SQLException {
-        List<FutureWork> list = new ArrayList<>();
+    public CustomList<FutureWork> getFutureWorkByHousehold(String householdId) throws SQLException {
+        CustomList<FutureWork> list = new CustomList<>();
 
         String sql = "SELECT task_id, worker_id, title, date, " +
                 "start_time, end_time, cost, status " +
@@ -47,8 +46,8 @@ public class FutureWorkDAOImpl implements FutureWorkDAO {
 
     // Worker POV: fetch upcoming jobs for a worker
     @Override
-    public List<FutureWork> getUpcomingJobsByWorker(String workerId) throws SQLException {
-        List<FutureWork> list = new ArrayList<>();
+    public CustomList<FutureWork> getUpcomingJobsByWorker(String workerId) throws SQLException {
+        CustomList<FutureWork> list = new CustomList<>();
 
         String sql = "SELECT task_id, household_id, title, address, date, " +
                 "start_time, end_time, cost, status " +

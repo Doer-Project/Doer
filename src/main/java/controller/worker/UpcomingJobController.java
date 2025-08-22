@@ -1,16 +1,18 @@
 package controller.worker;
 
 import app.FutureWorkService;
+import datastructures.CustomList;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.FutureWork;
 import model.SessionManager;
+import util.FXUtil;
 
 import java.sql.Time;
 import java.time.LocalDate;
-import java.util.List;
 
 public class UpcomingJobController {
 
@@ -52,8 +54,9 @@ public class UpcomingJobController {
 
     private void loadData(String workerId) {
         try {
-            List<FutureWork> list = service.getFutureWorksForWorker(workerId);
-            upcomingTable.getItems().setAll(list);
+            CustomList<FutureWork> list = service.getFutureWorksForWorker(workerId);
+            ObservableList<FutureWork> obsList = FXUtil.toObservableList(list);
+            upcomingTable.getItems().setAll(obsList);
         } catch (Exception e) {
             e.printStackTrace();
         }

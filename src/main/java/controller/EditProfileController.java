@@ -1,6 +1,7 @@
 package controller;
 
 import app.UserProfileService;
+import datastructures.CustomList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,7 +15,6 @@ import util.MessageBox;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
 
 public class EditProfileController {
 
@@ -33,7 +33,7 @@ public class EditProfileController {
     public void initialize() {
         try {
             userId = model.SessionManager.getUserID();
-            List<String> userData = app.UserProfileService.getUserDataList(userId);
+            CustomList<String> userData = app.UserProfileService.getUserDataList(userId);
             if (userData != null && userData.size() >= 6) {
                 txtFullName.setText(userData.get(0) + " " + userData.get(1));
                 txtAddress.setText(userData.get(3));

@@ -1,10 +1,9 @@
 package database.household;
 
+import datastructures.CustomList;
 import model.household.OngoingWork;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class OngoingWorkDAOImpl implements OngoingWorkDAO {
 
@@ -15,11 +14,11 @@ public class OngoingWorkDAOImpl implements OngoingWorkDAO {
     }
 
     @Override
-    public List<OngoingWork> getOngoingWorksForUser(String username) {
+    public CustomList<OngoingWork> getOngoingWorksForUser(String username) {
 
         /// temporary solution ⬇️, This is not final we have to change it.
 
-        List<OngoingWork> ongoingWorks = new ArrayList<>();
+        CustomList<OngoingWork> ongoingWorks = new CustomList<>();
         String sql = "SELECT request_id, title, description, preferred_work_date FROM workrequests WHERE household_id = ? and status = 'Pending'";
 
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -41,8 +40,8 @@ public class OngoingWorkDAOImpl implements OngoingWorkDAO {
     }
 
     @Override
-    public List<OngoingWork> getAllOngoingWorks(String requestId) {
-        List<OngoingWork> ongoingWorks = new ArrayList<>();
+    public CustomList<OngoingWork> getAllOngoingWorks(String requestId) {
+        CustomList<OngoingWork> ongoingWorks = new CustomList<>();
         String sql = "select worker_id, interest_status, proposed_start_time, proposed_end_time, estimated_cost from requestrecipients where request_id = ?";
 
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {

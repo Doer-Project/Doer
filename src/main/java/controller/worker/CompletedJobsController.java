@@ -1,15 +1,15 @@
 package controller.worker;
 
 import app.PastWorkService;
+import datastructures.CustomList;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.PastTask;
 import model.SessionManager;
-
-import java.util.List;
-import java.util.Objects;
+import util.FXUtil;
 
 public class CompletedJobsController {
     @FXML private TableView<PastTask> completedTable;
@@ -46,8 +46,9 @@ public class CompletedJobsController {
     private void loadData(String workerId) {
         try {
 //            System.out.println("Going to service");
-            List<PastTask> list = service.getPastWorksForWorker(workerId);
-            completedTable.getItems().setAll(list);
+            CustomList<PastTask> list = service.getPastWorksForWorker(workerId);
+            ObservableList<PastTask> obsList = FXUtil.toObservableList(list);
+            completedTable.getItems().setAll(obsList);
         } catch (Exception e) {
             e.printStackTrace();
         }

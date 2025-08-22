@@ -23,7 +23,6 @@ public class WorkerDBController {
     @FXML private Button btnPastWork;
     @FXML private Button btnProfile;
     @FXML private Button btnInbox;
-    @FXML private Button btnLogOut;
 
     @FXML private StackPane contentPane;
 
@@ -39,7 +38,7 @@ public class WorkerDBController {
     public void todaySchedule(ActionEvent event) {
         resetButtonStyles();
         btnTodaySchedule.setStyle(activeStyle());
-        loadUI("OngoingJobs.fxml");
+        loadUI("TodaySchedule.fxml");
     }
 
     // ✅ REAL - SHOW UPCOMING

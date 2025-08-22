@@ -1,6 +1,7 @@
 package controller;
 
 import app.UserProfileService;
+import datastructures.CustomList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,8 +17,6 @@ import javafx.stage.Stage;
 import util.MessageBox;
 
 import java.io.IOException;
-import java.util.List;
-
 import model.SessionManager;
 
 public class ProfileController {
@@ -40,7 +39,7 @@ public class ProfileController {
     private void loadUserProfile() {
         try {
             String userId = SessionManager.getUserID();
-            List<String> userData = UserProfileService.getUserDataList(userId);
+            CustomList<String> userData = UserProfileService.getUserDataList(userId);
 
             if (userData != null && userData.size() >= 6) {
                 lblName.setText(userData.get(0) + " " + userData.get(1));

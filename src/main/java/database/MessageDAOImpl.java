@@ -1,8 +1,6 @@
 package database;
 
 import java.sql.*;
-import java.util.Stack;
-
 import datastructures.CustomStack;
 import util.DBConnection;
 

@@ -1,14 +1,16 @@
 package controller.household;
 
 import app.PastWorkService;
+import datastructures.CustomList;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.PastTask;
 import model.SessionManager;
+import util.FXUtil;
 
-import java.util.List;
 
 public class PastWorkController {
     @FXML private TableView<PastTask> completedTable;
@@ -41,8 +43,9 @@ public class PastWorkController {
 
     private void loadData(String householdId) {
         try {
-            List<PastTask> list = service.getPastWorksForHousehold(householdId);
-            completedTable.getItems().setAll(list);
+            CustomList<PastTask> list = service.getPastWorksForHousehold(householdId);
+            ObservableList<PastTask> obsList = FXUtil.toObservableList(list);
+            completedTable.getItems().setAll(obsList);
         } catch (Exception e) {
             e.printStackTrace();
         }

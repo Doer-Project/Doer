@@ -1,6 +1,7 @@
 package controller.household;
 
 import app.household.OngoingWorkService;
+import datastructures.CustomList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
@@ -13,7 +14,6 @@ import model.SessionManager;
 import util.MessageBox;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.List;
 
 public class HouseholdOngoingController {
     @FXML
@@ -29,7 +29,7 @@ public class HouseholdOngoingController {
             OngoingWorkService service = new OngoingWorkService();
             String username = SessionManager.getUserID();
 
-            List<OngoingWork> ongoingWorks = service.getOngoingWorksForUser(username);
+            CustomList<OngoingWork> ongoingWorks = service.getOngoingWorksForUser(username);
             ///  it is for to delete the previous ui element;
             container.getChildren().clear();
 
@@ -46,8 +46,8 @@ public class HouseholdOngoingController {
         }
     }
 
-    private void loadOngoingRequests(List<OngoingWork> ongoingWorks) {
-        container.setAlignment(Pos.TOP_LEFT);  // Reset alignment for list
+    private void loadOngoingRequests(CustomList<OngoingWork> ongoingWorks) {
+        container.setAlignment(Pos.TOP_LEFT);
         for (int i = 0; i < ongoingWorks.size(); i++) {
             OngoingWork work = ongoingWorks.get(i);
 

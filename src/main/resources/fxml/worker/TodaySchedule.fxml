@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<ScrollPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="controller.worker.TodayScheduleController"
+            prefWidth="1000.0" prefHeight="800.0"
+            fitToWidth="true"
+            style="-fx-background-color: transparent;">
+    <content>
+        <AnchorPane prefWidth="1000.0" prefHeight="800.0" style="-fx-background-color: #E3F2FD;">
+            <!-- Page Title -->
+            <Label text="Today's Schedule"
+                   layoutX="40" layoutY="30"
+                   style="-fx-font-size: 30px; -fx-text-fill: #0D47A1; -fx-font-family: 'Verdana'; -fx-font-weight: bold;" />
+
+            <!-- Table Section -->
+            <TableView fx:id="todayTable" layoutX="40" layoutY="90"
+                       prefWidth="920" prefHeight="650"
+                       style="-fx-background-radius: 12;">
+                <columns>
+                    <TableColumn fx:id="colTaskId" text="Work ID" prefWidth="70"/>
+                    <TableColumn fx:id="colCustomerId" text="Customer ID" prefWidth="100"/>
+                    <TableColumn fx:id="colTitle" text="Service Title" prefWidth="150"/>
+                    <TableColumn fx:id="colAddress" text="Address" prefWidth="170"/>
+                    <TableColumn fx:id="colStartTime" text="Start Time" prefWidth="100"/>
+                    <TableColumn fx:id="colEndTime" text="End Time" prefWidth="100"/>
+                    <TableColumn fx:id="colCost" text="Cost" prefWidth="120"/>
+                    <TableColumn fx:id="colAction" text="Action" prefWidth="100"/>
+                </columns>
+            </TableView>
+        </AnchorPane>
+    </content>
+</ScrollPane>
