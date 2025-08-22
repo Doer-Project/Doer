@@ -7,7 +7,7 @@ public class DatabaseConnection {
     private static Connection connection;
 
     // Database credentials and URL - update these as per your DB setup
-    private static final String URL = "jdbc:mysql://localhost:3306/doer5";
+    private static final String URL = "jdbc:mysql://localhost:3306/doer13";
     private static final String USER = "root";
     private static final String PASSWORD = "";
 
