@@ -1,11 +1,9 @@
 package util;
 
-import jakarta.mail.*;
-import jakarta.mail.internet.InternetAddress;
-import jakarta.mail.internet.MimeMessage;
-
 import java.security.SecureRandom;
 import java.util.Properties;
+import javax.mail.*;
+import javax.mail.internet.*;
 
 public class OTP {
     private static SecureRandom random = new SecureRandom();

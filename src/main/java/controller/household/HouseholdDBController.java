@@ -67,7 +67,7 @@ public class HouseholdDBController {
     }
 
     @FXML
-    private void openInbox(ActionEvent event) {
+    private void openInbox() {
         resetButtonStyles();
         btnInbox.setStyle(activeStyle());
         Node node = null;

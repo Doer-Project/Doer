@@ -1,14 +1,18 @@
 package model.household;
 
 import app.household.OngoingWorkService;
+import controller.household.HouseholdDBController;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import model.SessionManager;
 import javafx.scene.control.Button;
 import util.MessageBox;
 
 
 import java.awt.*;
+import java.io.IOException;
 
 public class OngoingWork {
     private String taskName;
@@ -52,7 +56,9 @@ public class OngoingWork {
                 System.out.println("✅ Worker selected: " + workerName);
                 if (service.hireWorker(request_id, workerId, startTime, endTime, Double.parseDouble(expectedCost))) {
                     select.setText("Hired");
-                    disableAllButtons();
+
+                    MessageBox.showInfo("Success", "Worker hired successfully!");
+
                 } else {
                     System.out.println("❌ Failed to hire worker: " + workerName);
                     MessageBox.showError("Error", "Failed to hire worker. Please try again.");
@@ -65,12 +71,6 @@ public class OngoingWork {
             this.selectButton.get().setDisable(true); // Make it non-clickable
         }
 
-    }
-
-    private void disableAllButtons() {
-        if (this.selectButton != null && this.selectButton.get() != null) {
-            this.selectButton.get().setDisable(true);
-        }
     }
 
     public String getTaskName() {
