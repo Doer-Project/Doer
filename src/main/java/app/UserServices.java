@@ -132,7 +132,6 @@ public class UserServices {
     }
 
     public boolean updatePassword(String userId, String password) {
-        System.out.println("services called for password updating");
-        return true;
+        return userDAO.updatePassword(userId,password);
     }
 }

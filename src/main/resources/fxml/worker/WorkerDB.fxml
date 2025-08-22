@@ -40,8 +40,12 @@
                 <Button fx:id="btnProfile" prefWidth="190.0" onAction="#profile"
                         style="-fx-background-color: #FFFFFF; -fx-background-radius: 12; -fx-text-fill: #1B4242;"
                         text="👤 Profile"/>
-                <Button fx:id="btnInbox" text="📥 Inbox" prefWidth="190.0" onAction="#openInbox"
-                        style="-fx-background-color: #FFFFFF; -fx-background-radius: 12; -fx-text-fill: #1B4242;" />
+                <Button fx:id="btnInbox" prefWidth="190.0" onAction="#openInbox"
+                        style="-fx-background-color: #FFFFFF; -fx-background-radius: 12; -fx-text-fill: #1B4242;"
+                        text="📥 Inbox"/>
+                <Button fx:id="btnLogOut" prefWidth="190.0" onAction="#logout"
+                        style="-fx-background-color: #FFFFFF; -fx-background-radius: 12; -fx-text-fill: #1B4242;"
+                        text="⏻ Log-Out"/>
             </children>
         </VBox>
     </left>
