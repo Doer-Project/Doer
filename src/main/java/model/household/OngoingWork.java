@@ -7,9 +7,6 @@ import model.SessionManager;
 import javafx.scene.control.Button;
 import util.MessageBox;
 
-
-import java.awt.*;
-
 public class OngoingWork {
     private String taskName;
     private String description;

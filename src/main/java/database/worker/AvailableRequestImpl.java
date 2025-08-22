@@ -1,5 +1,6 @@
 package database.worker;
 
+import datastructures.CustomList;
 import model.worker.AvailableWork;
 import util.MessageBox;
 
@@ -18,11 +19,11 @@ public class AvailableRequestImpl implements AvailableRequestDAO{
     }
 
     @Override
-    public List<AvailableWork> getAvailableRequests(String userId) {
+    public CustomList<AvailableWork> getAvailableRequests(String userId) {
 
         /// temporary solution ⬇️, This is not final we have to change it.
 
-        List<AvailableWork> availableWorks = new ArrayList<>();
+        CustomList<AvailableWork> availableWorks = new CustomList<>();
         String sql = "select request_id from requestrecipients where worker_id = ? and interest_status = 'pending'";
 
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {

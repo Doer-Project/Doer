@@ -1,11 +1,11 @@
 package database;
 
+import datastructures.CustomList;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class UserProfileDAOImpl implements UserProfileDAO {
     private final Connection conn;
@@ -15,16 +15,13 @@ public class UserProfileDAOImpl implements UserProfileDAO {
     }
 
     @Override
-    public List<String> fetchUserDataList(String userId) throws SQLException {
+    public CustomList<String> fetchUserDataList(String userId) throws SQLException {
         String query = "SELECT u.first_name, u.last_name, u.email, u.role, w.work_area, h.address, u.gender FROM users u LEFT JOIN workers w ON w.worker_id = u.user_id LEFT JOIN households h ON h.household_id = u.user_id WHERE u.user_id = ?";
         try (PreparedStatement pst = conn.prepareStatement(query)) {
             pst.setString(1, userId);
-            /// checking
-//            pst.setInt(1,1);
-            ///
             ResultSet rs = pst.executeQuery();
 
-            List<String> userData = new ArrayList<>();
+            CustomList<String> userData = new CustomList<>();
             if (rs.next()) {
                 userData.add(rs.getString("first_name"));
                 userData.add(rs.getString("last_name"));

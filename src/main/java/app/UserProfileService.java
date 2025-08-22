@@ -2,6 +2,7 @@ package app;
 
 import database.UserProfileDAO;
 import database.UserProfileDAOImpl;
+import datastructures.CustomList;
 import util.DatabaseConnection;
 import util.MessageBox;
 
@@ -16,7 +17,7 @@ public class UserProfileService {
      * Fetches user data as List<String>
      * Order: [firstName, lastName, email, address/work_area, userType, gender]
      */
-    public static List<String> getUserDataList(String userId) {
+    public static CustomList<String> getUserDataList(String userId) {
         try (Connection conn = DatabaseConnection.getConnection()) {
             UserProfileDAO dao = new UserProfileDAOImpl(conn);
             return dao.fetchUserDataList(userId);

@@ -1,6 +1,7 @@
 package controller.worker;
 
 import app.worker.AvailableWorkService;
+import datastructures.CustomList;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -9,11 +10,7 @@ import javafx.scene.layout.*;
 import model.worker.AvailableWork;
 import model.SessionManager;
 import util.MessageBox;
-
-import java.sql.SQLException;
-import java.sql.Time;
 import java.time.LocalTime;
-import java.util.List;
 
 public class AvailableRequestController {
 
@@ -25,7 +22,7 @@ public class AvailableRequestController {
         AvailableWorkService service = new AvailableWorkService();
         String userID = SessionManager.getUserID();
 
-        List<AvailableWork> requests = service.getAvailableRequests(userID);
+        CustomList<AvailableWork> requests = service.getAvailableRequests(userID);
         container.getChildren().clear();
 
         if (requests.isEmpty()) {

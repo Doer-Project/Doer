@@ -2,6 +2,7 @@ package app.worker;
 
 import database.worker.AvailableRequestDAO;
 import database.worker.AvailableRequestImpl;
+import datastructures.CustomList;
 import model.worker.AvailableWork;
 import util.DatabaseConnection;
 
@@ -12,7 +13,7 @@ import java.util.List;
 public class AvailableWorkService {
 
     ///  just structure
-    public List<AvailableWork> getAvailableRequests(String userID) {
+    public CustomList<AvailableWork> getAvailableRequests(String userID) {
         try (Connection conn = DatabaseConnection.getConnection()) {
             AvailableRequestDAO dao = new AvailableRequestImpl(conn);
             return dao.getAvailableRequests(userID);
