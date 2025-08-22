@@ -5,15 +5,15 @@ import java.time.LocalDate;
 public class PastTask {
     private int pastId;
     private int taskId;
-    private int workerId;
-    private int householdId;
+    private String workerId;
+    private String householdId;
     private String title;
     private LocalDate date;
     private int rating;
     private String review;
 
     ///  household
-    public PastTask(int taskId, String title, int workerId, LocalDate date, int rating, String review) {
+    public PastTask(String title,int taskId, String workerId, LocalDate date, int rating, String review) {
         this.taskId = taskId;
         this.workerId = workerId;
         this.title = title;
@@ -22,8 +22,8 @@ public class PastTask {
         this.review = review;
     }
 
-    ///  worker
-    public PastTask(int taskId, int householdId, String title, LocalDate date, int rating, String review) {
+    ///  workers
+    public PastTask(int taskId, String title, String householdId, LocalDate date, int rating, String review) {
         this.taskId = taskId;
         this.householdId = householdId;
         this.title = title;
@@ -31,7 +31,6 @@ public class PastTask {
         this.rating = rating;
         this.review = review;
     }
-
 
     public int getPastId() {
         return pastId;
@@ -41,11 +40,11 @@ public class PastTask {
         return taskId;
     }
 
-    public int getWorkerId() {
+    public String getWorkerId() {
         return workerId;
     }
 
-    public int getHouseholdId() {
+    public String getHouseholdId() {
         return householdId;
     }
 
@@ -76,11 +75,11 @@ public class PastTask {
         this.taskId = taskId;
     }
 
-    public void setWorkerId(int workerId) {
+    public void setWorkerId(String workerId) {
         this.workerId = workerId;
     }
 
-    public void setHouseholdId(int householdId) {
+    public void setHouseholdId(String householdId) {
         this.householdId = householdId;
     }
 

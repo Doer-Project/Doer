@@ -20,11 +20,11 @@ public class PastWorkDAOImpl implements PastWorkDAO {
             CustomList<PastTask> list = new CustomList<>();
             while (rs.next()) {
                 list.add(new PastTask(
-                        rs.getInt("task_id"),
                         rs.getString("title"),
-                        rs.getObject("worker_id", Integer.class),
+                        rs.getInt("task_id"),
+                        rs.getString("worker_id"),
                         rs.getDate("date") != null ? rs.getDate("date").toLocalDate() : null,
-                        rs.getObject("rating", Integer.class),
+                        rs.getInt("rating"),
                         rs.getString("review")
                 ));
 //            System.out.println(list.get(0));
@@ -45,10 +45,10 @@ public class PastWorkDAOImpl implements PastWorkDAO {
 //                System.out.println(rs.getInt("worker_Id"));
                 list.add(new PastTask(
                         rs.getInt("task_id"),
-                        rs.getObject("household_id", Integer.class),
                         rs.getString("title"),
+                        rs.getString("household_id"),
                         rs.getDate("date") != null ? rs.getDate("date").toLocalDate() : null,
-                        rs.getObject("rating", Integer.class),
+                        rs.getInt("rating"),
                         rs.getString("review")
                 ));
 //            System.out.println(list.get(0));
