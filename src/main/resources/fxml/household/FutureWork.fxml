@@ -29,11 +29,9 @@
                     <TableColumn fx:id="colEndTime" text="End Time" prefWidth="80.0" style="-fx-alignment: CENTER;"/>
                     <TableColumn fx:id="colCost" text="Estimated cost" prefWidth="100.0" style="-fx-alignment: CENTER;"/>
                     <TableColumn fx:id="colStatus" text="Status" prefWidth="150.0" style="-fx-alignment: CENTER;"/>
+                    <TableColumn fx:id="colAction" text="Action" prefWidth="120.0" style="-fx-alignment: CENTER;"/>
                 </columns>
             </TableView>
-
-            <Label text="(This table is populated dynamically from your database...)"
-                   style="-fx-text-fill: #888888; -fx-font-size: 14px;" />
         </VBox>
     </ScrollPane>
 

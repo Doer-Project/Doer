@@ -11,4 +11,7 @@ public interface FutureWorkDAO {
 
     // Fetch upcoming jobs for a worker
     CustomList<FutureWork> getUpcomingJobsByWorker(String workerId) throws SQLException;
+
+    // Mark a job as rated by household and store rating/review
+    boolean rateWork(int taskId, int rating, String review) throws SQLException;
 }

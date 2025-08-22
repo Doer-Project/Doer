@@ -38,13 +38,29 @@ public class TodayDAOImpl implements TodayDAO {
     }
 
     public boolean updateJobStatusToComplete(int jobId) {
-        String query = "UPDATE assignedtasks SET status = 'COMPLETED' WHERE task_id = ?";
-        try (Connection conn = DBConnection.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(query)) {
-
-            pstmt.setInt(1, jobId);
-            return pstmt.executeUpdate() > 0;
-
+        String updAssigned = "UPDATE assignedtasks SET status = 'completed', completed_at = NOW() WHERE task_id = ?";
+        String updRequest = "UPDATE workrequests SET status = 'completed' WHERE request_id = (SELECT request_id FROM assignedtasks WHERE task_id = ?)";
+        try (Connection conn = DBConnection.getConnection()) {
+            boolean oldAuto = conn.getAutoCommit();
+            conn.setAutoCommit(false);
+            try (PreparedStatement ps1 = conn.prepareStatement(updAssigned);
+                 PreparedStatement ps2 = conn.prepareStatement(updRequest)) {
+                ps1.setInt(1, jobId);
+                int a = ps1.executeUpdate();
+                ps2.setInt(1, jobId);
+                ps2.executeUpdate();
+                if (a == 0) {
+                    conn.rollback();
+                    return false;
+                }
+                conn.commit();
+                return true;
+            } catch (SQLException ex) {
+                conn.rollback();
+                throw ex;
+            } finally {
+                try { conn.setAutoCommit(oldAuto); } catch (SQLException ignore) {}
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }

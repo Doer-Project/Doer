@@ -25,4 +25,12 @@ public class FutureWorkService {
             return dao.getUpcomingJobsByWorker(workerId);
         }
     }
+
+    // Rate a completed job and mark it as rated
+    public boolean rateWork(int taskId, int rating, String review) throws SQLException {
+        try (Connection conn = DatabaseConnection.getConnection()) {
+            FutureWorkDAO dao = new FutureWorkDAOImpl(conn);
+            return dao.rateWork(taskId, rating, review);
+        }
+    }
 }
