@@ -6,78 +6,98 @@ public class FutureWork {
 
     private int taskId;
     private String title;
-    private Integer householdId;  // nullable
-    private Integer workerId;     // nullable
-    private LocalDate date;
+    private String householdId;
+    private String workerId;
     private String status;
-    private Integer rating;       // nullable
     private String address;
+    private LocalDate preferredDate;
+    private String startTime;
+    private String endTime;
+    private String cost;
 
-    // Constructor for Household view (show worker info only)
-    public FutureWork(int taskId, String title, Integer workerId, LocalDate date, String status, Integer rating) {
+    // Household POV (show worker + high-level info)
+    public FutureWork(int taskId, String title, String workerId,
+                      LocalDate preferredDate, String startTime,
+                      String endTime, String cost, String status) {
         this.taskId = taskId;
         this.title = title;
         this.workerId = workerId;
-        this.date = date;
+        this.preferredDate = preferredDate;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.cost = cost;
         this.status = status;
-        this.rating = rating;
     }
 
-    // Constructor for Worker view (show household info + address)
-    public FutureWork(int taskId, Integer householdId, String title, String address, LocalDate date, String status, Integer rating) {
+    // Worker POV (show household + job details)
+    public FutureWork(int taskId, String householdId, String title, String address,
+                      LocalDate preferredDate, String startTime, String endTime,
+                      String cost, String status) {
         this.taskId = taskId;
-        this.title = title;
         this.householdId = householdId;
+        this.title = title;
         this.address = address;
-        this.date = date;
+        this.preferredDate = preferredDate;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.cost = cost;
         this.status = status;
-        this.rating = rating;
     }
 
-    // Full constructor (optional)
-    public FutureWork(int taskId, String title, Integer householdId, Integer workerId, String address, LocalDate date, String status, Integer rating) {
-        this.taskId = taskId;
-        this.title = title;
-        this.householdId = householdId;
-        this.workerId = workerId;
-        this.address = address;
-        this.date = date;
-        this.status = status;
-        this.rating = rating;
+    //getters
+    public int getTaskId() {
+        return taskId;
     }
 
-    // Getters
-    public int getTaskId() { return taskId; }
-    public String getTitle() { return title; }
-    public Integer getHouseholdId() { return householdId; }
-    public Integer getWorkerId() { return workerId; }
-    public LocalDate getDate() { return date; }
-    public String getStatus() { return status; }
-    public Integer getRating() { return rating; }
-    public String getAddress() { return address; }
+    public String getTitle() {
+        return title;
+    }
 
-    // Setters
-    public void setTaskId(int taskId) { this.taskId = taskId; }
-    public void setTitle(String title) { this.title = title; }
-    public void setHouseholdId(Integer householdId) { this.householdId = householdId; }
-    public void setWorkerId(Integer workerId) { this.workerId = workerId; }
-    public void setDate(LocalDate date) { this.date = date; }
-    public void setStatus(String status) { this.status = status; }
-    public void setRating(Integer rating) { this.rating = rating; }
-    public void setAddress(String address) { this.address = address; }
+    public String getHouseholdId() {
+        return householdId;
+    }
 
-    // toString for debugging
+    public String getWorkerId() {
+        return workerId;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public LocalDate getDate() {
+        return preferredDate;
+    }
+
+    public String getStartTime() {
+        return startTime;
+    }
+
+    public String getEndTime() {
+        return endTime;
+    }
+
+    public String getCost() {
+        return cost;
+    }
+
     @Override
     public String toString() {
         return "FutureWork{" +
                 "taskId=" + taskId +
                 ", title='" + title + '\'' +
-                ", householdId=" + householdId +
-                ", workerId=" + workerId +
-                ", address='" + address + '\'' +
-                ", date=" + date +
+                ", householdId='" + householdId + '\'' +
+                ", workerId='" + workerId + '\'' +
                 ", status='" + status + '\'' +
-                ", rating=" + rating +
+                ", address='" + address + '\'' +
+                ", preferredDate=" + preferredDate +
+                ", startTime='" + startTime + '\'' +
+                ", endTime='" + endTime + '\'' +
+                ", cost='" + cost + '\'' +
                 '}';
     }
 }
