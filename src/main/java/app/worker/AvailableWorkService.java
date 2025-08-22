@@ -20,4 +20,22 @@ public class AvailableWorkService {
             throw new RuntimeException(e);
         }
     }
+
+    public boolean markAsInterested(String requestId, String workerId, java.sql.Time startTime, java.sql.Time endTime, double estimatedCost) {
+        try (Connection conn = DatabaseConnection.getConnection()) {
+            AvailableRequestDAO dao = new AvailableRequestImpl(conn);
+            return dao.markAsInterested(requestId, workerId, startTime, endTime, estimatedCost);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public boolean markAsNotInterested(String requestId, String workerId) {
+        try (Connection conn = DatabaseConnection.getConnection()) {
+            AvailableRequestDAO dao = new AvailableRequestImpl(conn);
+            return dao.markAsNotInterested(requestId, workerId);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

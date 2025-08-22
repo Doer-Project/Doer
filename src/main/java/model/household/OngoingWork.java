@@ -41,7 +41,7 @@ public class OngoingWork {
 
         /// for only worker who are intrested to work.
         if ("interested".equalsIgnoreCase(status)) {
-            Button select = new Button("Select");
+            Button select = new Button("Hire");
             select.setStyle("-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-weight: bold;");
             select.setOnAction(e -> {
                 System.out.println("✅ Worker selected: " + workerName);

@@ -1,6 +1,7 @@
 package database.worker;
 
 import model.worker.AvailableWork;
+import util.MessageBox;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -56,6 +57,7 @@ public class AvailableRequestImpl implements AvailableRequestDAO{
                 }
 
                 return new AvailableWork(
+                        requestId,
                         householdName,
                         rs.getString("title"),
                         rs.getString("description"),
@@ -68,5 +70,46 @@ public class AvailableRequestImpl implements AvailableRequestDAO{
             e.printStackTrace();
         }
         return null;
+    }
+
+    @Override
+    public boolean markAsInterested(String requestId, String workerId, java.sql.Time startTime, java.sql.Time endTime, double estimatedCost) {
+        if (startTime.compareTo(endTime) >= 0) {
+            MessageBox.showError("Invalid Time", "Start time must be before end time.");
+            return false;
+        }
+        String sql = "{CALL AcceptWorkRequest(?, ?, ?, ?, ?, ?)}";
+        try (java.sql.CallableStatement cs = conn.prepareCall(sql)) {
+            cs.setString(1, requestId);
+            cs.setString(2, workerId);
+            cs.setTime(3, startTime);
+            cs.setTime(4, endTime);
+            cs.setDouble(5, estimatedCost);
+            cs.registerOutParameter(6, java.sql.Types.VARCHAR);
+            cs.execute();
+            String resultStatus = cs.getString(6);
+            if ("SUCCESS".equals(resultStatus)) {
+                return true;
+            } else if ("TIME_CONFLICT".equals(resultStatus)) {
+                MessageBox.showError("Time Conflict", "The selected time overlaps with another task.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            MessageBox.showError("Database Error", "Could not update interest status.");
+        }
+        return false;
+    }
+
+    @Override
+    public boolean markAsNotInterested(String requestId, String workerId) {
+        String sql = "UPDATE requestrecipients SET interest_status = 'not interested' WHERE request_id = ? AND worker_id = ?";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, requestId);
+            stmt.setString(2, workerId);
+            return stmt.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 }

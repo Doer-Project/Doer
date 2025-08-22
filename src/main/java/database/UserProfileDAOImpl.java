@@ -66,4 +66,27 @@ public class UserProfileDAOImpl implements UserProfileDAO {
         }
     }
 
+    @Override
+    public byte[] getProfilePicture(String userId) throws SQLException {
+        String query = "SELECT prof_pic FROM users WHERE user_id = ?";
+        try (PreparedStatement pst = conn.prepareStatement(query)) {
+            pst.setString(1, userId);
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                return rs.getBytes("prof_pic");
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public boolean updateProfilePicture(String userId, byte[] imageBytes) throws SQLException {
+        String query = "UPDATE users SET prof_pic = ? WHERE user_id = ?";
+        try (PreparedStatement pst = conn.prepareStatement(query)) {
+            pst.setBytes(1, imageBytes);
+            pst.setString(2, userId);
+            return pst.executeUpdate() > 0;
+        }
+    }
+
 }

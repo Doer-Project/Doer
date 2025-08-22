@@ -8,7 +8,7 @@
 <ScrollPane xmlns:fx="http://javafx.com/fxml"
             fitToWidth="true"
             style="-fx-background-color: transparent;"
-            hbarPolicy="NEVER" vbarPolicy="AS_NEEDED">
+            hbarPolicy="NEVER">
     <content>
         <VBox fx:id="messagesContainer" spacing="12">
             <padding>

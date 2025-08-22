@@ -128,6 +128,11 @@ public class UserServices {
     }
 
     public String getEmailByUserId(String userId) {
-        return userDAO.getUserIdByEmail(userId);
+        return userDAO.getEmailByUserId(userId);
+    }
+
+    public boolean updatePassword(String userId, String password) {
+        System.out.println("services called for password updating");
+        return true;
     }
 }

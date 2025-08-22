@@ -11,6 +11,8 @@ import model.SessionManager;
 import util.MessageBox;
 
 import java.sql.SQLException;
+import java.sql.Time;
+import java.time.LocalTime;
 import java.util.List;
 
 public class AvailableRequestController {
@@ -63,7 +65,7 @@ public class AvailableRequestController {
         leftBox.setPrefWidth(300);
         leftBox.getChildren().addAll(
                 createStyledLabel("👤 " + work.getHouseholdName()),
-                createStyledLabel("🛠 " + work.getTitle()),
+                createStyledLabel("🛠 " + work.getRequestTitle()), // updated for clarity
                 createStyledLabel("📄 " + work.getDescription())
         );
 
@@ -82,11 +84,11 @@ public class AvailableRequestController {
         // BUTTONS
         Button interestedBtn = new Button("Interested");
         interestedBtn.setStyle("-fx-background-color: green; -fx-text-fill: white; -fx-font-size: 13px; -fx-background-radius: 8;");
-        interestedBtn.setOnAction(e -> showInterestPopup(work));
+        interestedBtn.setOnAction(e -> showInterestPopup(work, cardContainer));
 
         Button notInterestedBtn = new Button("Not Interested");
         notInterestedBtn.setStyle("-fx-background-color: red; -fx-text-fill: white; -fx-font-size: 13px; -fx-background-radius: 8;");
-        notInterestedBtn.setOnAction(e -> container.getChildren().remove(cardContainer));
+        notInterestedBtn.setOnAction(e -> showNotInterestedPopup(work, cardContainer));
 
         VBox btnBox = new VBox(10, interestedBtn, notInterestedBtn);
         btnBox.setAlignment(Pos.CENTER_RIGHT);
@@ -103,38 +105,120 @@ public class AvailableRequestController {
         return label;
     }
 
-    private void showInterestPopup(AvailableWork work) {
+    private void showInterestPopup(AvailableWork work, HBox cardContainer) {
         Dialog<Void> dialog = new Dialog<>();
         dialog.setTitle("Interested in Work");
 
-        VBox content = new VBox(10);
-        content.setPadding(new Insets(10));
+        VBox content = new VBox(15); // increased spacing
+        content.setPadding(new Insets(20));
+        content.setStyle("-fx-background-color: #f5f5f5; -fx-border-radius: 10; -fx-background-radius: 10;");
+
+        // Details section with styled background
+        VBox detailsBox = new VBox(5);
+        detailsBox.setPadding(new Insets(10));
+        detailsBox.setStyle("-fx-background-color: #ffffff; -fx-background-radius: 8; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 5,0,0,1);");
 
         Label details = new Label(
                 "Household: " + work.getHouseholdName() + "\n" +
-                        "Title: " + work.getTitle() + "\n" +
+                        "Title: " + work.getRequestTitle() + "\n" + // updated for clarity
                         "Description: " + work.getDescription() + "\n" +
                         "Date: " + work.getDate() + "\n" +
                         "Address: " + work.getAddress() + "\n" +
                         "Pincode: " + work.getPincode()
         );
-        details.setStyle("-fx-font-size: 13px; -fx-text-fill: #222;");
+        details.setStyle("-fx-font-size: 13px; -fx-text-fill: #333;");
+        details.setWrapText(true);
 
-        TextField chargesField = new TextField("Enter your charges");
-        TextField timeField = new TextField("Expected completion time");
-        TextField notesField = new TextField("Additional notes");
+        detailsBox.getChildren().add(details);
 
-        content.getChildren().addAll(details, new Label("Provide your details:"), chargesField, timeField, notesField);
+        // Charges input
+        TextField chargesField = new TextField();
+        chargesField.setPromptText("Enter your expected charges");
+        chargesField.setStyle("-fx-font-size: 13px; -fx-background-radius: 5; -fx-border-radius: 5;");
 
+        // Start Time Spinners
+        Spinner<Integer> startHour = new Spinner<>(0, 23, 9);
+        Spinner<Integer> startMinute = new Spinner<>(0, 59, 0);
+        HBox startTimeBox = new HBox(5, new Label("Start Time:"), startHour, new Label(":"), startMinute);
+        startTimeBox.setAlignment(Pos.CENTER_LEFT);
+
+        // End Time Spinners
+        Spinner<Integer> endHour = new Spinner<>(0, 23, 17);
+        Spinner<Integer> endMinute = new Spinner<>(0, 59, 0);
+        HBox endTimeBox = new HBox(5, new Label("End Time:"), endHour, new Label(":"), endMinute);
+        endTimeBox.setAlignment(Pos.CENTER_LEFT);
+
+        // Add everything to main content
+        content.getChildren().addAll(detailsBox, new Label("Provide your details:"), chargesField, startTimeBox, endTimeBox);
+
+        // Dialog configuration
+        ButtonType okButtonType = new ButtonType("OK", ButtonBar.ButtonData.OK_DONE);
+        ButtonType cancelButtonType = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
+        dialog.getDialogPane().getButtonTypes().addAll(okButtonType, cancelButtonType);
         dialog.getDialogPane().setContent(content);
-        dialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
-
         dialog.setResultConverter(dialogButton -> {
-            if (dialogButton == ButtonType.OK) {
-                MessageBox.showInfo("Submitted", "You expressed interest in: " + work.getTitle()
-                        + "\nCharges: " + chargesField.getText()
-                        + "\nTime: " + timeField.getText()
-                        + "\nNotes: " + notesField.getText());
+            if (dialogButton == okButtonType) {
+                try {
+                    double estimatedCost = Double.parseDouble(chargesField.getText());
+                    java.sql.Time startTime = java.sql.Time.valueOf(LocalTime.of(startHour.getValue(), startMinute.getValue()));
+                    java.sql.Time endTime = java.sql.Time.valueOf(LocalTime.of(endHour.getValue(), endMinute.getValue()));
+                    String userId = model.SessionManager.getUserID();
+                    String requestId = work.getRequestId();
+                    boolean success = new AvailableWorkService().markAsInterested(requestId, userId, startTime, endTime, estimatedCost);
+                    if (success) {
+                        container.getChildren().remove(cardContainer);
+                        MessageBox.showInfo("Success", "Marked as interested!");
+                    } else {
+                        MessageBox.showError("Error", "Failed to update interest status.");
+                    }
+                } catch (Exception ex) {
+                    MessageBox.showError("Input Error", "Please enter valid data.");
+                }
+            }
+            return null;
+        });
+
+        dialog.showAndWait();
+    }
+
+    private void showNotInterestedPopup(AvailableWork work, HBox cardContainer) {
+        Dialog<Void> dialog = new Dialog<>();
+        dialog.setTitle("Not Interested in Work");
+        VBox content = new VBox(15);
+        content.setPadding(new Insets(20));
+        content.setStyle("-fx-background-color: #f5f5f5; -fx-border-radius: 10; -fx-background-radius: 10;");
+        VBox detailsBox = new VBox(5);
+        detailsBox.setPadding(new Insets(10));
+        detailsBox.setStyle("-fx-background-color: #ffffff; -fx-background-radius: 8; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 5,0,0,1);");
+        Label details = new Label(
+                "Household: " + work.getHouseholdName() + "\n" +
+                        "Title: " + work.getRequestTitle() + "\n" +
+                        "Description: " + work.getDescription() + "\n" +
+                        "Date: " + work.getDate() + "\n" +
+                        "Address: " + work.getAddress() + "\n" +
+                        "Pincode: " + work.getPincode()
+        );
+        details.setStyle("-fx-font-size: 13px; -fx-text-fill: #333;");
+        details.setWrapText(true);
+        detailsBox.getChildren().add(details);
+        Label confirmMsg = new Label("Are you sure you want to mark this request as 'Not Interested'?\nYou will not be able to apply for this request again.");
+        confirmMsg.setStyle("-fx-font-size: 14px; -fx-text-fill: #b71c1c; -fx-font-weight: bold; -fx-padding: 10 0 0 0;");
+        content.getChildren().addAll(detailsBox, confirmMsg);
+        ButtonType okButtonType = new ButtonType("OK", ButtonBar.ButtonData.OK_DONE);
+        ButtonType cancelButtonType = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
+        dialog.getDialogPane().getButtonTypes().addAll(okButtonType, cancelButtonType);
+        dialog.getDialogPane().setContent(content);
+        dialog.setResultConverter(dialogButton -> {
+            if (dialogButton == okButtonType) {
+                String userId = model.SessionManager.getUserID();
+                String requestId = work.getRequestId();
+                boolean success = new AvailableWorkService().markAsNotInterested(requestId, userId);
+                if (success) {
+                    container.getChildren().remove(cardContainer);
+                    MessageBox.showInfo("Success", "Marked as not interested.");
+                } else {
+                    MessageBox.showError("Error", "Failed to update status.");
+                }
             }
             return null;
         });

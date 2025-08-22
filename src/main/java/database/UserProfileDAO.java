@@ -11,4 +11,14 @@ public interface UserProfileDAO {
     List<String> fetchUserDataList(String userId) throws SQLException;
     boolean updateUserProfile(String userId, String firstName, String lastName,
                               String addressOrWorkArea, String userType) throws SQLException;
+
+    /**
+     * Fetch the profile picture as a byte array (BLOB) for the given userId
+     */
+    byte[] getProfilePicture(String userId) throws SQLException;
+
+    /**
+     * Update the profile picture (BLOB) for the given userId
+     */
+    boolean updateProfilePicture(String userId, byte[] imageBytes) throws SQLException;
 }
