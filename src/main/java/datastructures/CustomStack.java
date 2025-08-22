@@ -27,7 +27,7 @@ public class CustomStack<T> {
             throw new RuntimeException("Stack underflow");
         }
         T item = stackArray[top];
-        stackArray[top--] = null; // clear reference
+        stackArray[top--] = null;
         return item;
     }
 

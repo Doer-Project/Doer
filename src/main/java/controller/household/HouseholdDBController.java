@@ -4,8 +4,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 
@@ -65,15 +70,13 @@ public class HouseholdDBController {
     private void openInbox(ActionEvent event) {
         resetButtonStyles();
         btnInbox.setStyle(activeStyle());
-
+        Node node = null;
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Inbox.fxml"));
-            loader.setController(new controller.household.HouseholdInboxController()); // set dashboard-specific controller
-            Node node = loader.load();
-            contentPane.getChildren().setAll(node);
+            node = FXMLLoader.load(getClass().getResource("/fxml/Inbox.fxml"));
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
+        contentPane.getChildren().setAll(node);
     }
 
 
@@ -95,10 +98,30 @@ public class HouseholdDBController {
         btnFuture.setStyle(defaultStyle);
         btnCompleted.setStyle(defaultStyle);
         btnProfile.setStyle(defaultStyle);
+        btnInbox.setStyle(defaultStyle);
     }
 
     private String activeStyle() {
         return "-fx-background-color: #007bff;-fx-background-radius: 12; -fx-text-fill: white;";
     }
 
+    public void logout(ActionEvent event) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to log out?", ButtonType.YES, ButtonType.NO);
+        alert.showAndWait();
+
+        if (alert.getResult() == ButtonType.YES) {
+            try {
+                Parent root = FXMLLoader.load(getClass().getResource("/fxml/LoginPage.fxml"));
+                Scene scene = new Scene(root);
+
+                // Get current stage and set login scene
+                Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+                stage.setScene(scene);
+                stage.setTitle("Login - DOER");
+                stage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }

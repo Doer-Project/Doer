@@ -38,5 +38,4 @@
                    style="-fx-text-fill: #555555; -fx-font-size: 14px;" />
         </VBox>
     </ScrollPane>
-
 </AnchorPane>

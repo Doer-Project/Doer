@@ -16,7 +16,6 @@ public class CustomList<T> {
 
     private Node<T> head;
 
-    // Add element at end of the list.
     public void add(T value) {
         Node<T> newNode = new Node<>(value);
         if (head == null) {
@@ -30,7 +29,6 @@ public class CustomList<T> {
         }
     }
 
-    // Remove element (first occurrence)
     public void remove(T value) {
         if (head == null) return;
 
@@ -49,7 +47,6 @@ public class CustomList<T> {
         }
     }
 
-    // Display list
     public void display() {
         if (head == null) {
             System.out.println("List is empty");

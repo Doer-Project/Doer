@@ -183,8 +183,21 @@ public class UserDAO {
                 email = rs.getString("email");
             }
         } catch (SQLException e) {
-            MessageBox.showAlert("Databse","There is some error in Databse");
+            MessageBox.showAlert("Database","There is some error in Databse");
         }
         return email;
+    }
+
+    public boolean updatePassword(String userId, String password) {
+        String sql = "Update users set password_hash = ? where user_id = ?";
+        try {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1,password);
+            statement.setString(2,userId);
+            int change = statement.executeUpdate();
+            return change>0;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
