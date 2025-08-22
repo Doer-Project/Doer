@@ -5,10 +5,8 @@ import database.worker.AvailableRequestImpl;
 import datastructures.CustomList;
 import model.worker.AvailableWork;
 import util.DatabaseConnection;
-
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.List;
 
 public class AvailableWorkService {
 

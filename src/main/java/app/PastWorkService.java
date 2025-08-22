@@ -4,10 +4,8 @@ import database.PastWorkDAO;
 import datastructures.CustomList;
 import model.PastTask;
 import util.DatabaseConnection;
-
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.List;
 import database.PastWorkDAOImpl;
 import util.MessageBox;
 

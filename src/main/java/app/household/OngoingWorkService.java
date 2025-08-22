@@ -5,10 +5,8 @@ import database.household.OngoingWorkDAOImpl;
 import datastructures.CustomList;
 import model.household.OngoingWork;
 import util.DatabaseConnection;
-
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.List;
 
 public class OngoingWorkService {
 

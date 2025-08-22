@@ -5,10 +5,8 @@ import database.FutureWorkDAOImpl;
 import datastructures.CustomList;
 import model.FutureWork;
 import util.DatabaseConnection;
-
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.List;
 
 public class FutureWorkService {
 

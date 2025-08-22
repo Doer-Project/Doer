@@ -16,7 +16,7 @@ public class CustomList<T> implements Iterable<T> {
     }
 
     private Node<T> head;
-    private int size = 0; // keeps track of number of elements
+    private int size = 0;
 
     public void add(T value) {
         Node<T> newNode = new Node<>(value);
@@ -29,28 +29,9 @@ public class CustomList<T> implements Iterable<T> {
             }
             temp.next = newNode;
         }
-        size++; // increment size
+        size++;
     }
 
-    public void remove(T value) {
-        if (head == null) return;
-
-        if (head.data.equals(value)) {
-            head = head.next;
-            size--; // decrement size
-            return;
-        }
-
-        Node<T> temp = head;
-        while (temp.next != null && !temp.next.data.equals(value)) {
-            temp = temp.next;
-        }
-
-        if (temp.next != null) {
-            temp.next = temp.next.next;
-            size--; // decrement size
-        }
-    }
 
     public boolean isEmpty() {
         return head == null;
@@ -83,7 +64,7 @@ public class CustomList<T> implements Iterable<T> {
                 result.add(item);
             }
             index++;
-            if (index >= to) break; // stop early
+            if (index >= to) break;
         }
         return result;
     }
@@ -98,6 +79,26 @@ public class CustomList<T> implements Iterable<T> {
         while (temp != null) {
             System.out.println(temp.data);
             temp = temp.next;
+        }
+    }
+
+    public void remove(T value) {
+        if (head == null) return;
+
+        if (head.data.equals(value)) {
+            head = head.next;
+            size--;
+            return;
+        }
+
+        Node<T> temp = head;
+        while (temp.next != null && !temp.next.data.equals(value)) {
+            temp = temp.next;
+        }
+
+        if (temp.next != null) {
+            temp.next = temp.next.next;
+            size--;
         }
     }
 

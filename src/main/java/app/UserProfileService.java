@@ -5,10 +5,8 @@ import database.UserProfileDAOImpl;
 import datastructures.CustomList;
 import util.DatabaseConnection;
 import util.MessageBox;
-
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.List;
 
 public class UserProfileService {
 

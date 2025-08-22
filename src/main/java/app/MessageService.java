@@ -4,8 +4,6 @@ import database.MessageDAO;
 import database.MessageDAOImpl;
 import datastructures.CustomStack;
 
-import java.util.Stack;
-
 public class MessageService {
 
     private MessageDAO messageDAO = new MessageDAOImpl();
