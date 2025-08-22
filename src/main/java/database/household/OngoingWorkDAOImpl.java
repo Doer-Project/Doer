@@ -49,7 +49,6 @@ public class OngoingWorkDAOImpl implements OngoingWorkDAO {
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
-
                 String query = "SELECT first_name, last_name FROM users WHERE user_id = ?";
                 PreparedStatement userStmt = conn.prepareStatement(query);
                 String workerId = rs.getString("worker_id");

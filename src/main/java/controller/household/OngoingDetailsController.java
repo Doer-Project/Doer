@@ -53,6 +53,7 @@ public class OngoingDetailsController {
             if (workerList.size() > 10) {
                 workerList = workerList.subList(0, 10);
             }
+            System.out.println(workerList.size());
             // Convert CustomList -> ObservableList
             ObservableList<OngoingWork> obsList = FXUtil.toObservableList(workerList);
             detailsTable.getItems().clear();
