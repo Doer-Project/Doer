@@ -5,4 +5,6 @@ import java.util.List;
 
 public interface OngoingWorkDAO {
     List<OngoingWork> getOngoingWorksForUser(String username);
+
+    List<OngoingWork> getAllOngoingWorks(String requestId);
 }

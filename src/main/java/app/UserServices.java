@@ -1,6 +1,6 @@
 package app;
 
-import database.UserDAOImpl;
+import database.UserDAO;
 import model.Household;
 import model.SessionManager;
 import model.Worker;
@@ -8,10 +8,10 @@ import util.MessageBox;
 import util.Validations;
 
 public class UserServices {
-    private static UserDAOImpl userDAO;
+    private static UserDAO userDAO;
 
     public UserServices() {
-        userDAO = new UserDAOImpl();
+        userDAO = new UserDAO();
     }
 
     public boolean registerHousehold(String role, String firstName, String lastName, String email, String password, String age, String gender, String address, String city, String pin_code){
@@ -129,5 +129,10 @@ public class UserServices {
 
     public String getEmailByUserId(String userId) {
         return userDAO.getEmailByUserId(userId);
+    }
+
+    public boolean updatePassword(String userId, String password) {
+        System.out.println("services called for password updating");
+        return true;
     }
 }

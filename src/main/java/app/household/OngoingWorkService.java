@@ -18,4 +18,13 @@ public class OngoingWorkService {
             return dao.getOngoingWorksForUser(username);
         }
     }
+
+    public List<OngoingWork> getAllOngoingWorkers(String requestId){
+        try (Connection conn = DatabaseConnection.getConnection()) {
+            OngoingWorkDAO dao = new OngoingWorkDAOImpl(conn);
+            return dao.getAllOngoingWorks(requestId);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

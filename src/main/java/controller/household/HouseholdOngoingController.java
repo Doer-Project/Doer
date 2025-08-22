@@ -6,10 +6,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
-import javafx.stage.Stage;
 import model.household.OngoingWork;
 import model.SessionManager;
 import util.MessageBox;
@@ -34,7 +32,6 @@ public class HouseholdOngoingController {
             List<OngoingWork> ongoingWorks = service.getOngoingWorksForUser(username);
             ///  it is for to delete the previous ui element;
             container.getChildren().clear();
-            ongoingWorks.add(new OngoingWork("bla","aa", "aa"));
 
             if (ongoingWorks.isEmpty()) {
                 /// ui can change later, this is temporary ui
@@ -76,8 +73,8 @@ public class HouseholdOngoingController {
                     "                        -fx-font-size: 14px;\n" +
                     "                        -fx-font-weight: bold;\n" +
                     "                        -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 6, 0, 0, 2);");
-            viewDetailsButton.setOnAction(e -> showDetailsPopup(work));
             rightBox.getChildren().add(viewDetailsButton);
+            viewDetailsButton.setOnAction(e -> showDetailsPopup(work));
 
             // Combine left and right boxes in an HBox
             // every child(LEFT & RIGHT box) in this box have space of 50 between each other
@@ -114,6 +111,7 @@ public class HouseholdOngoingController {
     private void showDetailsPopup(OngoingWork work) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/household/OngoingDetails.fxml"));
+
             Parent detailsRoot = loader.load();
 
             // Pass selected work to the controller
@@ -136,11 +134,9 @@ public class HouseholdOngoingController {
 
             // Add overlay to rootStack
             rootStack.getChildren().add(overlay);
-
         } catch (IOException e) {
             e.printStackTrace();
             MessageBox.showError("Error", "Failed to open details page.");
         }
     }
-
 }

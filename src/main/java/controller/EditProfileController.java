@@ -27,35 +27,29 @@ public class EditProfileController {
 
     private String userId;
     private String userType;
+    private File selectedImageFile = null;
 
     @FXML
     public void initialize() {
         try {
             userId = model.SessionManager.getUserID();
-//            if (userId == null) {
-//                MessageBox.showError("Load Error", "No user ID found.");
-//                return;
-//            }
-
-            // Fetch user data: [firstName, lastName, email, address/work_area, userType, gender]
-            List<String> userData = UserProfileService.getUserDataList(userId);
+            List<String> userData = app.UserProfileService.getUserDataList(userId);
             if (userData != null && userData.size() >= 6) {
                 txtFullName.setText(userData.get(0) + " " + userData.get(1));
                 txtAddress.setText(userData.get(3));
                 userType = userData.get(4);
-                try {
-                    if (getClass().getResource(DEFAULT_IMAGE) == null) {
-                        System.out.println("Default image not found at " + DEFAULT_IMAGE);
-                    }
-
-                    // Load default image
-                    profileImage.setImage(new Image(getClass().getResourceAsStream(DEFAULT_IMAGE)));
-                } catch (Exception e) {
-                    System.out.println("Failed to load default image: " + e.getMessage());
-                }
+            }
+            // Load current profile picture
+            byte[] imageBytes = app.UserProfileService.getProfilePicture(userId);
+            if (imageBytes != null && imageBytes.length > 0) {
+                java.nio.file.Path tempPath = java.nio.file.Paths.get("src/main/resources/images/temp_profile_" + userId + ".jpg");
+                java.nio.file.Files.write(tempPath, imageBytes);
+                profileImage.setImage(new Image(tempPath.toUri().toString()));
+            } else {
+                profileImage.setImage(new Image(DEFAULT_IMAGE));
             }
         } catch (Exception e) {
-            MessageBox.showError("Load Error", "Error loading profile:\n" + e.getMessage());
+            util.MessageBox.showError("Load Error", "Could not load profile: " + e.getMessage());
         }
     }
 
@@ -76,8 +70,6 @@ public class EditProfileController {
             String firstName = parts[0];
             String lastName = (parts.length > 1) ? parts[1] : "";
             String addressOrWorkArea = txtAddress.getText().trim();
-//            String userType = lblUserType.getText();
-//            System.out.println(userType);
 
             // Confirm save
             Alert confirmAlert = new Alert(Alert.AlertType.CONFIRMATION,
@@ -98,6 +90,18 @@ public class EditProfileController {
                 MessageBox.showAlert("Update Failed", "Could not update profile.");
             }
 
+            if (selectedImageFile != null) {
+                try {
+                    byte[] imageBytes = java.nio.file.Files.readAllBytes(selectedImageFile.toPath());
+                    boolean updated = app.UserProfileService.updateProfilePicture(userId, imageBytes);
+                    if (!updated) {
+                        util.MessageBox.showError("Image Update Failed", "Could not update profile picture.");
+                    }
+                } catch (Exception e) {
+                    util.MessageBox.showError("Image Error", "Failed to save profile picture: " + e.getMessage());
+                }
+            }
+
         } catch (Exception e) {
             MessageBox.showError("Save Error", e.getMessage());
         }
@@ -113,8 +117,8 @@ public class EditProfileController {
 
         File selectedFile = fileChooser.showOpenDialog(profileImage.getScene().getWindow());
         if (selectedFile != null) {
+            selectedImageFile = selectedFile;
             profileImage.setImage(new Image(selectedFile.toURI().toString()));
-            // Store path or copy file to your app folder for saving in DB
         }
     }
 

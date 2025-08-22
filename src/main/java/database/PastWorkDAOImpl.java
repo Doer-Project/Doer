@@ -13,10 +13,10 @@ public class PastWorkDAOImpl implements PastWorkDAO {
     }
 
     // Get past works for a specific household
-    public List<PastTask> getPastWorksByHousehold(int householdId) throws SQLException {
+    public List<PastTask> getPastWorksByHousehold(String householdId) throws SQLException {
         String sql = "SELECT * FROM pastwork WHERE household_id = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setInt(1, householdId);
+            stmt.setString(1, householdId);
             ResultSet rs = stmt.executeQuery();
             List<PastTask> list = new ArrayList<>();
             while (rs.next()) {
@@ -35,11 +35,11 @@ public class PastWorkDAOImpl implements PastWorkDAO {
     }
 
     // Get past works for a specific worker
-    public List<PastTask> getPastWorksByWorker(int workerId) throws SQLException {
+    public List<PastTask> getPastWorksByWorker(String workerId) throws SQLException {
         String sql = "SELECT * FROM pastwork WHERE worker_id = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
 //            System.out.println("successfully execute");
-            stmt.setInt(1, workerId);
+            stmt.setString(1, workerId);
             ResultSet rs = stmt.executeQuery();
             List<PastTask> list = new ArrayList<>();
             while (rs.next()) {

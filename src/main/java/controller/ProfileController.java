@@ -40,32 +40,29 @@ public class ProfileController {
     private void loadUserProfile() {
         try {
             String userId = SessionManager.getUserID();
-//            if (userId == null) {
-//                MessageBox.showError("Profile Load Error", "No user is logged in.");
-//                return;
-//            }
-
-            // Get user data as List<String>
-            // Order: [firstName, lastName, email, address, userType, gender, profilePic]
             List<String> userData = UserProfileService.getUserDataList(userId);
 
-            if (userData != null && userData.size() >= 5) {
-                // Combine frst and last name
-                String fullName = userData.get(0) + " " + userData.get(1);
-                lblName.setText(fullName);
-
+            if (userData != null && userData.size() >= 6) {
+                lblName.setText(userData.get(0) + " " + userData.get(1));
                 lblEmail.setText(userData.get(2));
                 lblAddress.setText(userData.get(3));
                 lblUserType.setText(userData.get(4));
                 lblGender.setText(userData.get(5));
-
-
-                /// pic logic
-                profileImage.setImage(new Image(DEFAULT_IMAGE));
             }
 
+            // Load profile picture
+            byte[] imageBytes = UserProfileService.getProfilePicture(userId);
+            if (imageBytes != null && imageBytes.length > 0) {
+                // Save to temp file in images/ and display
+                java.nio.file.Path tempPath = java.nio.file.Paths.get("src/main/resources/images/temp_profile_" + userId + ".jpg");
+                java.nio.file.Files.write(tempPath, imageBytes);
+                profileImage.setImage(new Image(tempPath.toUri().toString()));
+                // Optionally, delete temp file after display (or on app exit)
+            } else {
+                profileImage.setImage(new Image(DEFAULT_IMAGE));
+            }
         } catch (Exception e) {
-            MessageBox.showError("Profile Load Error", "Error loading profile:\n" + e.getMessage());
+            MessageBox.showError("Profile Load Error", "Could not load profile: " + e.getMessage());
         }
     }
 

@@ -42,4 +42,32 @@ public class UserProfileService {
             return false;
         }
     }
+
+    /**
+     * Fetches the profile picture (BLOB) for the given userId
+     */
+    public static byte[] getProfilePicture(String userId) {
+        try (Connection conn = DatabaseConnection.getConnection()) {
+            UserProfileDAO dao = new UserProfileDAOImpl(conn);
+            return dao.getProfilePicture(userId);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            MessageBox.showError("Connection Failed", "Could not fetch profile picture");
+            return null;
+        }
+    }
+
+    /**
+     * Updates the profile picture (BLOB) for the given userId
+     */
+    public static boolean updateProfilePicture(String userId, byte[] imageBytes) {
+        try (Connection conn = DatabaseConnection.getConnection()) {
+            UserProfileDAO dao = new UserProfileDAOImpl(conn);
+            return dao.updateProfilePicture(userId, imageBytes);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            MessageBox.showError("Update Failed", "Could not update profile picture: " + e.getMessage());
+            return false;
+        }
+    }
 }

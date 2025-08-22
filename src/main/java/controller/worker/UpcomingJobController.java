@@ -6,6 +6,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.FutureWork;
+import model.SessionManager;
 
 import java.util.List;
 
@@ -37,13 +38,13 @@ public class UpcomingJobController {
             colRating.setCellValueFactory(new PropertyValueFactory<>("rating"));
 
             /// checking
-            loadData(4); // replace 2 with logged-in workerId
+            loadData(SessionManager.getUserID()); // replace 2 with logged-in workerId
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private void loadData(int workerId) {
+    private void loadData(String workerId) {
         try {
             List<FutureWork> list = service.getFutureWorksForWorker(workerId);
             upcomingTable.getItems().setAll(list);

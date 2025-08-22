@@ -18,9 +18,9 @@ public class UserProfileDAOImpl implements UserProfileDAO {
     public List<String> fetchUserDataList(String userId) throws SQLException {
         String query = "SELECT u.first_name, u.last_name, u.email, u.role, w.work_area, h.address, u.gender FROM users u LEFT JOIN workers w ON w.worker_id = u.user_id LEFT JOIN households h ON h.household_id = u.user_id WHERE u.user_id = ?";
         try (PreparedStatement pst = conn.prepareStatement(query)) {
-//            pst.setString(1, userId);
+            pst.setString(1, userId);
             /// checking
-            pst.setInt(1,1);
+//            pst.setInt(1,1);
             ///
             ResultSet rs = pst.executeQuery();
 
@@ -59,9 +59,32 @@ public class UserProfileDAOImpl implements UserProfileDAO {
             pst.setString(1, firstName);
             pst.setString(2, lastName);
             pst.setString(3, addressOrWorkArea);
-//            pst.setString(4, userId);
+            pst.setString(4, userId);
             /// checking
-        pst.setInt(4,1);
+//        pst.setInt(4,1);
+            return pst.executeUpdate() > 0;
+        }
+    }
+
+    @Override
+    public byte[] getProfilePicture(String userId) throws SQLException {
+        String query = "SELECT prof_pic FROM users WHERE user_id = ?";
+        try (PreparedStatement pst = conn.prepareStatement(query)) {
+            pst.setString(1, userId);
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                return rs.getBytes("prof_pic");
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public boolean updateProfilePicture(String userId, byte[] imageBytes) throws SQLException {
+        String query = "UPDATE users SET prof_pic = ? WHERE user_id = ?";
+        try (PreparedStatement pst = conn.prepareStatement(query)) {
+            pst.setBytes(1, imageBytes);
+            pst.setString(2, userId);
             return pst.executeUpdate() > 0;
         }
     }
