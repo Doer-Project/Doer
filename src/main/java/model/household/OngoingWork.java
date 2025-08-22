@@ -45,16 +45,6 @@ public class OngoingWork {
         if ("interested".equalsIgnoreCase(status)) {
             Button select = new Button("Hire");
             select.setStyle("-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-weight: bold;");
-            select.setOnAction(e -> {
-                System.out.println("✅ Worker selected: " + workerName);
-                if (service.hireWorker(request_id, workerId, startTime, endTime, Double.parseDouble(expectedCost))) {
-                    select.setText("Hired");
-                    disableAllButtons();
-                } else {
-                    System.out.println("❌ Failed to hire worker: " + workerName);
-                    MessageBox.showError("Error", "Failed to hire worker. Please try again.");
-                }
-            });
             this.selectButton = new SimpleObjectProperty<>(select);
         } else {
             // Safe placeholder instead of null
@@ -62,12 +52,6 @@ public class OngoingWork {
             this.selectButton.get().setDisable(true); // Make it non-clickable
         }
 
-    }
-
-    private void disableAllButtons() {
-        if (this.selectButton != null && this.selectButton.get() != null) {
-            this.selectButton.get().setDisable(true);
-        }
     }
 
     public String getTaskName() {

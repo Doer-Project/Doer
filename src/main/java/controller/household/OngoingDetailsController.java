@@ -1,6 +1,7 @@
 package controller.household;
 
 import app.household.OngoingWorkService;
+import util.MessageBox;
 import datastructures.CustomList;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.ObservableList;
@@ -10,6 +11,9 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import model.household.OngoingWork;
 import util.FXUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class OngoingDetailsController {
 
@@ -32,6 +36,8 @@ public class OngoingDetailsController {
     private TableColumn<OngoingWork, Button> colSelect;
 
     private OngoingWork ongoingWork;
+
+    private List<Button> hireButtons = new ArrayList<>();
 
     @FXML
     private void initialize() {
@@ -59,6 +65,38 @@ public class OngoingDetailsController {
             detailsTable.getItems().clear();
             detailsTable.getItems().addAll(obsList);
 
+            // Track all Hire buttons and set their actions
+            hireButtons.clear();
+            for (OngoingWork work : obsList) {
+                Button btn = work.getSelectButton().get();
+                if (btn != null) {
+                    hireButtons.add(btn);
+                }
+            }
+            for (int i = 0; i < obsList.size(); i++) {
+                OngoingWork work = obsList.get(i);
+                Button btn = work.getSelectButton().get();
+                if (btn == null || btn.isDisabled()) continue;
+                btn.setOnAction(e -> {
+                    boolean hired = service.hireWorker(
+                        work.getRequest_id(),
+                        work.getWorkerId(),
+                        work.getStartTime(),
+                        work.getEndTime(),
+                        Double.parseDouble(work.getExpectedCost())
+                    );
+                    if (hired) {
+                        btn.setText("Hired");
+                        for (Button otherBtn : hireButtons) {
+                            if (otherBtn != btn) {
+                                otherBtn.setDisable(true);
+                            }
+                        }
+                    } else {
+                        MessageBox.showError("Error", "Failed to hire worker. Please try again.");
+                    }
+                });
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
