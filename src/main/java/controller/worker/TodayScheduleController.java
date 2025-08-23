@@ -1,5 +1,6 @@
 package controller.worker;
 
+import app.MessageService;
 import app.worker.TodayService;
 import datastructures.CustomList;
 import javafx.collections.ObservableList;
@@ -7,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.FutureWork;
+import model.SessionManager;
 import util.FXUtil;
 
 public class TodayScheduleController {
@@ -76,6 +78,8 @@ public class TodayScheduleController {
         alert.showAndWait();
 
         if (success) {
+            MessageService ms = new MessageService();
+            ms.sendMessage(job.getHouseholdId(),"Work is completed please give review");
             todayTable.getItems().remove(job);
         }
     }

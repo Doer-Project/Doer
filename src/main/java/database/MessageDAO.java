@@ -5,5 +5,5 @@ import datastructures.CustomStack;
 
 public interface MessageDAO {
     CustomStack<String> getMessagesForUser(String userId);
-    public boolean insertMessage(String receiverId, String senderName, String message);
+    public boolean insertMessage(String receiverId, String message);
 }
