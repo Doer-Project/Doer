@@ -14,7 +14,7 @@ public class MessageService {
     }
 
     // Send a message to a user (worker or household)
-    public boolean sendMessage(String receiverId, String senderName, String message) {
-        return messageDAO.insertMessage(receiverId, senderName, message);
+    public boolean sendMessage(String receiverId, String message) {
+        return messageDAO.insertMessage(receiverId, message);
     }
 }

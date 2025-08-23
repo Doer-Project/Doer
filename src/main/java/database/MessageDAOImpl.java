@@ -9,7 +9,7 @@ public class MessageDAOImpl implements MessageDAO {
     @Override
     public CustomStack<String> getMessagesForUser(String userId) {
         CustomStack<String> messageStack = new CustomStack<>();
-        String query = "SELECT sender_name, message, created_at FROM notifications WHERE receiver_id = ? ORDER BY created_at ASC";
+        String query = "SELECT message, created_at FROM notifications WHERE receiver_id = ? ORDER BY created_at ASC";
 
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
@@ -18,7 +18,6 @@ public class MessageDAOImpl implements MessageDAO {
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
-                System.out.println(rs.getString("sender_name"));
                 String sender = rs.getString("sender_name");
                 String msg = rs.getString("message");
                 System.out.println(msg);
@@ -32,15 +31,14 @@ public class MessageDAOImpl implements MessageDAO {
     }
 
     // insert message into database.
-    public boolean insertMessage(String receiverId, String senderName, String message) {
-        String query = "insert into notifications(receiver_id, sender_name, message) values(?,?,?)";
+    public boolean insertMessage(String receiverId, String message) {
+        String query = "insert into notifications(receiver_id, message) values(?,?,?)";
 
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
 
             stmt.setString(1, receiverId);
-            stmt.setString(2, senderName);
-            stmt.setString(3, message);
+            stmt.setString(2, message);
 
             int rows = stmt.executeUpdate();
             return rows > 0;

@@ -79,7 +79,7 @@ public class TodayScheduleController {
 
         if (success) {
             MessageService ms = new MessageService();
-            ms.sendMessage(job.getHouseholdId(), SessionManager.getUserID(),"Work is completed please give review");
+            ms.sendMessage(job.getHouseholdId(),"Work is completed please give review");
             todayTable.getItems().remove(job);
         }
     }
