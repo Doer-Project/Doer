@@ -24,7 +24,6 @@ public class HouseholdOngoingController {
 
     public void initialize() {
         try {
-//            System.out.println("inside controller");
             ///  object for calling method like getOngoingWorksForUser(username)
             OngoingWorkService service = new OngoingWorkService();
             String username = SessionManager.getUserID();
@@ -54,9 +53,9 @@ public class HouseholdOngoingController {
             // LEFT side of the label, where basic information show of the work.
             // every child in this box have space of 8 between each other
             VBox leftBox = new VBox(8);
-            Label categoryLabel = new Label("Category: " + work.getTaskName());
-            Label dateLabel = new Label("Date: " + work.getDate());
+            Label categoryLabel = new Label("Title: " + work.getTaskName());
             Label descLabel = new Label("Description: " + work.getDescription());
+            Label dateLabel = new Label("Date: " + work.getDate());
             descLabel.setWrapText(true);
             descLabel.setMaxWidth(600);
             leftBox.getChildren().addAll(categoryLabel, dateLabel, descLabel);
