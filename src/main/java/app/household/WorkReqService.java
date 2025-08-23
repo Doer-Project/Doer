@@ -12,7 +12,6 @@ public class WorkReqService {
 
     private static WorkReqDAO dao;
 
-    // Constructor: initialize DAO with DB connection
     public WorkReqService(){
         dao = new WorkReqDAOImpl();
     }
@@ -55,7 +54,6 @@ public class WorkReqService {
         return new WorkRequest(title, description, category, city, area, pinCodeInt, date, householdId);
     }
 
-    // Save WorkRequest, return true if success
     public boolean saveWorkRequest(String title, String description, String category, String city, String area, String pinCode, LocalDate date, String householdId) {
         WorkRequest request = createRequest(title, description, category, city, area, pinCode, date, householdId);
 

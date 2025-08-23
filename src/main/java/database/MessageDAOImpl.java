@@ -18,11 +18,10 @@ public class MessageDAOImpl implements MessageDAO {
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
-                String sender = rs.getString("sender_name");
                 String msg = rs.getString("message");
                 System.out.println(msg);
                 Timestamp ts = rs.getTimestamp("created_at");
-                messageStack.push(sender + ": " + msg + " (" + ts.toString() + ")");
+                messageStack.push(msg + " (" + ts.toString() + ")");
             }
         } catch (SQLException e) {
             e.printStackTrace();

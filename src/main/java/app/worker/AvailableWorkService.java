@@ -10,7 +10,6 @@ import java.sql.SQLException;
 
 public class AvailableWorkService {
 
-    ///  just structure
     public CustomList<AvailableWork> getAvailableRequests(String userID) {
         try (Connection conn = DatabaseConnection.getConnection()) {
             AvailableRequestDAO dao = new AvailableRequestImpl(conn);
