@@ -3,7 +3,7 @@ package app;
 import database.UserProfileDAO;
 import database.UserProfileDAOImpl;
 import datastructures.CustomList;
-import util.DatabaseConnection;
+import util.DBConnection;
 import util.MessageBox;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -16,7 +16,7 @@ public class UserProfileService {
      * Order: [firstName, lastName, email, address/work_area, userType, gender]
      */
     public static CustomList<String> getUserDataList(String userId) {
-        try (Connection conn = DatabaseConnection.getConnection()) {
+        try (Connection conn = DBConnection.getConnection()) {
             UserProfileDAO dao = new UserProfileDAOImpl(conn);
             return dao.fetchUserDataList(userId);
         } catch (SQLException e) {
@@ -32,7 +32,7 @@ public class UserProfileService {
      */
     public static boolean updateUserProfile(String userId, String firstName, String lastName,
                                             String addressOrWorkArea, String userType) {
-        try (Connection conn = DatabaseConnection.getConnection()) {
+        try (Connection conn = DBConnection.getConnection()) {
             UserProfileDAO dao = new UserProfileDAOImpl(conn);
             return dao.updateUserProfile(userId, firstName, lastName, addressOrWorkArea, userType);
         } catch (SQLException e) {
@@ -46,7 +46,7 @@ public class UserProfileService {
      * Fetches the profile picture (BLOB) for the given userId
      */
     public static byte[] getProfilePicture(String userId) {
-        try (Connection conn = DatabaseConnection.getConnection()) {
+        try (Connection conn = DBConnection.getConnection()) {
             UserProfileDAO dao = new UserProfileDAOImpl(conn);
             return dao.getProfilePicture(userId);
         } catch (SQLException e) {
@@ -60,7 +60,7 @@ public class UserProfileService {
      * Updates the profile picture (BLOB) for the given userId
      */
     public static boolean updateProfilePicture(String userId, byte[] imageBytes) {
-        try (Connection conn = DatabaseConnection.getConnection()) {
+        try (Connection conn = DBConnection.getConnection()) {
             UserProfileDAO dao = new UserProfileDAOImpl(conn);
             return dao.updateProfilePicture(userId, imageBytes);
         } catch (SQLException e) {

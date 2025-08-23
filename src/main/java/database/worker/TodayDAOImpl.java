@@ -7,14 +7,23 @@ import util.DBConnection;
 import java.sql.*;
 
 public class TodayDAOImpl implements TodayDAO {
+    private Connection connection;
+
+    public TodayDAOImpl() {
+        try {
+            connection = DBConnection.getConnection();
+        } catch (SQLException e) {
+            System.err.println("Error connecting to the database: " + e.getMessage());
+            throw new RuntimeException("Database connection failed", e);
+        }
+    }
 
     public CustomList<FutureWork> fetchOngoingJobsForToday() {
         CustomList<FutureWork> jobs = new CustomList<>();
         String query = "SELECT task_id, household_id, title, address, start_time, end_time, cost " +
                 "FROM futurework WHERE status = 'upcoming' AND date = CURDATE()";
 
-        try (Connection conn = DBConnection.getConnection();
-             Statement stmt = conn.createStatement();
+        try (Statement stmt = connection.createStatement();
              ResultSet rs = stmt.executeQuery(query)) {
 
             while (rs.next()) {
@@ -40,29 +49,30 @@ public class TodayDAOImpl implements TodayDAO {
     public boolean updateJobStatusToComplete(int jobId) {
         String updAssigned = "UPDATE assignedtasks SET status = 'completed', completed_at = NOW() WHERE task_id = ?";
         String updRequest = "UPDATE workrequests SET status = 'completed' WHERE request_id = (SELECT request_id FROM assignedtasks WHERE task_id = ?)";
-        try (Connection conn = DBConnection.getConnection()) {
-            boolean oldAuto = conn.getAutoCommit();
-            conn.setAutoCommit(false);
-            try (PreparedStatement ps1 = conn.prepareStatement(updAssigned);
-                 PreparedStatement ps2 = conn.prepareStatement(updRequest)) {
+        boolean oldAuto = false;
+        try {
+            oldAuto = connection.getAutoCommit();
+
+            connection.setAutoCommit(false);
+            try (PreparedStatement ps1 = connection.prepareStatement(updAssigned);
+                 PreparedStatement ps2 = connection.prepareStatement(updRequest)) {
                 ps1.setInt(1, jobId);
                 int a = ps1.executeUpdate();
                 ps2.setInt(1, jobId);
                 ps2.executeUpdate();
                 if (a == 0) {
-                    conn.rollback();
+                    connection.rollback();
                     return false;
                 }
-                conn.commit();
+                connection.commit();
                 return true;
             } catch (SQLException ex) {
-                conn.rollback();
-                throw ex;
+                connection.rollback();
             } finally {
-                try { conn.setAutoCommit(oldAuto); } catch (SQLException ignore) {}
+                connection.setAutoCommit(oldAuto);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
         return false;
     }

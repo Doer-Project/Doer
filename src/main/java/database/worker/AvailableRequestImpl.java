@@ -2,31 +2,31 @@ package database.worker;
 
 import datastructures.CustomList;
 import model.worker.AvailableWork;
+import util.DBConnection;
 import util.MessageBox;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class AvailableRequestImpl implements AvailableRequestDAO{
-    private Connection conn;
+    private Connection connection;
 
-    public AvailableRequestImpl(Connection conn) {
-        this.conn = conn;
+    public AvailableRequestImpl() {
+        try {
+            connection = DBConnection.getConnection();
+        } catch (SQLException e) {
+            System.err.println("Error connecting to the database: " + e.getMessage());
+            throw new RuntimeException("Database connection failed", e);
+        }
     }
 
     @Override
     public CustomList<AvailableWork> getAvailableRequests(String userId) {
-
-        /// temporary solution ⬇️, This is not final we have to change it.
-
         CustomList<AvailableWork> availableWorks = new CustomList<>();
         String sql = "select request_id from requestrecipients where worker_id = ? and interest_status = 'pending'";
 
-        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, userId);
             ResultSet rs = stmt.executeQuery();
 
@@ -41,13 +41,13 @@ public class AvailableRequestImpl implements AvailableRequestDAO{
 
     private AvailableWork addAvailableWork(String requestId) {
         String sql = "SELECT household_id, title, description, preferred_work_date, address, pincode FROM workrequests WHERE request_id = ?";
-        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, requestId);
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {
                 String sql2 = "SELECT first_name, last_name FROM users WHERE user_id = ?";
-                PreparedStatement stmt2 = conn.prepareStatement(sql2);
+                PreparedStatement stmt2 = connection.prepareStatement(sql2);
                 stmt2.setString(1, rs.getString("household_id"));
                 ResultSet rs2 = stmt2.executeQuery();
 
@@ -80,7 +80,7 @@ public class AvailableRequestImpl implements AvailableRequestDAO{
             return false;
         }
         String sql = "{CALL AcceptWorkRequest(?, ?, ?, ?, ?, ?)}";
-        try (java.sql.CallableStatement cs = conn.prepareCall(sql)) {
+        try (CallableStatement cs = connection.prepareCall(sql)) {
             cs.setString(1, requestId);
             cs.setString(2, workerId);
             cs.setTime(3, startTime);
@@ -104,7 +104,7 @@ public class AvailableRequestImpl implements AvailableRequestDAO{
     @Override
     public boolean markAsNotInterested(String requestId, String workerId) {
         String sql = "UPDATE requestrecipients SET interest_status = 'not interested' WHERE request_id = ? AND worker_id = ?";
-        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, requestId);
             stmt.setString(2, workerId);
             return stmt.executeUpdate() > 0;

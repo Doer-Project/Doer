@@ -3,7 +3,7 @@ package app;
 import database.PastWorkDAO;
 import datastructures.CustomList;
 import model.PastTask;
-import util.DatabaseConnection;
+import util.DBConnection;
 import java.sql.Connection;
 import java.sql.SQLException;
 import database.PastWorkDAOImpl;
@@ -12,7 +12,7 @@ import util.MessageBox;
 public class PastWorkService {
 
     public CustomList<PastTask> getPastWorksForHousehold(String householdId){
-        try (Connection conn = DatabaseConnection.getConnection()) {
+        try (Connection conn = DBConnection.getConnection()) {
             PastWorkDAO dao = new PastWorkDAOImpl(conn);
             return dao.getPastWorksByHousehold(householdId);
         } catch (SQLException e) {
@@ -23,7 +23,7 @@ public class PastWorkService {
     }
 
     public CustomList<PastTask> getPastWorksForWorker(String workerId) {
-        try (Connection conn = DatabaseConnection.getConnection()) {
+        try (Connection conn = DBConnection.getConnection()) {
             PastWorkDAO dao = new PastWorkDAOImpl(conn);
             return dao.getPastWorksByWorker(workerId);
         } catch (SQLException e) {

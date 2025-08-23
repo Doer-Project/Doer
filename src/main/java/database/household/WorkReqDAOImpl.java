@@ -1,7 +1,7 @@
 package database.household;
 
 import model.household.WorkRequest;
-import util.DatabaseConnection;
+import util.DBConnection;
 
 import java.sql.*;
 
@@ -11,7 +11,7 @@ public class WorkReqDAOImpl implements WorkReqDAO {
 
     public WorkReqDAOImpl() {
         try {
-            connection = DatabaseConnection.getConnection();
+            connection = DBConnection.getConnection();
         } catch (SQLException e) {
             System.out.println("Error connecting to database: " + e.getMessage());
             throw new RuntimeException(e);

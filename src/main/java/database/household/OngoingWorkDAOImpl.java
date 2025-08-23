@@ -2,26 +2,29 @@ package database.household;
 
 import datastructures.CustomList;
 import model.household.OngoingWork;
+import util.DBConnection;
 
 import java.sql.*;
 
 public class OngoingWorkDAOImpl implements OngoingWorkDAO {
 
-    private Connection conn;
+    private Connection connection;
 
-    public OngoingWorkDAOImpl(Connection conn) {
-        this.conn = conn;
+    public OngoingWorkDAOImpl() {
+        try {
+            connection = DBConnection.getConnection();
+        } catch (SQLException e) {
+            System.err.println("Error connecting to the database: " + e.getMessage());
+            throw new RuntimeException("Database connection failed", e);
+        }
     }
 
     @Override
     public CustomList<OngoingWork> getOngoingWorksForUser(String username) {
-
-        /// temporary solution ⬇️, This is not final we have to change it.
-
         CustomList<OngoingWork> ongoingWorks = new CustomList<>();
         String sql = "SELECT request_id, title, description, preferred_work_date FROM workrequests WHERE household_id = ? and status = 'Pending'";
 
-        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, username);
             ResultSet rs = stmt.executeQuery();
 
@@ -34,7 +37,7 @@ public class OngoingWorkDAOImpl implements OngoingWorkDAO {
                 ));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
         return ongoingWorks;
     }
@@ -44,13 +47,13 @@ public class OngoingWorkDAOImpl implements OngoingWorkDAO {
         CustomList<OngoingWork> ongoingWorks = new CustomList<>();
         String sql = "select worker_id, interest_status, proposed_start_time, proposed_end_time, estimated_cost from requestrecipients where request_id = ?";
 
-        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, requestId);
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
                 String query = "SELECT first_name, last_name FROM users WHERE user_id = ?";
-                PreparedStatement userStmt = conn.prepareStatement(query);
+                PreparedStatement userStmt = connection.prepareStatement(query);
                 String workerId = rs.getString("worker_id");
                 userStmt.setString(1, workerId);
                 ResultSet userRs = userStmt.executeQuery();
@@ -75,7 +78,7 @@ public class OngoingWorkDAOImpl implements OngoingWorkDAO {
     @Override
     public boolean hireWorker(int requestId, String workerId, String startTime, String endTime, double expectedCost) {
         String sql = "{CALL assign_chosen_worker(?, ?, ?, ?, ?)}";
-        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setInt(1, requestId);
             stmt.setString(2, workerId);
             stmt.setTime(3, Time.valueOf(startTime));
