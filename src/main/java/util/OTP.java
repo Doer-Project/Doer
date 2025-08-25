@@ -19,8 +19,8 @@ public class OTP {
     public static String sendOtp(String toEmail) {
         String otp = generateOtp();
 
-        String fromEmail = "niharkakani@gmail.com";
-        String fromPassword = "xarl afsv vsjp huho";
+        String fromEmail = "niharkakani@gmail.com"; //add a valid from email to send email from it
+        String fromPassword = "xarl afsv vsjp huho"; // paste app password generated on your google account
 
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
